@@ -1,0 +1,13 @@
+"vault.title"="Vault";
+
+"Options.settings"                          = "Settings";
+
+"Options.about"                             = "About %1$@";
+"Options.contact"                           = "Contact us";
+"Options.errorlist"                         = "Error Protocol";
+"Options.colorscheme"                       = "Color Scheme";
+"Options.walkthrough"                       = "Walkthrough";
+"Options.purgefavorites"                    = "Purge Favorites";
+
+"AboutTitle"   = "About %1$@";
+"AboutMessage" = "Version %1$@ Build %2$@\nAuthor: iSchlecken\nSecure passworts\non my iPhone.";

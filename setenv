@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Sourcing tresor environment..."
+
+DEVDIR=/Users/fe/Development
+
+alias brt="java -jar $DEVDIR/3rdParty/batik-1.7/batik-rasterizer.jar"

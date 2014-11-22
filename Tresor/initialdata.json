@@ -1,0 +1,47 @@
+[ { "name" : "Diesel",
+    "icon" : "diesel",
+    "desc" : "Suche nach Diesel in meiner Nähe",
+    "vcty" : "YES",
+    "atbs" : [ { "category":"gastype","value":"diesel"}
+             ]
+  },
+  { "name" : "Super",
+    "icon" : "super",
+    "desc" : "Suche nach Super in meiner Nähe",
+    "vcty" : "YES",
+    "atbs" : [ { "category":"gastype" ,"value":"Super"}
+           ]
+  },
+  { "name" : "Super E5",
+    "icon" : "e5",
+    "desc" : "Suche nach E5 in meiner Nähe",
+    "vcty" : "YES",
+    "atbs" : [ { "category":"gastype" ,"value":"E5"}
+             ]
+  },
+  { "name" : "Super E10",
+    "icon" : "e10",
+    "desc" : "Suche nach E10 in meiner Nähe",
+    "vcty" : "YES",
+    "atbs" : [ { "category":"gastype" ,"value":"E10"}
+             ]
+  },
+  { "name" : "Umgebung",
+    "icon" : "vicinity",
+    "desc" : "Tankstellen in meiner Nähe",
+    "vcty" : "YES"
+  },
+ 
+  { "name" : "Geöffnet",
+    "icon" : "open",
+    "desc" : "Offene Tankstellen in meiner Nähe",
+    "vcty" : "YES",
+    "atbs" : [ { "category":"openstate" ,"value":"open"} ]
+  },
+
+  { "name" : "Favoriten",
+    "icon" : "star",
+    "desc" : "Suche nach meinen Favoriten",
+    "favo" : "YES"
+  } 
+]

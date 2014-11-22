@@ -1,0 +1,11 @@
+"vault.title"="Tresor";
+
+"Options.settings"                          = "Einstellungen";
+"Options.about"                             = "Über %1$@";
+"Options.contact"                           = "Kontakt";
+"Options.errorlist"                         = "Fehlerprotokoll";
+"Options.walkthrough"                       = "Rundgang";
+"Options.purgefavorites"                    = "Favoriten löschen";
+
+"AboutTitle"   = "Über %1$@";
+"AboutMessage" = "Version %1$@ Build %2$@\nAuthor: iSchlecken\nSichere Passwörter\nauf meinem iPhone.";

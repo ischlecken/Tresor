@@ -1,0 +1,639 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09D8419A01C6722DC46A0AC7 /* libPods-Tresor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39618325C324E94269A090 /* libPods-Tresor.a */; };
+		855CE08B1A20E09500E9CF50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE08A1A20E09500E9CF50 /* main.m */; };
+		855CE0941A20E09500E9CF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0921A20E09500E9CF50 /* Main.storyboard */; };
+		855CE0961A20E09500E9CF50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0951A20E09500E9CF50 /* Images.xcassets */; };
+		855CE0A51A20E09500E9CF50 /* TresorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE0A41A20E09500E9CF50 /* TresorTests.m */; };
+		855CE0B01A20E74800E9CF50 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855CE0AF1A20E74800E9CF50 /* StoreKit.framework */; };
+		855CE0B71A20E79400E9CF50 /* initialdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0B11A20E79400E9CF50 /* initialdata.json */; };
+		855CE0B81A20E79400E9CF50 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0B21A20E79400E9CF50 /* Settings.bundle */; };
+		855CE0B91A20E79400E9CF50 /* tresor.caf in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0B41A20E79400E9CF50 /* tresor.caf */; };
+		855CE0BA1A20E79400E9CF50 /* TresorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE0B61A20E79400E9CF50 /* TresorAppDelegate.m */; };
+		855CE1301A20E81800E9CF50 /* ButtonAnimationAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1151A20E81800E9CF50 /* ButtonAnimationAction.m */; };
+		855CE1311A20E81800E9CF50 /* ButtonLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1171A20E81800E9CF50 /* ButtonLayer.m */; };
+		855CE1321A20E81800E9CF50 /* DigitAnimationAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1191A20E81800E9CF50 /* DigitAnimationAction.m */; };
+		855CE1331A20E81800E9CF50 /* DigitLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11B1A20E81800E9CF50 /* DigitLayer.m */; };
+		855CE1341A20E81800E9CF50 /* EditVaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */; };
+		855CE1351A20E81800E9CF50 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11F1A20E81800E9CF50 /* OptionsViewController.m */; };
+		855CE1361A20E81800E9CF50 /* PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1211A20E81800E9CF50 /* PasswordView.m */; };
+		855CE1371A20E81800E9CF50 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1231A20E81800E9CF50 /* PasswordViewController.m */; };
+		855CE1381A20E81800E9CF50 /* PasswordViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1251A20E81800E9CF50 /* PasswordViewController1.m */; };
+		855CE1391A20E81800E9CF50 /* PayloadItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */; };
+		855CE13A1A20E81800E9CF50 /* ShimmeringTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1291A20E81800E9CF50 /* ShimmeringTextLayer.m */; };
+		855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE12B1A20E81800E9CF50 /* VaultViewController.m */; };
+		855CE1441A20E8E800E9CF50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1421A20E8E800E9CF50 /* Localizable.strings */; };
+		855CE1481A20E90200E9CF50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1461A20E90200E9CF50 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		855CE09F1A20E09500E9CF50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 855CE07D1A20E09500E9CF50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 855CE0841A20E09500E9CF50;
+			remoteInfo = Tresor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		855CE0851A20E09500E9CF50 /* Tresor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tresor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		855CE08A1A20E09500E9CF50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		855CE0931A20E09500E9CF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		855CE0951A20E09500E9CF50 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		855CE09E1A20E09500E9CF50 /* TresorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TresorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		855CE0A31A20E09500E9CF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		855CE0A41A20E09500E9CF50 /* TresorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TresorTests.m; sourceTree = "<group>"; };
+		855CE0AE1A20E73E00E9CF50 /* Tresor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tresor.entitlements; sourceTree = "<group>"; };
+		855CE0AF1A20E74800E9CF50 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		855CE0B11A20E79400E9CF50 /* initialdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = initialdata.json; sourceTree = "<group>"; };
+		855CE0B21A20E79400E9CF50 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		855CE0B31A20E79400E9CF50 /* Tresor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tresor-Prefix.pch"; sourceTree = "<group>"; };
+		855CE0B41A20E79400E9CF50 /* tresor.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tresor.caf; sourceTree = "<group>"; };
+		855CE0B51A20E79400E9CF50 /* TresorAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TresorAppDelegate.h; sourceTree = "<group>"; };
+		855CE0B61A20E79400E9CF50 /* TresorAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TresorAppDelegate.m; sourceTree = "<group>"; };
+		855CE1141A20E81800E9CF50 /* ButtonAnimationAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonAnimationAction.h; sourceTree = "<group>"; };
+		855CE1151A20E81800E9CF50 /* ButtonAnimationAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonAnimationAction.m; sourceTree = "<group>"; };
+		855CE1161A20E81800E9CF50 /* ButtonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonLayer.h; sourceTree = "<group>"; };
+		855CE1171A20E81800E9CF50 /* ButtonLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonLayer.m; sourceTree = "<group>"; };
+		855CE1181A20E81800E9CF50 /* DigitAnimationAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitAnimationAction.h; sourceTree = "<group>"; };
+		855CE1191A20E81800E9CF50 /* DigitAnimationAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitAnimationAction.m; sourceTree = "<group>"; };
+		855CE11A1A20E81800E9CF50 /* DigitLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitLayer.h; sourceTree = "<group>"; };
+		855CE11B1A20E81800E9CF50 /* DigitLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitLayer.m; sourceTree = "<group>"; };
+		855CE11C1A20E81800E9CF50 /* EditVaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVaultViewController.h; sourceTree = "<group>"; };
+		855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVaultViewController.m; sourceTree = "<group>"; };
+		855CE11E1A20E81800E9CF50 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
+		855CE11F1A20E81800E9CF50 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
+		855CE1201A20E81800E9CF50 /* PasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordView.h; sourceTree = "<group>"; };
+		855CE1211A20E81800E9CF50 /* PasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordView.m; sourceTree = "<group>"; };
+		855CE1221A20E81800E9CF50 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		855CE1231A20E81800E9CF50 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		855CE1241A20E81800E9CF50 /* PasswordViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController1.h; sourceTree = "<group>"; };
+		855CE1251A20E81800E9CF50 /* PasswordViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController1.m; sourceTree = "<group>"; };
+		855CE1261A20E81800E9CF50 /* PayloadItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayloadItemListViewController.h; sourceTree = "<group>"; };
+		855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayloadItemListViewController.m; sourceTree = "<group>"; };
+		855CE1281A20E81800E9CF50 /* ShimmeringTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShimmeringTextLayer.h; sourceTree = "<group>"; };
+		855CE1291A20E81800E9CF50 /* ShimmeringTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShimmeringTextLayer.m; sourceTree = "<group>"; };
+		855CE12A1A20E81800E9CF50 /* VaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VaultViewController.h; sourceTree = "<group>"; };
+		855CE12B1A20E81800E9CF50 /* VaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VaultViewController.m; sourceTree = "<group>"; };
+		855CE1401A20E8CA00E9CF50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		855CE1431A20E8E800E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		855CE1471A20E90200E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		855CE1491A20E90700E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.release.xcconfig"; sourceTree = "<group>"; };
+		AB39618325C324E94269A090 /* libPods-Tresor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tresor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		855CE0821A20E09500E9CF50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09D8419A01C6722DC46A0AC7 /* libPods-Tresor.a in Frameworks */,
+				855CE0B01A20E74800E9CF50 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		855CE09B1A20E09500E9CF50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		855CE07C1A20E09500E9CF50 = {
+			isa = PBXGroup;
+			children = (
+				855CE0871A20E09500E9CF50 /* Tresor */,
+				855CE0A11A20E09500E9CF50 /* TresorTests */,
+				855CE0861A20E09500E9CF50 /* Products */,
+				C5773D37C22C222628A68829 /* Pods */,
+				CF854B888AC8DD488ECECE1C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		855CE0861A20E09500E9CF50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				855CE0851A20E09500E9CF50 /* Tresor.app */,
+				855CE09E1A20E09500E9CF50 /* TresorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		855CE0871A20E09500E9CF50 /* Tresor */ = {
+			isa = PBXGroup;
+			children = (
+				855CE1131A20E81800E9CF50 /* Gui */,
+				855CE0B51A20E79400E9CF50 /* TresorAppDelegate.h */,
+				855CE0B61A20E79400E9CF50 /* TresorAppDelegate.m */,
+				855CE0921A20E09500E9CF50 /* Main.storyboard */,
+				855CE0951A20E09500E9CF50 /* Images.xcassets */,
+				855CE0881A20E09500E9CF50 /* Supporting Files */,
+			);
+			path = Tresor;
+			sourceTree = "<group>";
+		};
+		855CE0881A20E09500E9CF50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				855CE0AE1A20E73E00E9CF50 /* Tresor.entitlements */,
+				855CE1461A20E90200E9CF50 /* InfoPlist.strings */,
+				855CE1421A20E8E800E9CF50 /* Localizable.strings */,
+				855CE1401A20E8CA00E9CF50 /* Info.plist */,
+				855CE0B21A20E79400E9CF50 /* Settings.bundle */,
+				855CE0B31A20E79400E9CF50 /* Tresor-Prefix.pch */,
+				855CE0B11A20E79400E9CF50 /* initialdata.json */,
+				855CE0B41A20E79400E9CF50 /* tresor.caf */,
+				855CE08A1A20E09500E9CF50 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		855CE0A11A20E09500E9CF50 /* TresorTests */ = {
+			isa = PBXGroup;
+			children = (
+				855CE0A41A20E09500E9CF50 /* TresorTests.m */,
+				855CE0A21A20E09500E9CF50 /* Supporting Files */,
+			);
+			path = TresorTests;
+			sourceTree = "<group>";
+		};
+		855CE0A21A20E09500E9CF50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				855CE0A31A20E09500E9CF50 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		855CE1131A20E81800E9CF50 /* Gui */ = {
+			isa = PBXGroup;
+			children = (
+				855CE1141A20E81800E9CF50 /* ButtonAnimationAction.h */,
+				855CE1151A20E81800E9CF50 /* ButtonAnimationAction.m */,
+				855CE1161A20E81800E9CF50 /* ButtonLayer.h */,
+				855CE1171A20E81800E9CF50 /* ButtonLayer.m */,
+				855CE1181A20E81800E9CF50 /* DigitAnimationAction.h */,
+				855CE1191A20E81800E9CF50 /* DigitAnimationAction.m */,
+				855CE11A1A20E81800E9CF50 /* DigitLayer.h */,
+				855CE11B1A20E81800E9CF50 /* DigitLayer.m */,
+				855CE11C1A20E81800E9CF50 /* EditVaultViewController.h */,
+				855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */,
+				855CE11E1A20E81800E9CF50 /* OptionsViewController.h */,
+				855CE11F1A20E81800E9CF50 /* OptionsViewController.m */,
+				855CE1201A20E81800E9CF50 /* PasswordView.h */,
+				855CE1211A20E81800E9CF50 /* PasswordView.m */,
+				855CE1221A20E81800E9CF50 /* PasswordViewController.h */,
+				855CE1231A20E81800E9CF50 /* PasswordViewController.m */,
+				855CE1241A20E81800E9CF50 /* PasswordViewController1.h */,
+				855CE1251A20E81800E9CF50 /* PasswordViewController1.m */,
+				855CE1261A20E81800E9CF50 /* PayloadItemListViewController.h */,
+				855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */,
+				855CE1281A20E81800E9CF50 /* ShimmeringTextLayer.h */,
+				855CE1291A20E81800E9CF50 /* ShimmeringTextLayer.m */,
+				855CE12A1A20E81800E9CF50 /* VaultViewController.h */,
+				855CE12B1A20E81800E9CF50 /* VaultViewController.m */,
+			);
+			path = Gui;
+			sourceTree = "<group>";
+		};
+		C5773D37C22C222628A68829 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */,
+				8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CF854B888AC8DD488ECECE1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				855CE0AF1A20E74800E9CF50 /* StoreKit.framework */,
+				AB39618325C324E94269A090 /* libPods-Tresor.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		855CE0841A20E09500E9CF50 /* Tresor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 855CE0A81A20E09500E9CF50 /* Build configuration list for PBXNativeTarget "Tresor" */;
+			buildPhases = (
+				B5994F5EBD784C127B237DA0 /* Check Pods Manifest.lock */,
+				855CE0811A20E09500E9CF50 /* Sources */,
+				855CE0821A20E09500E9CF50 /* Frameworks */,
+				855CE0831A20E09500E9CF50 /* Resources */,
+				4B1AD9E8EE51CED07A9428CD /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tresor;
+			productName = Tresor;
+			productReference = 855CE0851A20E09500E9CF50 /* Tresor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		855CE09D1A20E09500E9CF50 /* TresorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 855CE0AB1A20E09500E9CF50 /* Build configuration list for PBXNativeTarget "TresorTests" */;
+			buildPhases = (
+				855CE09A1A20E09500E9CF50 /* Sources */,
+				855CE09B1A20E09500E9CF50 /* Frameworks */,
+				855CE09C1A20E09500E9CF50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				855CE0A01A20E09500E9CF50 /* PBXTargetDependency */,
+			);
+			name = TresorTests;
+			productName = TresorTests;
+			productReference = 855CE09E1A20E09500E9CF50 /* TresorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		855CE07D1A20E09500E9CF50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = ischlecken;
+				TargetAttributes = {
+					855CE0841A20E09500E9CF50 = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 4V27BGKSLA;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					855CE09D1A20E09500E9CF50 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 855CE0841A20E09500E9CF50;
+					};
+				};
+			};
+			buildConfigurationList = 855CE0801A20E09500E9CF50 /* Build configuration list for PBXProject "Tresor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				de,
+			);
+			mainGroup = 855CE07C1A20E09500E9CF50;
+			productRefGroup = 855CE0861A20E09500E9CF50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				855CE0841A20E09500E9CF50 /* Tresor */,
+				855CE09D1A20E09500E9CF50 /* TresorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		855CE0831A20E09500E9CF50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				855CE0B71A20E79400E9CF50 /* initialdata.json in Resources */,
+				855CE0B91A20E79400E9CF50 /* tresor.caf in Resources */,
+				855CE0941A20E09500E9CF50 /* Main.storyboard in Resources */,
+				855CE0B81A20E79400E9CF50 /* Settings.bundle in Resources */,
+				855CE1441A20E8E800E9CF50 /* Localizable.strings in Resources */,
+				855CE1481A20E90200E9CF50 /* InfoPlist.strings in Resources */,
+				855CE0961A20E09500E9CF50 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		855CE09C1A20E09500E9CF50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4B1AD9E8EE51CED07A9428CD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tresor/Pods-Tresor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5994F5EBD784C127B237DA0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		855CE0811A20E09500E9CF50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				855CE1381A20E81800E9CF50 /* PasswordViewController1.m in Sources */,
+				855CE08B1A20E09500E9CF50 /* main.m in Sources */,
+				855CE1391A20E81800E9CF50 /* PayloadItemListViewController.m in Sources */,
+				855CE13A1A20E81800E9CF50 /* ShimmeringTextLayer.m in Sources */,
+				855CE1311A20E81800E9CF50 /* ButtonLayer.m in Sources */,
+				855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */,
+				855CE1361A20E81800E9CF50 /* PasswordView.m in Sources */,
+				855CE1301A20E81800E9CF50 /* ButtonAnimationAction.m in Sources */,
+				855CE1331A20E81800E9CF50 /* DigitLayer.m in Sources */,
+				855CE1321A20E81800E9CF50 /* DigitAnimationAction.m in Sources */,
+				855CE1351A20E81800E9CF50 /* OptionsViewController.m in Sources */,
+				855CE1341A20E81800E9CF50 /* EditVaultViewController.m in Sources */,
+				855CE0BA1A20E79400E9CF50 /* TresorAppDelegate.m in Sources */,
+				855CE1371A20E81800E9CF50 /* PasswordViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		855CE09A1A20E09500E9CF50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				855CE0A51A20E09500E9CF50 /* TresorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		855CE0A01A20E09500E9CF50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 855CE0841A20E09500E9CF50 /* Tresor */;
+			targetProxy = 855CE09F1A20E09500E9CF50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		855CE0921A20E09500E9CF50 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				855CE0931A20E09500E9CF50 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		855CE1421A20E8E800E9CF50 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				855CE1431A20E8E800E9CF50 /* en */,
+				855CE1451A20E8F200E9CF50 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		855CE1461A20E90200E9CF50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				855CE1471A20E90200E9CF50 /* en */,
+				855CE1491A20E90700E9CF50 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		855CE0A61A20E09500E9CF50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		855CE0A71A20E09500E9CF50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		855CE0A91A20E09500E9CF50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Tresor/Tresor.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "Tresor/Tresor-Prefix.pch";
+				INFOPLIST_FILE = Tresor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		855CE0AA1A20E09500E9CF50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Tresor/Tresor.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "Tresor/Tresor-Prefix.pch";
+				INFOPLIST_FILE = Tresor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		855CE0AC1A20E09500E9CF50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "Tresor/Tresor-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TresorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tresor.app/Tresor";
+			};
+			name = Debug;
+		};
+		855CE0AD1A20E09500E9CF50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREFIX_HEADER = "Tresor/Tresor-Prefix.pch";
+				INFOPLIST_FILE = TresorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tresor.app/Tresor";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		855CE0801A20E09500E9CF50 /* Build configuration list for PBXProject "Tresor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				855CE0A61A20E09500E9CF50 /* Debug */,
+				855CE0A71A20E09500E9CF50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		855CE0A81A20E09500E9CF50 /* Build configuration list for PBXNativeTarget "Tresor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				855CE0A91A20E09500E9CF50 /* Debug */,
+				855CE0AA1A20E09500E9CF50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		855CE0AB1A20E09500E9CF50 /* Build configuration list for PBXNativeTarget "TresorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				855CE0AC1A20E09500E9CF50 /* Debug */,
+				855CE0AD1A20E09500E9CF50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 855CE07D1A20E09500E9CF50 /* Project object */;
+}

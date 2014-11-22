@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>SplashDisplayDuration</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<integer>2</integer>
+			<key>Key</key>
+			<string>splashDisplayDuration</string>
+			<key>MaximumValue</key>
+			<integer>10</integer>
+			<key>MinimumValue</key>
+			<integer>1</integer>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Data</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+    <dict>
+			<key>File</key>
+			<string>Security</string>
+			<key>Title</key>
+			<string>Security</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>On</string>
+			<key>FalseValue</key>
+			<string>Off</string>
+			<key>TrueValue</key>
+			<string>On</string>
+			<key>Key</key>
+			<string>keyDBinBackupDirectory</string>
+			<key>Title</key>
+			<string>KeyDBinBackupDirectory</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>iVault Settings</string>
+</dict>
+</plist>
