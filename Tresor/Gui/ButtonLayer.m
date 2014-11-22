@@ -88,6 +88,14 @@
 /**
  *
  */
+-(void) dealloc
+{ _NSLOG_SELECTOR;
+  
+}
+
+/**
+ *
+ */
 +(BOOL) needsDisplayForKey:(NSString *)key
 { if( [key isEqualToString:@"digit"]      ||
       [key isEqualToString:@"digitColor"] ||

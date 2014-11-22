@@ -92,12 +92,12 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="W5Y-BS-YEY">
                             <connections>
                                 <action selector="createVaultAction:" destination="iah-cq-dyU" id="0hY-Zi-lzp"/>
-                                <segue destination="7DR-7M-QPd" kind="modal" identifier="CreateVaultSegue" id="psY-TF-OzI"/>
+                                <segue destination="7DR-7M-QPd" kind="presentation" identifier="CreateVaultSegue" id="psY-TF-OzI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="7DR-7M-QPd" kind="modal" identifier="UpdateVaultSegue" id="u0K-m2-1RZ"/>
+                        <segue destination="7DR-7M-QPd" kind="presentation" identifier="UpdateVaultSegue" id="u0K-m2-1RZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ins-vh-qI5" sceneMemberID="firstResponder"/>
