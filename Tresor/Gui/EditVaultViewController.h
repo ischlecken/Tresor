@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface EditVaultViewController : UIViewController
-@property(weak   , nonatomic) IBOutlet UITextView*   vaultName;
+@property(weak   , nonatomic) IBOutlet UITextField*  vaultName;
+@property(weak   , nonatomic) IBOutlet UIImageView*  vaultIcon;
 @property(weak   , nonatomic) IBOutlet UIPickerView* vaultType;
 @property(weak   , nonatomic)          Vault*        initialVault;
 @property(readonly,nonatomic)          NSString*     selectedVaultType;

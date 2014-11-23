@@ -1,3 +1,5 @@
 /* Localized versions of Info.plist keys */
 
 "CFBundleDisplayName" = "Vault";
+
+"NSPhotoLibraryUsageDescription"      = "The access to your photo library is used to select an icon for your vault.";

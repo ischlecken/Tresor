@@ -1,3 +1,5 @@
 /* Localized versions of Info.plist keys */
 
 "CFBundleDisplayName" = "Tresor";
+
+"NSPhotoLibraryUsageDescription"      = "Der Zugriff auf ihre Fotos wird benutzt, damit Sie daraus ein Icon für Ihren Tresor auswählen können.";

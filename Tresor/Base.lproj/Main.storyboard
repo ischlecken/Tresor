@@ -154,17 +154,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Enter your vault description" translatesAutoresizingMaskIntoConstraints="NO" id="Ljh-rb-9FN">
-                                <rect key="frame" x="16" y="74" width="568" height="80"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" translatesAutoresizingMaskIntoConstraints="NO" id="hlq-pl-Sy5" userLabel="VaultIcon">
+                                <rect key="frame" x="16" y="72" width="92" height="92"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="0Wq-Ii-0c1"/>
+                                    <constraint firstAttribute="width" constant="92" id="3Wb-G1-fPG"/>
+                                    <constraint firstAttribute="height" constant="92" id="qqt-uc-ins"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="e9K-3N-kBe" appends="YES" id="LeG-tg-IDG"/>
+                                </connections>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Vault Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RPZ-qx-FjG" userLabel="VaultName">
+                                <rect key="frame" x="116" y="103" width="468" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wP-bS-hkE">
-                                <rect key="frame" x="16" y="154" width="568" height="162"/>
+                                <rect key="frame" x="16" y="172" width="568" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="je7-7N-xNa" id="vc9-oe-Xlq"/>
                                     <outlet property="delegate" destination="je7-7N-xNa" id="YoI-Lp-k4H"/>
@@ -174,10 +181,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3wP-bS-hkE" firstAttribute="leading" secondItem="qyT-YQ-Qsq" secondAttribute="leadingMargin" id="4wb-VD-Udv"/>
-                            <constraint firstItem="Ljh-rb-9FN" firstAttribute="top" secondItem="pre-d1-SN1" secondAttribute="top" constant="10" id="NGK-an-nhS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ljh-rb-9FN" secondAttribute="trailing" id="Pwb-7Y-qdN"/>
-                            <constraint firstItem="Ljh-rb-9FN" firstAttribute="leading" secondItem="qyT-YQ-Qsq" secondAttribute="leadingMargin" id="cud-O1-G1S"/>
-                            <constraint firstItem="3wP-bS-hkE" firstAttribute="top" secondItem="Ljh-rb-9FN" secondAttribute="bottom" id="kMf-Ur-0cl"/>
+                            <constraint firstItem="hlq-pl-Sy5" firstAttribute="leading" secondItem="qyT-YQ-Qsq" secondAttribute="leadingMargin" id="9Dk-IC-KCI"/>
+                            <constraint firstItem="RPZ-qx-FjG" firstAttribute="leading" secondItem="hlq-pl-Sy5" secondAttribute="trailing" constant="8" id="Bgr-ZJ-qSY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RPZ-qx-FjG" secondAttribute="trailing" id="PIG-AB-dwf"/>
+                            <constraint firstItem="RPZ-qx-FjG" firstAttribute="centerY" secondItem="hlq-pl-Sy5" secondAttribute="centerY" id="d5N-yq-zm5"/>
+                            <constraint firstItem="3wP-bS-hkE" firstAttribute="top" secondItem="hlq-pl-Sy5" secondAttribute="bottom" constant="8" id="j5q-46-KDX"/>
+                            <constraint firstItem="hlq-pl-Sy5" firstAttribute="top" secondItem="pre-d1-SN1" secondAttribute="bottom" constant="8" id="pof-x7-9O8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3wP-bS-hkE" secondAttribute="trailing" id="yO7-Pu-ahb"/>
                         </constraints>
                     </view>
@@ -194,12 +203,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="vaultName" destination="Ljh-rb-9FN" id="yBe-Wz-gqT"/>
+                        <outlet property="vaultIcon" destination="hlq-pl-Sy5" id="i5f-O7-E9I"/>
+                        <outlet property="vaultName" destination="RPZ-qx-FjG" id="di7-G1-k21"/>
                         <outlet property="vaultType" destination="3wP-bS-hkE" id="h1s-f7-vlK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IGV-39-V7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WX7-zz-yxm" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="e9K-3N-kBe">
+                    <connections>
+                        <action selector="imageTapped:" destination="je7-7N-xNa" id="LGS-0w-yHC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1832" y="-862"/>
         </scene>
@@ -357,10 +372,11 @@
     <resources>
         <image name="addfolder" width="32" height="32"/>
         <image name="folder" width="32" height="32"/>
+        <image name="gear" width="32" height="32"/>
         <image name="password" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u0K-m2-1RZ"/>
+        <segue reference="psY-TF-OzI"/>
     </inferredMetricsTieBreakers>
 </document>

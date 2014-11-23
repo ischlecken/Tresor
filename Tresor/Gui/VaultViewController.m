@@ -75,6 +75,8 @@
       
       vault.vaultname = evvc.vaultName.text;
       vault.vaulttype = evvc.selectedVaultType;
+      if( evvc.vaultIcon.image )
+        vault.vaulticon = UIImagePNGRepresentation(evvc.vaultIcon.image);
       
       [_MOC save:&error];
     } /* of if */
@@ -359,7 +361,10 @@
   cell.textLabel.text            = vault.vaultname;
   cell.detailTextLabel.text      = vault.vaulttype;
   cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+  cell.imageView.image           = nil;
   
+  if( vault.vaulticon!=nil )
+    cell.imageView.image = [UIImage imageWithData:vault.vaulticon];
   
   if( [_TRESORMODEL isVaultInEditMode:vault] )
   { cell.textLabel.textColor = [UIColor redColor];
