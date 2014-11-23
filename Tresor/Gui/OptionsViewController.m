@@ -127,7 +127,7 @@
     cell.imageView.image                     = [si tintedImage];
     
     if( [option isEqualToString:@"about"] )
-      cell.textLabel.text = [NSString stringWithFormat:displayOption,_APPDELEGATE.appName];
+      cell.textLabel.text = [NSString stringWithFormat:displayOption,_TRESORCONFIG.appName];
   } /* of else */
   
   return cell;
@@ -148,8 +148,8 @@
   if( [option isEqualToString:@"about"] )
   { NSString*     aboutTitleTmpl   = _LSTR(@"AboutTitle");
     NSString*     aboutMessageTmpl = _LSTR(@"AboutMessage");
-    NSString*     aboutTitle       = [NSString stringWithFormat:aboutTitleTmpl,_APPDELEGATE.appName];
-    NSString*     aboutMessage     = [NSString stringWithFormat:aboutMessageTmpl,_APPDELEGATE.appVersion,_APPDELEGATE.appBuild];
+    NSString*     aboutTitle       = [NSString stringWithFormat:aboutTitleTmpl,_TRESORCONFIG.appName];
+    NSString*     aboutMessage     = [NSString stringWithFormat:aboutMessageTmpl,_TRESORCONFIG.appVersion,_TRESORCONFIG.appBuild];
     UIAlertView*  alertBox         = [[UIAlertView alloc ] initWithTitle:aboutTitle message:aboutMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
     [alertBox show];

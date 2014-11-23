@@ -18,7 +18,7 @@
 #import "PasswordViewController1.h"
 #import "UIViewController+PromiseKit.h"
 
-@interface TresorAppDelegate () <DecryptedPayloadKeyPromiseDelegate,TresorModelDelegate>
+@interface TresorAppDelegate () <DecryptedPayloadKeyPromiseDelegate>
 @property NSData* lastPasswordKey;
 @property NSDate* lastPasswordKeyTS;
 @end
@@ -32,11 +32,10 @@
 { _NSLOG(@"options:%@",launchOptions);
   
   [CryptoService sharedInstance].delegate = self;
-  [TresorModel sharedInstance].delegate = self;
   
-  [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"launch-iphone-568h"]]];
+  [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]]];
   
-  self.window.rootViewController.view.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.6];
+  self.window.rootViewController.view.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
 
   return YES;
 }
@@ -83,38 +82,10 @@
   // Saves changes in the application's managed object context before the application terminates.
   
   [CryptoService sharedInstance].delegate = nil;
-  [TresorModel sharedInstance].delegate = nil;
 }
 
-#pragma mark Info
 
-/**
- *
- */
--(NSString*) appName
-{ NSDictionary* localizedInfo    = [[NSBundle mainBundle] localizedInfoDictionary];
-  
-  return localizedInfo[@"CFBundleDisplayName"];
-}
-
-/**
- *
- */
--(NSString*) appVersion
-{ NSDictionary* info             = [[NSBundle mainBundle] infoDictionary];
-  
-  return info[@"CFBundleShortVersionString"];
-}
-
-/**
- *
- */
--(NSString*) appBuild
-{ NSDictionary* info             = [[NSBundle mainBundle] infoDictionary];
-  
-  return info[@"CFBundleVersion"];
-}
-
+#pragma mark DecryptedPayloadKeyPromiseDelegate
 
 /**
  *
@@ -153,48 +124,4 @@
   return promise;
 }
 
-#pragma mark TresorModelDelegate
-
-/**
- *
- */
--(BOOL)   useCloud
-{ return _TRESORCONFIG.useCloud; }
-
-/**
- *
- */
--(id)     icloudId
-{ return _TRESORCONFIG.icloudId; }
-
-/**
- *
- */
--(BOOL)   iCloudAvailable
-{ return _TRESORCONFIG.iCloudAvailable; }
-
-/**
- *
- */
--(NSURL*) keysDatabaseStoreURL
-{ return [TresorConfig keysDatabaseStoreURL]; }
-
-
-/**
- *
- */
--(BOOL)   keysDatabaseStoreExists
-{ return [TresorConfig keysDatabaseStoreExists]; }
-
-/**
- *
- */
--(NSURL*) dataDatabaseStoreURL
-{ return [TresorConfig dataDatabaseStoreURL]; }
-
-/**
- *
- */
--(BOOL)   dataDatabaseStoreExists
-{ return [TresorConfig dataDatabaseStoreExists]; }
 @end

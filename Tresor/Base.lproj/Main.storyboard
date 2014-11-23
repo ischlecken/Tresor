@@ -33,7 +33,7 @@
                     <tableView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="B0A-yR-9BV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" editingAccessoryType="detailDisclosureButton" textLabel="odU-yB-Orj" detailTextLabel="biT-7D-x9f" style="IBUITableViewCellStyleSubtitle" id="ADA-3u-k7G">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -79,7 +79,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="BZv-hG-y94"/>
                         <barButtonItem image="share" id="sMc-gz-ZsJ" userLabel="OptionsButton">
                             <connections>
-                                <segue destination="xBb-gM-TvO" kind="presentation" id="yEZ-3A-94v"/>
+                                <segue destination="xBb-gM-TvO" kind="presentation" modalTransitionStyle="flipHorizontal" id="yEZ-3A-94v"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -297,7 +297,7 @@
                     <tableView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fLp-SK-zQl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="p9B-QQ-lEJ" style="IBUITableViewCellStyleDefault" id="Upa-A1-sdm">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>

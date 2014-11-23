@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 { [super viewDidLoad];
   
-  self.title = _APPDELEGATE.appName;
+  self.title = _TRESORCONFIG.appName;
   
   [_TRESORMODEL addObserver:self forKeyPath:@"vaultsInEditMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }

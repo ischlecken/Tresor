@@ -20,13 +20,6 @@
 #define _APPWINDOW                _APPDELEGATE.window
 #define _DUMMYPASSWORD            [NSData dataWithUTF8String:@"01234567891123456789212345678931"]
 
-@class Vault;
-@class Payload;
-
 @interface TresorAppDelegate : UIResponder <UIApplicationDelegate>
-@property(nonatomic,strong         ) UIWindow*            window;
-@property(nonatomic,strong,readonly) NSString*            appName;
-@property(nonatomic,strong,readonly) NSString*            appVersion;
-@property(nonatomic,strong,readonly) NSString*            appBuild;
-@property(nonatomic,strong         ) Vault*               vault;
+@property(nonatomic,strong) UIWindow* window;
 @end
