@@ -85,13 +85,7 @@
   return self;
 }
 
-/**
- *
- */
--(void) dealloc
-{ _NSLOG_SELECTOR;
-  
-}
+
 
 /**
  *

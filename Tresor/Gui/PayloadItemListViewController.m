@@ -517,6 +517,23 @@
 /**
  *
  */
+-(NSString *)tableView:(UITableView *)tableView titleForSwipeAccessoryButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{ _NSLOG_SELECTOR;
+  
+  return @"Key";
+}
+
+/**
+ *
+ */
+-(void)tableView:(UITableView *)tableView swipeAccessoryButtonPushedForRowAtIndexPath:(NSIndexPath *)indexPath
+{ _NSLOG_SELECTOR;
+  
+}
+
+/**
+ *
+ */
 -(BOOL) indexPathIsSecretCell:(NSIndexPath*)indexPath
 { UITableViewCell* cell   = [self.tableView cellForRowAtIndexPath:indexPath];
   BOOL             result = cell!=nil && [cell viewWithTag:kSecretViewTag]!=nil;
