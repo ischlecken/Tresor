@@ -9,3 +9,9 @@
 
 "AboutTitle"   = "Über %1$@";
 "AboutMessage" = "Version %1$@ Build %2$@\nAuthor: iSchlecken\nSichere Passwörter\nauf meinem iPhone.";
+
+"EditAction.Delete"   = "Löschen";
+"EditAction.Keys"     = "Schlüssel";
+"EditAction.Key"      = "Schlüssel";
+"EditAction.More"     = "Mehr";
+"EditAction.Favorite" = "Favorit";

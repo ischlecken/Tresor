@@ -390,21 +390,29 @@
   } /* of else */
 }
 
-/**
- *
- */
--(NSString *)tableView:(UITableView *)tableView titleForSwipeAccessoryButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{ _NSLOG_SELECTOR;
-
-  return @"Key";
-}
 
 /**
  *
  */
--(void)tableView:(UITableView *)tableView swipeAccessoryButtonPushedForRowAtIndexPath:(NSIndexPath *)indexPath
+-(NSArray*) tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 { _NSLOG_SELECTOR;
   
+  NSArray* result =
+  @[
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:_LSTR(@"EditAction.Delete") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    { _NSLOG_SELECTOR;
+    }],
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.Keys") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    { _NSLOG_SELECTOR;
+    }],
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.More") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+     { _NSLOG_SELECTOR;
+     }],
+  ];
+  
+  [result[1] setBackgroundColor:[UIColor orangeColor]];
+  
+  return result;
 }
 
 

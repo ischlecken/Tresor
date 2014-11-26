@@ -82,6 +82,8 @@
                                 <segue destination="23d-k7-uhP" kind="presentation" id="lrc-zD-0db"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DWE-e6-f1Q"/>
+                        <barButtonItem title="Favorites" id="aj7-68-mqE"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="qn1-Co-82V"/>
                         <barButtonItem image="share" id="sMc-gz-ZsJ" userLabel="OptionsButton">
                             <connections>
