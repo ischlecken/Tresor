@@ -18,7 +18,6 @@
 
 #define _APPDELEGATE              ((TresorAppDelegate*) [UIApplication sharedApplication].delegate)
 #define _APPWINDOW                _APPDELEGATE.window
-#define _DUMMYPASSWORD            [NSData dataWithUTF8String:@"01234567891123456789212345678931"]
 
 @interface TresorAppDelegate : UIResponder <UIApplicationDelegate>
 @property(nonatomic,strong) UIWindow* window;
