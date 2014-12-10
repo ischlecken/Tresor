@@ -11,6 +11,7 @@
 #import "EditVaultViewController.h"
 #import "TresorError.h"
 #import "PasswordViewController.h"
+#import "MBProgressHUD.h"
 
 @interface VaultViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -98,9 +99,15 @@
   PasswordViewController* pvc = unwindSegue.sourceViewController;
 
   if( pvc.password )
-  { UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Password" message:pvc.password delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  { UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Password" message:pvc.password preferredStyle:UIAlertControllerStyleAlert];
     
-    [alertView show];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                      { [self generateKeyFromPassword:pvc.password];
+                      }]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    { [self presentViewController:alert animated:YES completion:NULL];
+    });
   } /* of if */
 }
 
@@ -118,6 +125,42 @@
 -(IBAction) auditDoneAction:(UIStoryboardSegue *)unwindSegue
 { _NSLOG_SELECTOR;
   
+}
+
+/**
+ *
+ */
+-(void) generateKeyFromPassword:(NSString*)password
+{ _NSLOG_SELECTOR;
+  
+  VaultAlgorithmT vat          = vaultAES256;
+  AlgorithmInfoT  vai          = VaultAlgorithmInfo[vat];
+  
+  NSData*         passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+  NSUInteger      keySize      = vai.keySize;
+  NSUInteger      iterations   = 1000000;
+  NSData*         salt         = [NSData dataWithRandom:keySize];
+  
+  MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+  hud.labelText = @"calculating key";
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
+  { _NSLOG(@"derivedKey.start");
+    
+    NSError* error      = nil;
+    NSData*  derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2 withLength:keySize usingSalt:salt andIterations:iterations error:&error];
+  
+    _NSLOG(@"derivedKey.stop:<%@>",[derivedKey hexStringValue]);
+ 
+    dispatch_async(dispatch_get_main_queue(), ^
+    { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+      
+      UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"DerivedKey" message:[derivedKey hexStringValue] preferredStyle:UIAlertControllerStyleAlert];
+      
+      [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
+      [self presentViewController:alert animated:YES completion:NULL];
+    });
+  });
 }
 
 #pragma mark Modelchanged
