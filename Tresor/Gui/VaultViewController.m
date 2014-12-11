@@ -127,6 +127,9 @@
   
 }
 
+
+#define _DUMMYSALT [NSData dataWithUTF8String:@"01234567891123456789212345678931"]
+
 /**
  *
  */
@@ -138,8 +141,13 @@
   
   NSData*         passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
   NSUInteger      keySize      = vai.keySize;
+#if TARGET_IPHONE_SIMULATOR
+  NSUInteger      iterations   = 4000000;
+#else
   NSUInteger      iterations   = 1000000;
-  NSData*         salt         = [NSData dataWithRandom:keySize];
+#endif
+  
+  NSData*         salt         = _DUMMYSALT; //[NSData dataWithRandom:keySize];
   
   MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
   hud.labelText = @"calculating key";
@@ -148,7 +156,7 @@
   { _NSLOG(@"derivedKey.start");
     
     NSError* error      = nil;
-    NSData*  derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2 withLength:keySize usingSalt:salt andIterations:iterations error:&error];
+    NSData*  derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2CC withLength:keySize usingSalt:salt andIterations:iterations error:&error];
   
     _NSLOG(@"derivedKey.stop:<%@>",[derivedKey hexStringValue]);
  

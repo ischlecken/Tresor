@@ -137,7 +137,6 @@
   
   if( actEnable!=enable )
   {
-    
     if( enable )
     { NSError* error      = nil;
       Commit*  nextCommit = [self.vault nextCommit:&error];
@@ -164,7 +163,7 @@
             
             return (id) decryptedPayload;
           });
-     } /* of if */
+      } /* of if */
       else
         addToErrorList(@"Could not find next commit", error, AddErrorNothing);
     } /* of if */
