@@ -139,11 +139,10 @@
   {
     if( enable )
     { NSError* error      = nil;
-      Commit*  nextCommit = [self.vault nextCommit:&error];
+      Commit*  nextCommit = [self.vault useOrCreateNextCommit:&error];
       
       if( nextCommit )
-      {
-        if( self.secretIndexPath )
+      { if( self.secretIndexPath )
         { NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.secretIndexPath.row - 1 inSection:self.secretIndexPath.section];
           
           [self toggleSecretForSelectedIndexPath:indexPath];
@@ -198,12 +197,10 @@
   
   [self disableToolbarItems];
   
-  NSError* error      = nil;
-  Commit*  nextCommit = [self.vault nextCommit:&error];
+  Commit*  nextCommit = self.vault.nextCommit;
   
   if( nextCommit )
-  {
-    NSUInteger iconIndex = random() % self.icons.count;
+  { NSUInteger iconIndex = random() % self.icons.count;
     
     [nextCommit addPayloadItemWithTitle:@"itemtestAddPayloadItemInCommit.0"
                             andSubtitle:@"subtitletestAddPayloadItemInCommit.0"
@@ -246,7 +243,7 @@
   [self cancelEditUI];
   
   NSError* error      = nil;
-  Commit*  nextCommit = [self.vault nextCommit:&error];
+  Commit*  nextCommit = self.vault.nextCommit;
   
   if( nextCommit )
   { nextCommit.message = @"successfull added";
@@ -295,17 +292,9 @@
   
   [self cancelEditUI];
   
-  NSError* error      = nil;
-  Commit*  nextCommit = [self.vault nextCommit:&error];
-  
-  if( nextCommit )
-  { [_MOC deleteObject:nextCommit];
-    
-    if( ![_MOC save:&error] )
-      addToErrorList(@"error while saving data", error, AddErrorNothing);
-  } /* of if */
-  else
-    addToErrorList(@"error while get next commit", error, AddErrorNothing);
+  NSError* error = nil;
+  if( ![self.vault cancelNextCommit:&error] )
+    addToErrorList(@"error while cancel next commit", error, AddErrorNothing);
 }
 
 /**
@@ -381,7 +370,7 @@
     textView.editable = NO;
     
     PayloadItem* pi = [self.payloadItemList objectAtIndex:(indexPath.row-1)];
-    Payload*     pl = (Payload*)[_MOC loadObjectWithObjectID:pi.payloadObjectId andError:&error];
+    Payload*     pl = (Payload*)[_MOC loadObjectWithObjectID:pi.payloadoid andError:&error];
     
     [[CryptoService sharedInstance] decryptPayload:pl]
       .then(^(Payload* pl)
@@ -417,7 +406,7 @@
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 { if( editingStyle==UITableViewCellEditingStyleDelete )
   { NSError* error      = nil;
-    Commit*  nextCommit = [self.vault nextCommit:&error];
+    Commit*  nextCommit = self.vault.nextCommit;
     
     if( nextCommit )
       [nextCommit deletePayloadItemForPath:self.path atPosition:[indexPath row]]
@@ -468,7 +457,7 @@
   else
   { PayloadItem* item        = [self.payloadItemList objectAtIndex:[indexPath row]];
     NSError*     error       = nil;
-    Payload*     itemPayload = (Payload*)[_MOC loadObjectWithObjectID:item.payloadObjectId andError:&error];
+    Payload*     itemPayload = (Payload*)[_MOC loadObjectWithObjectID:item.payloadoid andError:&error];
       
     if( error==nil )
     { UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

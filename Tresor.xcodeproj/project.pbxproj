@@ -78,7 +78,7 @@
 		855CE1241A20E81800E9CF50 /* PasswordViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController1.h; sourceTree = "<group>"; };
 		855CE1251A20E81800E9CF50 /* PasswordViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController1.m; sourceTree = "<group>"; };
 		855CE1261A20E81800E9CF50 /* PayloadItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayloadItemListViewController.h; sourceTree = "<group>"; };
-		855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayloadItemListViewController.m; sourceTree = "<group>"; };
+		855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PayloadItemListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		855CE1281A20E81800E9CF50 /* ShimmeringTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShimmeringTextLayer.h; sourceTree = "<group>"; };
 		855CE1291A20E81800E9CF50 /* ShimmeringTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShimmeringTextLayer.m; sourceTree = "<group>"; };
 		855CE12A1A20E81800E9CF50 /* VaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VaultViewController.h; sourceTree = "<group>"; };
