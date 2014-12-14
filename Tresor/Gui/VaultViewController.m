@@ -60,32 +60,89 @@
 }
 
 
+/**
+ *
+ */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{ _NSLOG(@"[%@]",segue.identifier);
+  
+  if( [[segue identifier] isEqualToString:@"showPayload"] )
+  { NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
+    Vault*       vault     = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    PayloadItemListViewController* payloadItemListViewController = [segue destinationViewController];
+    
+    payloadItemListViewController.vault = vault;
+    payloadItemListViewController.path  = [NSIndexPath new];
+    
+    if( vault.commit )
+      [vault.commit parentPathForPath:[NSIndexPath new]]
+      .then(^(NSArray* parentPath)
+            { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+              
+              if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+                return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+              
+              payloadItemListViewController.readonlyPayloadItemList = decryptedPayload;
+              
+              return (id) decryptedPayload;
+            });
+    
+  } /* of if */
+  else if( [[segue identifier] isEqualToString:@"CreateVaultSegue"] )
+  { EditVaultViewController* ebbc      = (EditVaultViewController*)[segue.destinationViewController topViewController];
+    
+    ebbc.parameter = [EditVaultParameter new];
+  } /* of else if */
+  else if( [[segue identifier] isEqualToString:@"UpdateVaultSegue"] )
+  { NSIndexPath*             indexPath = sender;
+    Vault*                   vault     = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    EditVaultViewController* ebbc      = (EditVaultViewController*)[segue.destinationViewController topViewController];
+    
+    ebbc.parameter = [EditVaultParameter editVaultParameterWithVault:vault];
+  } /* of else if */
+  else if( [[segue identifier] isEqualToString:@"PaswordSegue"] )
+  {
+  } /* of else if */
+  
+}
 
 /**
  *
  */
--(IBAction) createVaultAction:(UIStoryboardSegue *)unwindSegue
-{
-  if( [unwindSegue.identifier isEqualToString:@"SaveCreateVault"] )
+-(IBAction) createVaultUnwindAction:(UIStoryboardSegue *)unwindSegue
+{ _NSLOG_SELECTOR;
+  
+  if( [unwindSegue.identifier isEqualToString:@"CreateVault"] )
   { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
     NSError*                   error = nil;
-    Vault*                     vault = nil;
-    
-    if( evvc.initialVault )
-    { vault = evvc.initialVault;
-      
-      vault.vaultname = evvc.vaultName.text;
-      vault.vaulttype = evvc.selectedVaultType;
-      if( evvc.vaultIcon.image )
-        vault.vaulticon = UIImagePNGRepresentation(evvc.vaultIcon.image);
-      
-      [_MOC save:&error];
-    } /* of if */
-    else
-      vault = [Vault vaultObjectWithName:evvc.vaultName.text andType:evvc.selectedVaultType andError:&error];
+    Vault*                     vault = [Vault vaultObjectWithName:evvc.parameter.vaultName andType:[evvc.parameter selectedVaultType] andError:&error];
 
     if( vault==nil )
       addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
+  } /* of if */
+}
+
+/**
+ *
+ */
+-(IBAction) editVaultUnwindAction:(UIStoryboardSegue *)unwindSegue
+{ _NSLOG_SELECTOR;
+  
+  if( [unwindSegue.identifier isEqualToString:@"EditVault"] )
+  { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
+    NSError*                   error = nil;
+    Vault*                     vault = evvc.parameter.vault;
+    
+    vault.vaultname = evvc.parameter.vaultName;
+    vault.vaulttype = [evvc.parameter selectedVaultType];
+    if( evvc.parameter.vaultIcon )
+      vault.vaulticon = UIImagePNGRepresentation(evvc.parameter.vaultIcon);
+      
+    [_MOC save:&error];
+    
+    if( vault==nil )
+      addToErrorList(@"error while updating vault",error,AddErrorUIFeedback);
   } /* of if */
 }
 
@@ -251,45 +308,34 @@
 /**
  *
  */
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{ _NSLOG(@"[%@]",segue.identifier);
+-(NSArray*) tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{ _NSLOG_SELECTOR;
   
-  if( [[segue identifier] isEqualToString:@"showPayload"] )
-  { NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-    Vault*       vault     = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   
-    PayloadItemListViewController* payloadItemListViewController = [segue destinationViewController];
-        
-    payloadItemListViewController.vault = vault;
-    payloadItemListViewController.path  = [NSIndexPath new];
-    
-    if( vault.commit )
-    [vault.commit parentPathForPath:[NSIndexPath new]]
-      .then(^(NSArray* parentPath)
-      { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-              
-        if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-          return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-        
-        payloadItemListViewController.readonlyPayloadItemList = decryptedPayload;
-        
-        return (id) decryptedPayload;
-      });
-      
-  } /* of if */
-  else if( [[segue identifier] isEqualToString:@"UpdateVaultSegue"] )
-  { NSIndexPath* indexPath = sender;
-    Vault*       vault     = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    
-    EditVaultViewController* ebbc = (EditVaultViewController*)[segue.destinationViewController topViewController];
-    
-    ebbc.initialVault=vault;
-  } /* of else if */
-  else if( [[segue identifier] isEqualToString:@"PaswordSegue"] )
-  {
-  } /* of else if */
+  NSArray* result =
+  @[
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:_LSTR(@"EditAction.Delete") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+     { _NSLOG(@"delete row");
+       
+       NSError* error = nil;
+       id       vault = [self.fetchedResultsController objectAtIndexPath:indexPath];
+       
+       if( ![Vault deleteVault:vault andError:&error] )
+         addToErrorList(@"Error while deleting vault", error, AddErrorUIFeedback);
+     }],
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.Keys") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+     { _NSLOG(@"keys row");
+     }],
+    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.More") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+     { _NSLOG(@"more row");
+     }],
+    ];
   
+  [result[1] setBackgroundColor:[UIColor orangeColor]];
+  
+  return result;
 }
+
+
 
 
 
@@ -442,29 +488,6 @@
 }
 
 
-/**
- *
- */
--(NSArray*) tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{ _NSLOG_SELECTOR;
-  
-  NSArray* result =
-  @[
-    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:_LSTR(@"EditAction.Delete") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-    { _NSLOG_SELECTOR;
-    }],
-    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.Keys") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-    { _NSLOG_SELECTOR;
-    }],
-    [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.More") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-     { _NSLOG_SELECTOR;
-     }],
-  ];
-  
-  [result[1] setBackgroundColor:[UIColor orangeColor]];
-  
-  return result;
-}
 
 
 @end

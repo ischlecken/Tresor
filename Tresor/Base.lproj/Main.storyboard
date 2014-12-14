@@ -100,7 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="W5Y-BS-YEY">
                             <connections>
                                 <action selector="createVaultAction:" destination="iah-cq-dyU" id="0hY-Zi-lzp"/>
-                                <segue destination="7DR-7M-QPd" kind="presentation" identifier="CreateVaultSegue" id="psY-TF-OzI"/>
+                                <segue destination="R2t-ta-IRv" kind="presentation" identifier="CreateVaultSegue" id="e1v-hc-G8P"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -198,12 +198,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcV-l4-mn4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="-862"/>
+            <point key="canvasLocation" x="1024" y="-954"/>
         </scene>
-        <!--Edit Vault View Controller-->
+        <!--Edit Vault-->
         <scene sceneID="hgs-yH-mAI">
             <objects>
-                <viewController id="je7-7N-xNa" customClass="EditVaultViewController" sceneMemberID="viewController">
+                <viewController title="Edit Vault" id="je7-7N-xNa" customClass="EditVaultViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pre-d1-SN1"/>
                         <viewControllerLayoutGuide type="bottom" id="MOM-ky-7KW"/>
@@ -213,7 +213,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" translatesAutoresizingMaskIntoConstraints="NO" id="hlq-pl-Sy5" userLabel="VaultIcon">
-                                <rect key="frame" x="16" y="72" width="92" height="92"/>
+                                <rect key="frame" x="16" y="64" width="92" height="92"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="92" id="3Wb-G1-fPG"/>
@@ -224,12 +224,15 @@
                                 </connections>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Vault Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RPZ-qx-FjG" userLabel="VaultName">
-                                <rect key="frame" x="116" y="103" width="468" height="30"/>
+                                <rect key="frame" x="116" y="95" width="468" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="je7-7N-xNa" id="amE-R4-XzQ"/>
+                                </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wP-bS-hkE">
-                                <rect key="frame" x="16" y="172" width="568" height="162"/>
+                                <rect key="frame" x="16" y="124" width="568" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="je7-7N-xNa" id="vc9-oe-Xlq"/>
                                     <outlet property="delegate" destination="je7-7N-xNa" id="YoI-Lp-k4H"/>
@@ -243,20 +246,20 @@
                             <constraint firstItem="RPZ-qx-FjG" firstAttribute="leading" secondItem="hlq-pl-Sy5" secondAttribute="trailing" constant="8" id="Bgr-ZJ-qSY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RPZ-qx-FjG" secondAttribute="trailing" id="PIG-AB-dwf"/>
                             <constraint firstItem="RPZ-qx-FjG" firstAttribute="centerY" secondItem="hlq-pl-Sy5" secondAttribute="centerY" id="d5N-yq-zm5"/>
-                            <constraint firstItem="3wP-bS-hkE" firstAttribute="top" secondItem="hlq-pl-Sy5" secondAttribute="bottom" constant="8" id="j5q-46-KDX"/>
-                            <constraint firstItem="hlq-pl-Sy5" firstAttribute="top" secondItem="pre-d1-SN1" secondAttribute="bottom" constant="8" id="pof-x7-9O8"/>
+                            <constraint firstItem="3wP-bS-hkE" firstAttribute="top" secondItem="hlq-pl-Sy5" secondAttribute="bottom" constant="-32" id="j5q-46-KDX"/>
+                            <constraint firstItem="hlq-pl-Sy5" firstAttribute="top" secondItem="pre-d1-SN1" secondAttribute="bottom" id="pof-x7-9O8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3wP-bS-hkE" secondAttribute="trailing" id="yO7-Pu-ahb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="apH-ev-Xe0">
+                    <navigationItem key="navigationItem" title="Edit Vault" id="apH-ev-Xe0" userLabel="Edit Vault View Controller">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yI9-f1-cMs">
                             <connections>
-                                <segue destination="WX7-zz-yxm" kind="unwind" identifier="CancelCreateVault" unwindAction="createVaultAction:" id="ujO-78-72k"/>
+                                <segue destination="WX7-zz-yxm" kind="unwind" identifier="CancelEditVault" unwindAction="editVaultUnwindAction:" id="ujO-78-72k"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="WjK-r6-CDT">
                             <connections>
-                                <segue destination="WX7-zz-yxm" kind="unwind" identifier="SaveCreateVault" unwindAction="createVaultAction:" id="LVK-RL-1PN"/>
+                                <segue destination="WX7-zz-yxm" kind="unwind" identifier="EditVault" unwindAction="editVaultUnwindAction:" id="LVK-RL-1PN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -274,7 +277,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1832" y="-862"/>
+            <point key="canvasLocation" x="1736" y="-946"/>
         </scene>
         <!--Payload Item List View Controller-->
         <scene sceneID="xKr-tU-N6a">
@@ -363,6 +366,27 @@
             </objects>
             <point key="canvasLocation" x="1054" y="12"/>
         </scene>
+        <!--Create PIN-->
+        <scene sceneID="7Ik-fl-90Z">
+            <objects>
+                <viewController id="qeE-pI-NRF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b6v-lP-sPp"/>
+                        <viewControllerLayoutGuide type="bottom" id="Smm-f9-Wnb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TK9-y2-5XI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create PIN" id="H17-cZ-Xkr">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="Jf9-lS-NPE"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0Q-Q6-Zwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2469" y="-1716"/>
+        </scene>
         <!--Options-->
         <scene sceneID="WUy-ah-zit">
             <objects>
@@ -426,6 +450,101 @@
             </objects>
             <point key="canvasLocation" x="1054" y="839"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eOw-gS-sKC">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="R2t-ta-IRv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xbU-yf-xaY">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="epo-Yn-0f9" kind="relationship" relationship="rootViewController" id="PM8-sO-uRp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hcc-dP-2Ek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="-1716"/>
+        </scene>
+        <!--Create Vault View Controller-->
+        <scene sceneID="3Ux-Zf-BNS">
+            <objects>
+                <viewController title="Create Vault" id="epo-Yn-0f9" userLabel="Create Vault View Controller" customClass="EditVaultViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mlK-KA-76C"/>
+                        <viewControllerLayoutGuide type="bottom" id="PsY-iz-dOm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pfc-X4-n75">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" translatesAutoresizingMaskIntoConstraints="NO" id="lml-IY-xJQ" userLabel="VaultIcon">
+                                <rect key="frame" x="16" y="64" width="92" height="92"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="5hZ-Q3-zme"/>
+                                    <constraint firstAttribute="height" constant="92" id="u7l-3X-Efz"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gA7-Pv-Nkt" appends="YES" id="Xqa-sT-EIJ"/>
+                                </connections>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Vault Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J9q-Xe-2cu" userLabel="VaultName">
+                                <rect key="frame" x="116" y="95" width="468" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="epo-Yn-0f9" id="Eil-vu-6V5"/>
+                                </connections>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uY-0k-m9e">
+                                <rect key="frame" x="16" y="124" width="568" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="epo-Yn-0f9" id="UVl-cP-ljm"/>
+                                    <outlet property="delegate" destination="epo-Yn-0f9" id="AVk-V5-vfc"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="J9q-Xe-2cu" secondAttribute="trailing" id="DLS-IL-SIt"/>
+                            <constraint firstItem="J9q-Xe-2cu" firstAttribute="centerY" secondItem="lml-IY-xJQ" secondAttribute="centerY" id="I3Z-uG-LNL"/>
+                            <constraint firstItem="8uY-0k-m9e" firstAttribute="leading" secondItem="Pfc-X4-n75" secondAttribute="leadingMargin" id="fLN-mv-9CV"/>
+                            <constraint firstItem="lml-IY-xJQ" firstAttribute="leading" secondItem="Pfc-X4-n75" secondAttribute="leadingMargin" id="fVx-cH-Q4o"/>
+                            <constraint firstItem="J9q-Xe-2cu" firstAttribute="leading" secondItem="lml-IY-xJQ" secondAttribute="trailing" constant="8" id="gZS-QP-r3s"/>
+                            <constraint firstItem="8uY-0k-m9e" firstAttribute="top" secondItem="lml-IY-xJQ" secondAttribute="bottom" constant="-32" id="gfW-bK-Btr"/>
+                            <constraint firstItem="lml-IY-xJQ" firstAttribute="top" secondItem="mlK-KA-76C" secondAttribute="bottom" id="t8w-nm-6fE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8uY-0k-m9e" secondAttribute="trailing" id="xbE-cB-Xod"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create Vault" id="2n2-Uh-C9L">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Fax-Z2-icv">
+                            <connections>
+                                <segue destination="Ncl-iT-ggR" kind="unwind" identifier="CancelCreateVault" unwindAction="createVaultUnwindAction:" id="6lR-lX-68J"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="9JO-ik-e1E">
+                            <connections>
+                                <segue destination="qeE-pI-NRF" kind="show" id="vuS-Ln-g0N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="vaultIcon" destination="lml-IY-xJQ" id="GBa-X2-KqJ"/>
+                        <outlet property="vaultName" destination="J9q-Xe-2cu" id="ycB-lO-VGB"/>
+                        <outlet property="vaultType" destination="8uY-0k-m9e" id="Sdb-70-Vql"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F4f-SV-BVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ncl-iT-ggR" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="gA7-Pv-Nkt">
+                    <connections>
+                        <action selector="imageTapped:" destination="epo-Yn-0f9" id="40G-kB-EmG"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1736" y="-1716"/>
+        </scene>
     </scenes>
     <resources>
         <image name="addfolder" width="32" height="32"/>
@@ -434,8 +553,5 @@
         <image name="password" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="psY-TF-OzI"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.43008147720000001" blue="0.24258404780000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

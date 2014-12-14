@@ -8,12 +8,18 @@
 
 #import "EditVaultViewController.h"
 
-@interface EditVaultViewController () <UIPickerViewDataSource,UIPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property(nonatomic,strong) NSArray*                 vaultTypes;
-@property(nonatomic,strong) UIImagePickerController* imgPicker;
+@interface EditVaultViewController () <UIPickerViewDataSource,UIPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+
+@property(weak   , nonatomic) IBOutlet UITextField*             vaultName;
+@property(weak   , nonatomic) IBOutlet UIImageView*             vaultIcon;
+@property(weak   , nonatomic) IBOutlet UIPickerView*            vaultType;
+
+@property(strong , nonatomic)          UIImagePickerController* imgPicker;
 @end
 
 @implementation EditVaultViewController
+
+@synthesize parameter=_parameter;
 
 /**
  *
@@ -35,25 +41,44 @@
 - (void)viewDidLoad
 { [super viewDidLoad];
   
-  self.vaultTypes = @[@"Bank",@"EMail",@"Accounts",@"Internet",@"Sonstiges"];
-  
-  if( self.initialVault )
-  {
-    self.vaultName.text = self.initialVault.vaultname;
-    
-    for( int i=0;i<self.vaultTypes.count;i++ )
-    { NSString* t=self.vaultTypes[i];
-      
-      if( [t isEqualToString:self.initialVault.vaulttype] )
-      {
-        [self.vaultType selectRow:i inComponent:0 animated:NO];
-        
-        break;
-      } /* of if */
-    } /* of for */
-  } /* of if */
+  [self initControls];
 }
 
+/**
+ *
+ */
+-(EditVaultParameter*)parameter
+{ self->_parameter.vaultName = self.vaultName.text;
+
+  return self->_parameter;
+}
+
+/**
+ *
+ */
+-(void) setParameter:(EditVaultParameter *)parameter
+{ self->_parameter = parameter;
+  
+  [self initControls];
+}
+
+
+/**
+ *
+ */
+-(void) initControls
+{ _NSLOG_SELECTOR;
+  
+  [self.vaultType reloadAllComponents];
+  
+  self.vaultName.text = self->_parameter.vaultName;
+  
+  if( self->_parameter.vaultIcon )
+    self.vaultIcon.image = self->_parameter.vaultIcon;
+  
+  if( self->_parameter.vaultType!=NSUIntegerMax )
+    [self.vaultType selectRow:self->_parameter.vaultType inComponent:0 animated:NO];
+}
 
 /**
  *
@@ -83,22 +108,6 @@
   [self presentViewController:self.imgPicker animated:YES completion:NULL];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-/**
- *
- */
--(NSString*) selectedVaultType
-{ return self.vaultTypes[[self.vaultType selectedRowInComponent:0]]; }
 
 #pragma mark UIPickerViewDataSource
 
@@ -112,13 +121,24 @@
  *
  */
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{ return self.vaultTypes.count; }
+{ return self.parameter.vaultTypes.count; }
 
 /**
  *
  */
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{ return self.vaultTypes[row]; }
+{ return self.parameter.vaultTypes[row]; }
+
+
+/**
+ *
+ */
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{ _NSLOG_SELECTOR;
+
+  self.parameter.vaultType = row;
+}
+
 
 #pragma mark UIImagePickerControllerDelegate
 
@@ -142,6 +162,8 @@
   self.vaultIcon.image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   
+  self.parameter.vaultIcon = self.vaultIcon.image;
+  
   [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -152,5 +174,15 @@
 { [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+#pragma mark UITextFieldDelegate
+
+/**
+ *
+ */
+-(void) textFieldDidEndEditing:(UITextField *)textField
+{ _NSLOG_SELECTOR;
+  
+  self.parameter.vaultName = textField.text;
+}
 
 @end

@@ -31,6 +31,7 @@
 		855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE12B1A20E81800E9CF50 /* VaultViewController.m */; };
 		855CE1441A20E8E800E9CF50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1421A20E8E800E9CF50 /* Localizable.strings */; };
 		855CE1481A20E90200E9CF50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1461A20E90200E9CF50 /* InfoPlist.strings */; };
+		85FAA3781A3DCB54007F05BA /* EditVaultParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		855CE1471A20E90200E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		855CE1491A20E90700E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85FAA3761A3DCB54007F05BA /* EditVaultParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVaultParameter.h; sourceTree = "<group>"; };
+		85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVaultParameter.m; sourceTree = "<group>"; };
 		8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.release.xcconfig"; sourceTree = "<group>"; };
 		AB39618325C324E94269A090 /* libPods-Tresor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tresor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				855CE1191A20E81800E9CF50 /* DigitAnimationAction.m */,
 				855CE11A1A20E81800E9CF50 /* DigitLayer.h */,
 				855CE11B1A20E81800E9CF50 /* DigitLayer.m */,
+				85FAA3761A3DCB54007F05BA /* EditVaultParameter.h */,
+				85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */,
 				855CE11C1A20E81800E9CF50 /* EditVaultViewController.h */,
 				855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */,
 				855CE11E1A20E81800E9CF50 /* OptionsViewController.h */,
@@ -389,6 +394,7 @@
 				855CE1381A20E81800E9CF50 /* PasswordViewController1.m in Sources */,
 				855CE08B1A20E09500E9CF50 /* main.m in Sources */,
 				855CE1391A20E81800E9CF50 /* PayloadItemListViewController.m in Sources */,
+				85FAA3781A3DCB54007F05BA /* EditVaultParameter.m in Sources */,
 				855CE13A1A20E81800E9CF50 /* ShimmeringTextLayer.m in Sources */,
 				855CE1311A20E81800E9CF50 /* ButtonLayer.m in Sources */,
 				855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */,
