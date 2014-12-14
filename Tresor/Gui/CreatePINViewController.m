@@ -15,21 +15,16 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "PasswordViewController.h"
+#import "CreatePINViewController.h"
 #import "PasswordView.h"
 
-@interface PasswordViewController () <PasswordViewDelegate>
+@interface CreatePINViewController () <PasswordViewDelegate>
 @end
 
-@implementation PasswordViewController
+@implementation CreatePINViewController
 
+@synthesize parameter=_parameter;
 
-
-/**
- *
- */
--(BOOL)prefersStatusBarHidden
-{ return YES; }
 
 /**
  *
@@ -47,8 +42,28 @@
 -(void) closePasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  self.password = ((PasswordView*)self.view).password;
+  self.pin = ((PasswordView*)self.view).password;
   
   [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
 }
+
+#pragma mark prepare Segue
+
+/**
+ *
+ */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{ _NSLOG(@"[%@]",segue.identifier);
+  
+  if( [[segue identifier] isEqualToString:@"ConfirmPIN"] )
+  { id vc0 = [segue destinationViewController];
+    
+    if( [vc0 conformsToProtocol:@protocol(EditVaultParameter)] )
+    { id<EditVaultParameter> vc1 = vc0;
+      
+      vc1.parameter = self.parameter;
+    } /* of if */
+  } /* of if */
+}
+
 @end

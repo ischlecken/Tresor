@@ -185,4 +185,23 @@
   self.parameter.vaultName = textField.text;
 }
 
+#pragma mark prepare Segue
+
+/**
+ *
+ */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{ _NSLOG(@"[%@]",segue.identifier);
+  
+  if( [[segue identifier] isEqualToString:@"CreatePIN"] )
+  { id vc0 = [segue destinationViewController];
+    
+    if( [vc0 conformsToProtocol:@protocol(EditVaultParameter)] )
+    { id<EditVaultParameter> vc1 = vc0;
+      
+      vc1.parameter = self.parameter;
+    } /* of if */
+  } /* of if */
+}
+
 @end

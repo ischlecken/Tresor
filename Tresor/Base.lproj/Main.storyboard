@@ -124,6 +124,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="maxDigits">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="delegate" destination="iMW-hz-mAf" id="GaS-wv-8LH"/>
+                        </connections>
                     </view>
                     <connections>
                         <segue destination="HNk-64-iTU" kind="unwind" identifier="passwordControllerUnwindSegue" unwindAction="passwordDoneAction:" id="Idf-zb-0CZ"/>
@@ -369,23 +377,33 @@
         <!--Create PIN-->
         <scene sceneID="7Ik-fl-90Z">
             <objects>
-                <viewController id="qeE-pI-NRF" sceneMemberID="viewController">
+                <viewController id="qeE-pI-NRF" userLabel="Create PIN" customClass="CreatePINViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b6v-lP-sPp"/>
                         <viewControllerLayoutGuide type="bottom" id="Smm-f9-Wnb"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TK9-y2-5XI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="TK9-y2-5XI" customClass="PasswordView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="maxDigits">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
-                    <navigationItem key="navigationItem" title="Create PIN" id="H17-cZ-Xkr">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="Jf9-lS-NPE"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="PIN" id="H17-cZ-Xkr">
+                        <barButtonItem key="rightBarButtonItem" title="Confirm" id="Jf9-lS-NPE">
+                            <connections>
+                                <segue destination="h9l-Pa-L6i" kind="show" identifier="ConfirmPIN" id="fZl-Bn-95B"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0Q-Q6-Zwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2469" y="-1716"/>
+            <point key="canvasLocation" x="2548" y="-1716"/>
         </scene>
         <!--Options-->
         <scene sceneID="WUy-ah-zit">
@@ -523,9 +541,9 @@
                                 <segue destination="Ncl-iT-ggR" kind="unwind" identifier="CancelCreateVault" unwindAction="createVaultUnwindAction:" id="6lR-lX-68J"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="9JO-ik-e1E">
+                        <barButtonItem key="rightBarButtonItem" title="Create PIN" id="9JO-ik-e1E">
                             <connections>
-                                <segue destination="qeE-pI-NRF" kind="show" id="vuS-Ln-g0N"/>
+                                <segue destination="qeE-pI-NRF" kind="show" identifier="CreatePIN" id="vuS-Ln-g0N"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -544,6 +562,83 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1736" y="-1716"/>
+        </scene>
+        <!--Confirm PIN-->
+        <scene sceneID="qYV-0g-qbr">
+            <objects>
+                <viewController id="h9l-Pa-L6i" userLabel="Confirm PIN" customClass="ConfirmPINViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NjA-9T-KL9"/>
+                        <viewControllerLayoutGuide type="bottom" id="K5D-s7-JjC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DXN-Sw-GhV" customClass="PasswordView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="PIN" id="Lk9-L2-QIh">
+                        <barButtonItem key="rightBarButtonItem" title="Create PUK" id="SCk-O2-ncC">
+                            <connections>
+                                <segue destination="y8e-sy-JbW" kind="show" identifier="CreatePUK" id="xcg-Gd-A1O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6lS-Sf-6Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3261" y="-1716"/>
+        </scene>
+        <!--Create PUK-->
+        <scene sceneID="leT-dd-0gi">
+            <objects>
+                <viewController id="y8e-sy-JbW" userLabel="Create PUK" customClass="CreatePUKViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NZ9-cZ-nwR"/>
+                        <viewControllerLayoutGuide type="bottom" id="6lz-M8-4wh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WFy-8d-gU4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="PUK" id="X0u-Ko-sG4">
+                        <barButtonItem key="rightBarButtonItem" title="Confirm" id="PoM-8f-gZ3">
+                            <connections>
+                                <segue destination="aFz-QO-k0U" kind="show" identifier="ConfirmPUK" id="P4W-4l-Zrt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gMg-pJ-9iM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4010" y="-1716"/>
+        </scene>
+        <!--Confirm PUK-->
+        <scene sceneID="L94-WG-Fey">
+            <objects>
+                <viewController id="aFz-QO-k0U" userLabel="Confirm PUK" customClass="ConfirmPUKViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="12n-Br-rjr"/>
+                        <viewControllerLayoutGuide type="bottom" id="eAf-hI-kXD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Ey-1W-cH3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="PUK" id="x3P-t5-lod">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kmT-eQ-zFI">
+                            <connections>
+                                <segue destination="cNo-oe-nSq" kind="unwind" identifier="CreateVault" unwindAction="createVaultUnwindAction:" id="nYX-au-wnD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIy-WR-b9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="cNo-oe-nSq" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4699" y="-1716"/>
         </scene>
     </scenes>
     <resources>

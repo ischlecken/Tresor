@@ -15,21 +15,15 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "PasswordViewController.h"
+#import "CreatePUKViewController.h"
 #import "PasswordView.h"
 
-@interface PasswordViewController () <PasswordViewDelegate>
+@interface CreatePUKViewController () <PasswordViewDelegate>
 @end
 
-@implementation PasswordViewController
+@implementation CreatePUKViewController
 
-
-
-/**
- *
- */
--(BOOL)prefersStatusBarHidden
-{ return YES; }
+@synthesize parameter=_parameter;
 
 /**
  *
@@ -47,8 +41,28 @@
 -(void) closePasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  self.password = ((PasswordView*)self.view).password;
+  self.puk = ((PasswordView*)self.view).password;
   
   [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
 }
+
+#pragma mark prepare Segue
+
+/**
+ *
+ */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{ _NSLOG(@"[%@]",segue.identifier);
+  
+  if( [[segue identifier] isEqualToString:@"ConfirmPUK"] )
+  { id vc0 = [segue destinationViewController];
+    
+    if( [vc0 conformsToProtocol:@protocol(EditVaultParameter)] )
+    { id<EditVaultParameter> vc1 = vc0;
+      
+      vc1.parameter = self.parameter;
+    } /* of if */
+  } /* of if */
+}
+
 @end

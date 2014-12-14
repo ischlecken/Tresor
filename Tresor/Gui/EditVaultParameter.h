@@ -24,3 +24,7 @@
 
 -(NSString*) selectedVaultType;
 @end
+
+@protocol EditVaultParameter <NSObject>
+@property(strong , nonatomic) EditVaultParameter* parameter;
+@end

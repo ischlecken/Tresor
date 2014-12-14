@@ -7,6 +7,5 @@
 //
 #import "EditVaultParameter.h"
 
-@interface EditVaultViewController : UIViewController
-@property(strong , nonatomic) EditVaultParameter* parameter;
+@interface EditVaultViewController : UIViewController<EditVaultParameter>
 @end

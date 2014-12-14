@@ -15,7 +15,8 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
+#import "EditVaultParameter.h"
 
-@interface PasswordViewController : UIViewController
-@property NSString* password;
+@interface ConfirmPUKViewController : UIViewController<EditVaultParameter>
+@property(strong , nonatomic) NSString*           puk;
 @end
