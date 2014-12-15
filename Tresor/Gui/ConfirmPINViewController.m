@@ -31,7 +31,6 @@
 -(void) cancelPasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
 }
 
 
@@ -41,9 +40,8 @@
 -(void) closePasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  self.pin = ((PasswordView*)self.view).password;
-  
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
+  if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )
+    _NSLOG(@"pin %@ confirmed.",self.parameter.vaultPIN);
 }
 
 #pragma mark prepare Segue

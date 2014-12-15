@@ -18,5 +18,4 @@
 #import "EditVaultParameter.h"
 
 @interface CreatePINViewController : UIViewController<EditVaultParameter>
-@property(strong , nonatomic) NSString*           pin;
 @end

@@ -31,7 +31,6 @@
 -(void) cancelPasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
 }
 
 
@@ -41,9 +40,8 @@
 -(void) closePasswordView:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  self.puk = ((PasswordView*)self.view).password;
+  self.puk = passwordView.password;
   
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
 }
 
 #pragma mark prepare Segue
