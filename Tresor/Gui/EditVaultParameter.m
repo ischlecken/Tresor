@@ -5,7 +5,6 @@
 //  Created by Feldmaus on 14.12.14.
 //  Copyright (c) 2014 ischlecken. All rights reserved.
 //
-
 #import "EditVaultParameter.h"
 
 @implementation EditVaultParameter
@@ -20,6 +19,7 @@
   {
     self.vaultTypes = @[@"Bank",@"EMail",@"Accounts",@"Internet",@"Sonstiges"];
     self.vaultType  = 2;
+    
   } /* of if */
   
   return self;

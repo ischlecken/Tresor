@@ -601,10 +601,10 @@
             </objects>
             <point key="canvasLocation" x="3261" y="-1716"/>
         </scene>
-        <!--Create PUK-->
+        <!--PUKViewController-->
         <scene sceneID="leT-dd-0gi">
             <objects>
-                <viewController id="y8e-sy-JbW" userLabel="Create PUK" customClass="CreatePUKViewController" sceneMemberID="viewController">
+                <viewController id="y8e-sy-JbW" userLabel="PUKViewController" customClass="PUKViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uvl-6H-Z6j"/>
                         <viewControllerLayoutGuide type="bottom" id="4eB-IL-MMR"/>

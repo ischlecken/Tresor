@@ -17,6 +17,7 @@
  */
 #import "ConfirmPINViewController.h"
 #import "PasswordView.h"
+#import "PUKViewController.h"
 
 @interface ConfirmPINViewController () <PasswordViewDelegate>
 @end
@@ -59,6 +60,12 @@
     { id<EditVaultParameter> vc1 = vc0;
       
       vc1.parameter = self.parameter;
+      
+      if( [vc0 isKindOfClass:[PUKViewController class]] )
+      {
+        
+        ((PUKViewController*)vc0).validatePUK = NO;
+      } /* of if */
     } /* of if */
   } /* of if */
 }

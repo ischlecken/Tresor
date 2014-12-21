@@ -15,10 +15,9 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "CreatePUKViewController.h"
-#import "PasswordView.h"
+#import "PUKViewController.h"
 
-@interface CreatePUKViewController () <PasswordViewDelegate,UITextFieldDelegate>
+@interface PUKViewController () <UITextFieldDelegate>
 @property(nonatomic,weak  ) IBOutlet UIScrollView* scrollView;
 @property(nonatomic,weak  ) IBOutlet UIView*       contentView;
 
@@ -45,10 +44,10 @@
 @property(nonatomic,weak  ) IBOutlet UITextField*  activeTextField;
 
 @property(nonatomic,strong)          NSArray*      textFields;
-
+@property(nonatomic,assign)          BOOL          triggerNextPUK;
 @end
 
-@implementation CreatePUKViewController
+@implementation PUKViewController
 
 @synthesize parameter=_parameter;
 
@@ -82,6 +81,13 @@
                                                                     multiplier:1.0
                                                                       constant:-8];
   [self.view addConstraint:rightConstraint];
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+  {
+    self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
+    
+    _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
+  });
 }
 
 /**
@@ -99,6 +105,12 @@
                                            selector:@selector(keyboardWillBeHidden:)
                                                name:UIKeyboardWillHideNotification
                                              object:nil];
+  
+  for( UITextField* tf in self.textFields )
+    tf.enabled = self.validatePUK;
+
+  self.triggerNextPUK = YES;
+  [self nextDisplayPUK];
 }
 
 /**
@@ -107,8 +119,36 @@
 -(void) viewWillDisappear:(BOOL)animated
 { [super viewWillDisappear:animated];
   
+  self.triggerNextPUK = NO;
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification  object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark create puk
+
+/**
+ *
+ */
+-(void) nextDisplayPUK
+{ NSString* puk = self.parameter.vaultPUK;
+  
+  if( puk==nil )
+  { puk = [[NSData dataWithRandom:8] hexStringValue];
+    
+    if( self.triggerNextPUK )
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100 * USEC_PER_SEC)), dispatch_get_main_queue(), ^
+      { [self nextDisplayPUK];
+      });
+  } /* of if */
+  
+  //_NSLOG(@"puk:%@",puk);
+  
+  for( NSUInteger i=0;i<self.textFields.count;i++ )
+  { UITextField* tf = self.textFields[i];
+    
+    tf.text    = [puk substringWithRange:NSMakeRange(i, 1)];
+  } /* of if */
 }
 
 #pragma mark keyboard delegate
@@ -168,26 +208,6 @@
   self.activeTextField = nil;
 }
 
-#pragma mark PasswordViewDelegate
-
-/**
- *
- */
--(void) cancelPasswordView:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-}
-
-
-/**
- *
- */
--(void) closePasswordView:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-  self.puk = passwordView.password;
-  
-}
 
 #pragma mark prepare Segue
 

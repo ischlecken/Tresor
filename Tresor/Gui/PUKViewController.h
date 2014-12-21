@@ -15,36 +15,8 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "ConfirmPUKViewController.h"
-#import "PasswordView.h"
+#import "EditVaultParameter.h"
 
-@interface ConfirmPUKViewController () <PasswordViewDelegate>
-@end
-
-@implementation ConfirmPUKViewController
-
-@synthesize parameter=_parameter;
-
-/**
- *
- */
--(void) cancelPasswordView:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
-}
-
-
-/**
- *
- */
--(void) closePasswordView:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-  self.puk = ((PasswordView*)self.view).password;
-  
-  [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
-}
-
-
+@interface PUKViewController : UIViewController<EditVaultParameter>
+@property(assign , nonatomic) BOOL validatePUK;
 @end
