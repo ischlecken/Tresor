@@ -71,7 +71,7 @@
                                                                        toItem:self.view
                                                                     attribute:NSLayoutAttributeLeft
                                                                    multiplier:1.0
-                                                                     constant:0];
+                                                                     constant:8];
   [self.view addConstraint:leftConstraint];
   
   NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
@@ -80,7 +80,7 @@
                                                                         toItem:self.view
                                                                      attribute:NSLayoutAttributeRight
                                                                     multiplier:1.0
-                                                                      constant:-0];
+                                                                      constant:-8];
   [self.view addConstraint:rightConstraint];
 }
 
