@@ -20,10 +20,11 @@
 #import "ButtonLayer.h"
 #import "ShimmeringTextLayer.h"
 
-#define kPound   @"#"
-#define kStar    @"*"
 
 /*
+ #define kPound   @"#"
+ #define kStar    @"*"
+
  #define kPound   @"\u274C"
  #define kStar    @"\U0001F519"
  #define kSmiley  @"\U0001F604"
@@ -85,15 +86,25 @@
   self.buttonLayers = @[[[ButtonLayer alloc] initWithDigit:@"1"],
                         [[ButtonLayer alloc] initWithDigit:@"2"],
                         [[ButtonLayer alloc] initWithDigit:@"3"],
+                        [[ButtonLayer alloc] initWithDigit:@"A"],
+                        
                         [[ButtonLayer alloc] initWithDigit:@"4"],
                         [[ButtonLayer alloc] initWithDigit:@"5"],
                         [[ButtonLayer alloc] initWithDigit:@"6"],
+                        [[ButtonLayer alloc] initWithDigit:@"B"],
+                        
                         [[ButtonLayer alloc] initWithDigit:@"7"],
                         [[ButtonLayer alloc] initWithDigit:@"8"],
                         [[ButtonLayer alloc] initWithDigit:@"9"],
-                        [[ButtonLayer alloc] initWithDigit:kStar],
+                        [[ButtonLayer alloc] initWithDigit:@"C"],
+                        
+                        [[ButtonLayer alloc] initWithDigit:@"E"],
                         [[ButtonLayer alloc] initWithDigit:@"0"],
-                        [[ButtonLayer alloc] initWithDigit:kPound]
+                        [[ButtonLayer alloc] initWithDigit:@"F"],
+                        
+                        [[ButtonLayer alloc] initWithDigit:@"D"]
+                        
+                        
                        ];
   
   NSUInteger position=0;
@@ -124,8 +135,6 @@
   [CATransaction commit];
   
   self.multipleTouchEnabled = YES;
-
-  [self findButtonByText:kPound].enabled = NO;
 }
 
 /**
@@ -151,7 +160,7 @@
   for( position=0;position<self.maxDigits;position++ )
   { ButtonLayer* dl = [[ButtonLayer alloc] initWithDigit:nil];
     
-    dl.index = position;
+    dl.index      = position;
     dl.digitColor = [UIColor redColor];
     
     [dots addObject:dl];
@@ -193,8 +202,8 @@
 -(void) layoutSublayersOfLayer:(CALayer *)layer
 { //_NSLOG_FRAME(@"frame=", layer.frame);
   
-  NSUInteger columns       = self.bounds.size.width<self.bounds.size.height ? 3 : 6;
-  CGFloat    padding       =28.0;
+  NSUInteger columns       = self.bounds.size.width<self.bounds.size.height ? 4 : 6;
+  CGFloat    padding       =14.0;
   CGFloat    buttonPadding =14.0;
   CGFloat    width         = (self.bounds.size.width-padding*2.0)/columns;
   CGFloat    height        = width;
@@ -242,6 +251,25 @@
   
   for( ButtonLayer* b in self.buttonLayers )
     if( b==layer )
+    { result = b;
+      
+      break;
+    } /* of if */
+  
+  
+  return result;
+}
+
+/**
+ *
+ */
+-(ButtonLayer*) findTouchedDigit:(UITouch*)touch
+{ ButtonLayer* result = nil;
+  
+  CGPoint viewLocation = [touch locationInView:self];
+  
+  for( ButtonLayer* b in self.dotLayers )
+    if( CGRectContainsPoint(b.frame, viewLocation) )
     { result = b;
       
       break;
@@ -321,10 +349,7 @@
 { //_NSLOG_SELECTOR;
   
   for( ButtonLayer* b in self.buttonLayers )
-    if( ![b.digit isEqualToString:kPound] && ![b.digit isEqualToString:kStar] )
-    { b.digitColor = [UIColor colorWithWhite:1.0 alpha:0.4];
-      b.enabled    = NO;
-    } /* of if */
+    [b disableButton];
 }
 
 /**
@@ -334,11 +359,31 @@
 { //_NSLOG_SELECTOR;
   
   for( ButtonLayer* b in self.buttonLayers )
-    if( ![b.digit isEqualToString:kPound] && ![b.digit isEqualToString:kStar] )
-    { b.digitColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-      b.enabled    = YES;
-    } /* of if */
+    [b enableButton];
 }
+
+
+/**
+ *
+ */
+-(void) removeLastDigit
+{ if( self.digitPosition>=0 )
+  { ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
+    dl.digit = nil;
+    
+    [self->_digits replaceObjectAtIndex:self.digitPosition withObject:[NSNull null]];
+    
+    self->_digitPosition--;
+    
+    if( self.digitPosition<=self.maxDigits-1 && self.textButton.superlayer )
+    { [self.textButton stopAnimation];
+      [self.textButton removeFromSuperlayer];
+    } /* of if */
+    
+    if( self.digitPosition<=self.maxDigits-1 )
+      [self enableButtons];
+  } /* of if */
+} /* of if */
 
 
 /**
@@ -347,58 +392,27 @@
 -(void) buttonPushed:(ButtonLayer*)bl
 {
   if( bl && bl.enabled )
-  { if( [bl.digit isEqualToString:kPound] )
-    { if( self.digitPosition>=0 )
-      { bl.pushed = YES;
-        
-        ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
-        dl.digit = nil;
-        
-        [self->_digits replaceObjectAtIndex:self.digitPosition withObject:[NSNull null]];
-        
-        self->_digitPosition--;
-        
-        if( self.digitPosition<=self.maxDigits-1 )
-        { [self enableButtons];
-          
-          if( self.textButton.superlayer )
-          { [self.textButton stopAnimation];
-            [self.textButton removeFromSuperlayer];
-          } /* of if */
+  {
+    if( self.digitPosition<self.maxDigits-1 )
+    { bl.pushed = YES;
+      
+      self->_digitPosition++;
+      
+      [self->_digits replaceObjectAtIndex:self.digitPosition withObject:bl.digit];
+      
+      ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
+      dl.digit = bl.digit;
+      
+      if( self.digitPosition>=self.maxDigits-1 )
+      { [self disableButtons];
+      
+        if( self.textButton.superlayer==nil )
+        { [self.layer addSublayer:self.textButton];
+          [self.textButton startAnimation];
         } /* of if */
-        
-        if( self.digitPosition<0 )
-          [self findButtonByText:kPound].enabled = NO;
-      } /* of if */
-    } /* of if */
-    else if( [bl.digit isEqualToString:kStar] )
-    { [self.delegate cancelPasswordView:self];
-    } /* of else if */
-    else
-    {
-      if( self.digitPosition<self.maxDigits-1 )
-      { bl.pushed = YES;
-        
-        self->_digitPosition++;
-        
-        [self->_digits replaceObjectAtIndex:self.digitPosition withObject:bl.digit];
-        
-        ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
-        dl.digit = bl.digit;
-        
-        if( self.digitPosition>=self.maxDigits-1 )
-        { [self disableButtons];
-        
-          if( self.textButton.superlayer==nil )
-          { [self.layer addSublayer:self.textButton];
-            [self.textButton startAnimation];
-          } /* of if */
-        } /* of if */
-        
       } /* of if */
       
-      [self findButtonByText:kPound].enabled = YES;
-    } /* of else */
+    } /* of if */
   } /* of if */
 }
 
@@ -449,10 +463,20 @@
   for( UITouch* touch in touches )
   { ButtonLayer* buttonLayer = [self findTouchedButton:touch];
   
-    [self setButtonPushed:buttonLayer withValue:YES];
-    
-    if( buttonLayer==nil && CGRectContainsPoint(self.textButton.frame, [touch locationInView:self]) && self.digitPosition>=self.maxDigits-1 )
-     [self.delegate closePasswordView:self];
+    if( buttonLayer )
+      [self setButtonPushed:buttonLayer withValue:YES];
+    else
+    { ButtonLayer* dot = [self findTouchedDigit:touch];
+      
+      if( dot )
+      { if( self.digitPosition>=0 )
+          [self removeLastDigit];
+        else
+          [self.delegate cancelPasswordView:self];
+      } /* of if */
+      else if( CGRectContainsPoint(self.textButton.frame, [touch locationInView:self]) && self.digitPosition>=self.maxDigits-1 )
+        [self.delegate closePasswordView:self];
+    } /* of else */
   } /* of for */
 }
 

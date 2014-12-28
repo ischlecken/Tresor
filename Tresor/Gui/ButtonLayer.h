@@ -31,5 +31,7 @@
 @property(strong,nonatomic,readonly) CAShapeLayer* innerRing;
 @property(strong,nonatomic,readonly) DigitLayer*   digitLabel;
 
+-(void) disableButton;
+-(void) enableButton;
 @end
 

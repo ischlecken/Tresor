@@ -43,10 +43,12 @@
     [self addSublayer:self.innerRing];
     [self addSublayer:self.digitLabel];
     
-    self.strokeColor   = [UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
-    self.digitColor    = [UIColor colorWithWhite:1.0 alpha:1.0];
+    BOOL isDigit = [ButtonLayer isDigit:digit];
+    
+    self.strokeColor   = isDigit ? [UIColor colorWithWhite:1.0 alpha:1.0].CGColor : [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
+    self.digitColor    = isDigit ? [UIColor colorWithWhite:1.0 alpha:1.0]         : [UIColor colorWithWhite:0.9 alpha:1.0];
     self.fillColor     = [UIColor clearColor].CGColor;
-    self.lineWidth     = 2.0;
+    self.lineWidth     = isDigit ? 2.0 : 1.5;
     self.strokeStart   = 0.0;
     self.fontName      = @"Arial";
     self.enabled       = YES;
@@ -62,6 +64,28 @@
   
   return self;
 }
+
+/**
+ *
+ */
++(BOOL) isDigit:(NSString*)digit
+{ BOOL result = NO;
+  
+  if( digit && digit.length==1 )
+  { unichar         ch         = [digit characterAtIndex:0];
+    NSCharacterSet* numericSet = [NSCharacterSet decimalDigitCharacterSet];
+
+    result = [numericSet characterIsMember:ch];
+  } /* of if */
+  
+  return result;
+}
+
+/**
+ *
+ */
+-(BOOL) isDigit
+{ return [ButtonLayer isDigit:self.digit]; }
 
 /**
  *
@@ -165,6 +189,23 @@
     self.digitLabel.digitColor = self.digitColor;
 }
 
+
+/**
+ *
+ */
+-(void) disableButton
+{ self.digitColor = [self isDigit] ? [UIColor colorWithWhite:1.0 alpha:0.4] : [UIColor colorWithWhite:0.9 alpha:0.4];
+  self.enabled    = NO;
+}
+
+
+/**
+ *
+ */
+-(void) enableButton
+{ self.digitColor = [self isDigit] ? [UIColor colorWithWhite:1.0 alpha:1.0] : [UIColor colorWithWhite:0.9 alpha:1.0];
+  self.enabled    = YES;
+}
 @end
 
 
