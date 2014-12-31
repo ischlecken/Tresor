@@ -17,3 +17,8 @@
 "EditAction.Key"      = "Key";
 "EditAction.More"     = "More";
 "EditAction.Favorite" = "Favorite";
+
+"GeneratePin"         = "Generate";
+"GeneratingPin"       = "generating pin";
+
+

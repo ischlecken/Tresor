@@ -23,6 +23,7 @@
 
 @property(strong,nonatomic)          NSString*     digit;
 @property(strong,nonatomic)          UIColor*      digitColor;
+@property(assign,nonatomic)          BOOL          displayDigit;
 @property(weak  ,nonatomic)          NSString*     fontName;
 @property(assign,nonatomic)          BOOL          pushed;
 @property(assign,nonatomic)          BOOL          enabled;

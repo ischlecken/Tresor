@@ -391,6 +391,7 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="maxDigits">
                                 <integer key="value" value="6"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="displayDigits" value="YES"/>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="delegate" destination="qeE-pI-NRF" id="eJ4-9B-h3y"/>
@@ -404,6 +405,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="confirmButton" destination="Jf9-lS-NPE" id="6Rk-h1-e3L"/>
+                        <outlet property="passwordView" destination="TK9-y2-5XI" id="COX-0b-SR8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0Q-Q6-Zwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

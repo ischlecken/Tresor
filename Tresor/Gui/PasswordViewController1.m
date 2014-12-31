@@ -66,7 +66,7 @@
 /**
  *
  */
--(void) cancelPasswordView:(PasswordView *)passwordView
+-(void) passwordViewCanceled:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
   [self reject:_TRESORERROR(TresorErrorNoPassword)];
@@ -76,7 +76,7 @@
 /**
  *
  */
--(void) closePasswordView:(PasswordView *)passwordView
+-(void) passwordViewButtonPushed:(PasswordView *)passwordView
 { //_NSLOG_SELECTOR;
   
   self.password = ((PasswordView*)self.view).password;

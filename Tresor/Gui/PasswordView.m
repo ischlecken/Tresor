@@ -126,15 +126,34 @@
   
   backgroundLayer.locations = @[@(0.0),@(1.0)];
   backgroundLayer.frame     = CGRectMake(0, 0, 200, 200);
-  
-  self.textButton           = [ShimmeringTextLayer new];
-  self.textButton.text      = @"Prüfen";
-  self.textButton.textColor = [UIColor colorWithHue:0.14 saturation:1.0 brightness:1.0 alpha:1.0];
-  self.textButton.fontName  = @"Arial";
 
   [CATransaction commit];
   
+  self.showButton = PasswordViewShowButtonNever;
+  [self setButtonText:self.buttonText];
+  
   self.multipleTouchEnabled = YES;
+}
+
+
+/**
+ *
+ */
+-(void) setButtonText:(NSString *)buttonText
+{ self->_buttonText = buttonText;
+  
+  if( self.textButton==nil )
+  { self.textButton           = [ShimmeringTextLayer new];
+    self.textButton.textColor = [UIColor colorWithHue:0.14 saturation:1.0 brightness:1.0 alpha:1.0];
+    self.textButton.fontName  = @"Arial";
+    
+    [self setNeedsLayout];
+  } /* of if */
+  
+  self.textButton.text = buttonText;
+
+  if( self.showButton==PasswordViewShowButtonAlways || (self.showButton==PasswordViewShowButtonWhenNoDigitIsEntered && self.digitPosition<0) )
+    [self showTextButton];
 }
 
 /**
@@ -160,8 +179,9 @@
   for( position=0;position<self.maxDigits;position++ )
   { ButtonLayer* dl = [[ButtonLayer alloc] initWithDigit:nil];
     
-    dl.index      = position;
-    dl.digitColor = [UIColor redColor];
+    dl.index        = position;
+    dl.digitColor   = [UIColor redColor];
+    dl.displayDigit = self.displayDigits;
     
     [dots addObject:dl];
     
@@ -237,8 +257,11 @@
     buttonLayer.frame    = frame;
   } /* of if */
   
-  CGFloat textHeight = MIN(self.bounds.size.height-(yOffset+heightRows),48.0);
-  self.textButton.frame = CGRectMake(0, yOffset+heightRows + (self.bounds.size.height-(yOffset+heightRows)-textHeight)*0.5, self.bounds.size.width,textHeight);
+  if( self.textButton )
+  { CGFloat textHeight = MIN(self.bounds.size.height-(yOffset+heightRows),48.0);
+    
+    self.textButton.frame = CGRectMake(0, yOffset+heightRows + (self.bounds.size.height-(yOffset+heightRows)-textHeight)*0.5, self.bounds.size.width,textHeight);
+  } /* of if */
 }
 
 #pragma mark Touch Handling
@@ -362,6 +385,36 @@
     [b enableButton];
 }
 
+/**
+ *
+ */
+-(void) showTextButton
+{ if( self.textButton && self.textButton.superlayer==nil )
+  { [self.layer addSublayer:self.textButton];
+    [self.textButton startAnimation];
+  } /* of if */
+}
+
+/**
+ *
+ */
+-(void) hideTextButton
+{ if( self.textButton && self.textButton.superlayer )
+  { [self.textButton stopAnimation];
+    [self.textButton removeFromSuperlayer];
+  } /* of if */
+}
+
+/**
+ *
+ */
+-(void) resetDigits
+{ _NSLOG_SELECTOR;
+  
+  while( self.digitPosition>=0 )
+    [self removeLastDigit];
+}
+
 
 /**
  *
@@ -375,13 +428,17 @@
     
     self->_digitPosition--;
     
-    if( self.digitPosition<=self.maxDigits-1 && self.textButton.superlayer )
-    { [self.textButton stopAnimation];
-      [self.textButton removeFromSuperlayer];
-    } /* of if */
+    if( self.digitPosition<=self.maxDigits-1 && self.showButton==PasswordViewShowButtonWhenAllDigitsAreEntered )
+      [self hideTextButton];
     
     if( self.digitPosition<=self.maxDigits-1 )
       [self enableButtons];
+    
+    if( self.digitPosition<0 && self.showButton==PasswordViewShowButtonWhenNoDigitIsEntered )
+      [self showTextButton];
+
+    if( self.delegate && self.digitPosition<=self.maxDigits-1 && [self.delegate respondsToSelector:@selector(passwordViewDigitsEntered:allDigits:)] )
+      [self.delegate passwordViewDigitsEntered:self allDigits:NO];
   } /* of if */
 } /* of if */
 
@@ -390,29 +447,37 @@
  *
  */
 -(void) buttonPushed:(ButtonLayer*)bl
-{
-  if( bl && bl.enabled )
-  {
-    if( self.digitPosition<self.maxDigits-1 )
-    { bl.pushed = YES;
+{ if( bl && bl.enabled && self.digitPosition<self.maxDigits-1 )
+  { bl.pushed = YES;
+    
+    [self addDigit:bl.digit];
+  } /* of if */
+}
+
+/**
+ *
+ */
+-(void) addDigit:(NSString*)digit
+{ if( digit && self.digitPosition<self.maxDigits-1 )
+  { self->_digitPosition++;
+    
+    [self->_digits replaceObjectAtIndex:self.digitPosition withObject:digit];
+    
+    ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
+    dl.digit = digit;
+    
+    if( self.showButton==PasswordViewShowButtonWhenNoDigitIsEntered )
+      [self hideTextButton];
+    
+    if( self.digitPosition>=self.maxDigits-1 )
+    { [self disableButtons];
       
-      self->_digitPosition++;
-      
-      [self->_digits replaceObjectAtIndex:self.digitPosition withObject:bl.digit];
-      
-      ButtonLayer* dl = [self.dotLayers objectAtIndex:self.digitPosition];
-      dl.digit = bl.digit;
-      
-      if( self.digitPosition>=self.maxDigits-1 )
-      { [self disableButtons];
-      
-        if( self.textButton.superlayer==nil )
-        { [self.layer addSublayer:self.textButton];
-          [self.textButton startAnimation];
-        } /* of if */
-      } /* of if */
-      
+      if( self.showButton==PasswordViewShowButtonWhenAllDigitsAreEntered )
+        [self showTextButton];
     } /* of if */
+    
+    if( self.delegate && [self.delegate respondsToSelector:@selector(passwordViewDigitsEntered:allDigits:)] )
+      [self.delegate passwordViewDigitsEntered:self allDigits:self.digitPosition>=self.maxDigits-1];
   } /* of if */
 }
 
@@ -472,10 +537,10 @@
       { if( self.digitPosition>=0 )
           [self removeLastDigit];
         else
-          [self.delegate cancelPasswordView:self];
+          [self.delegate passwordViewCanceled:self];
       } /* of if */
-      else if( CGRectContainsPoint(self.textButton.frame, [touch locationInView:self]) && self.digitPosition>=self.maxDigits-1 )
-        [self.delegate closePasswordView:self];
+      else if( self.textButton && CGRectContainsPoint(self.textButton.frame, [touch locationInView:self]) )
+        [self.delegate passwordViewButtonPushed:self];
     } /* of else */
   } /* of for */
 }

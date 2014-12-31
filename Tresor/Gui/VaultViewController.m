@@ -207,7 +207,7 @@
   NSData*         salt         = _DUMMYSALT; //[NSData dataWithRandom:keySize];
   
   MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-  hud.labelText = @"calculating key";
+  hud.labelText = _LSTR(@"calculating key");
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
   { _NSLOG(@"derivedKey.start");

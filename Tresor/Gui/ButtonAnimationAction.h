@@ -18,6 +18,7 @@
 
 
 @interface OnAnimationAction : NSObject<CAAction>
+@property NSUInteger disappearDuration;
 @end
 
 @interface OffAnimationAction : NSObject<CAAction>

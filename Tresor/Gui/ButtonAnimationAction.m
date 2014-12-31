@@ -24,10 +24,22 @@
 /**
  *
  */
+- (instancetype)init
+{ self = [super init];
+  
+  if( self )
+  { self.disappearDuration = 0.6;
+  }
+  
+  return self;
+}
+
+/**
+ *
+ */
 -(void) runActionForKey:(NSString *)event object:(id)anObject arguments:(NSDictionary *)dict
 { ButtonLayer*      layer    = (ButtonLayer*)anObject;
   CFTimeInterval    duration = 0.6;
-
 
   CABasicAnimation* anim2 = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
   anim2.duration            = duration;
@@ -40,15 +52,15 @@
   CABasicAnimation* anim3 = [CABasicAnimation animationWithKeyPath:@"fillColor"];
   anim3.duration            = duration;
   anim3.fromValue           = (id)[UIColor clearColor].CGColor;
-  anim3.toValue             = (id)[UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
+  anim3.toValue             = (id)[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
   anim3.fillMode            = kCAFillModeRemoved;
   anim3.removedOnCompletion = NO;
   [layer addAnimation:anim3 forKey:@"fillColorAnim"];
 
   CABasicAnimation* anim4 = [CABasicAnimation animationWithKeyPath:@"fillColor"];
   anim4.beginTime           = CACurrentMediaTime()+duration;
-  anim4.duration            = duration;
-  anim4.fromValue           = (id)[UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
+  anim4.duration            = self.disappearDuration;
+  anim4.fromValue           = (id)[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
   anim4.toValue             = (id)[UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
   anim4.fillMode            = kCAFillModeForwards;
   anim4.removedOnCompletion = NO;

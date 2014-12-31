@@ -24,6 +24,19 @@
 @implementation PasswordViewController
 
 
+/**
+ *
+ */
+-(void) viewDidLoad
+{ [super viewDidLoad];
+  
+  if( [self.view isKindOfClass:[PasswordView class]] )
+  { PasswordView* passwordView = (PasswordView*)self.view;
+    
+    passwordView.showButton = PasswordViewShowButtonAlways;
+    passwordView.buttonText = _LSTR(@"Test");
+  } /* of if */
+}
 
 /**
  *
@@ -34,7 +47,7 @@
 /**
  *
  */
--(void) cancelPasswordView:(PasswordView *)passwordView
+-(void) passwordViewCanceled:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
   [self performSegueWithIdentifier:@"passwordControllerUnwindSegue" sender:self];
@@ -44,7 +57,7 @@
 /**
  *
  */
--(void) closePasswordView:(PasswordView *)passwordView
+-(void) passwordViewButtonPushed:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
   self.password = ((PasswordView*)self.view).password;

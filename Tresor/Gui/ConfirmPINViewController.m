@@ -29,7 +29,7 @@
 /**
  *
  */
--(void) cancelPasswordView:(PasswordView *)passwordView
+-(void) passwordViewCanceled:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
 }
@@ -38,7 +38,7 @@
 /**
  *
  */
--(void) closePasswordView:(PasswordView *)passwordView
+-(void) passwordViewButtonPushed:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
   if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )

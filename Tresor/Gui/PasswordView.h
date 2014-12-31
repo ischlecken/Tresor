@@ -18,13 +18,30 @@
 @class PasswordView;
 
 @protocol PasswordViewDelegate <NSObject>
--(void)      cancelPasswordView:(PasswordView*)passwordView;
--(void)      closePasswordView:(PasswordView*)passwordView;
+-(void) passwordViewCanceled:(PasswordView*)passwordView;
+-(void) passwordViewButtonPushed:(PasswordView*)passwordView;
+
+@optional
+-(void) passwordViewDigitsEntered:(PasswordView*)passwordView allDigits:(BOOL)allDigits;
 @end
+
+typedef NS_ENUM(NSUInteger, PasswordViewShowButtonType)
+{ PasswordViewShowButtonNever=0,
+  PasswordViewShowButtonAlways,
+  PasswordViewShowButtonWhenNoDigitIsEntered,
+  PasswordViewShowButtonWhenAllDigitsAreEntered
+};
+
 
 @interface PasswordView : UIView
 -(NSString*) password;
 
-@property(assign  ,nonatomic)          NSInteger                maxDigits;
-@property(weak    ,nonatomic) IBOutlet id<PasswordViewDelegate> delegate;
+@property(assign  ,nonatomic)          NSInteger                  maxDigits;
+@property(assign  ,nonatomic)          BOOL                       displayDigits;
+@property(strong  ,nonatomic)          NSString*                  buttonText;
+@property(assign  ,nonatomic)          PasswordViewShowButtonType showButton;
+@property(weak    ,nonatomic) IBOutlet id<PasswordViewDelegate>   delegate;
+
+-(void) addDigit:(NSString*)digit;
+-(void) resetDigits;
 @end

@@ -145,14 +145,26 @@
 -(id<CAAction>) actionForKey:(NSString *)key
 { //_NSLOG(@"[%@]: digit=%@",key,self.digit);
   
-  if( [key isEqualToString:@"pushed"] )
-    return self.pushed ? [OffAnimationAction1 new] : [OnAnimationAction1 new];
-  else if( [key isEqualToString:@"enabled"] )
-    return self.enabled ? [OffAnimationAction2 new] : [OnAnimationAction2 new];
-  else if( [key isEqualToString:@"digit"] )
-    return self.digit ? [OffAnimationAction new] : [OnAnimationAction new];
+  id<CAAction> result = nil;
   
-  return nil;
+  if( [key isEqualToString:@"pushed"] )
+    result = self.pushed ? [OffAnimationAction1 new] : [OnAnimationAction1 new];
+  else if( [key isEqualToString:@"enabled"] )
+    result = self.enabled ? [OffAnimationAction2 new] : [OnAnimationAction2 new];
+  else if( [key isEqualToString:@"digit"] )
+  { if( self.digit )
+      result = [OffAnimationAction new];
+    else
+    { OnAnimationAction* action = [OnAnimationAction new];
+      
+      if( self.displayDigit )
+        action.disappearDuration = 12.0f;
+      
+      result = action;
+    } /* of else */
+  } /* of else if */
+  
+  return result;
 }
 
 /**

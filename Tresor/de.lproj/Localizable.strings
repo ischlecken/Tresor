@@ -15,3 +15,6 @@
 "EditAction.Key"      = "Schlüssel";
 "EditAction.More"     = "Mehr";
 "EditAction.Favorite" = "Favorit";
+
+"GeneratePin"         = "Erzeugen";
+"GeneratingPin"       = "Erzeuge PIN";
