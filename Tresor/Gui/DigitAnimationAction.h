@@ -18,4 +18,5 @@
 
 
 @interface DigitLayerDigitColorAction : NSObject<CAAction>
+@property NSUInteger duration;
 @end

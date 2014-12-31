@@ -18,3 +18,4 @@
 
 "GeneratePin"         = "Erzeugen";
 "GeneratingPin"       = "Erzeuge PIN";
+"ConfirmPIN"          = "Bestätigen";

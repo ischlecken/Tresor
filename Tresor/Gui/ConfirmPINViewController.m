@@ -20,11 +20,36 @@
 #import "PUKViewController.h"
 
 @interface ConfirmPINViewController () <PasswordViewDelegate>
+@property (weak  , nonatomic) IBOutlet UIBarButtonItem* createPUKButton;
+@property (strong, nonatomic) IBOutlet PasswordView*    passwordView;
 @end
 
 @implementation ConfirmPINViewController
 
 @synthesize parameter=_parameter;
+
+/**
+ *
+ */
+-(void) viewDidLoad
+{ [super viewDidLoad];
+  
+  self.passwordView.showButton    = PasswordViewShowButtonWhenAllDigitsAreEntered;
+  self.passwordView.buttonText    = _LSTR(@"ConfirmPIN");
+}
+
+
+/**
+ *
+ */
+-(void) viewWillAppear:(BOOL)animated
+{ [super viewWillAppear:animated];
+  
+  [self.passwordView resetDigits];
+  self.createPUKButton.enabled = NO;
+}
+
+#pragma mark PasswordViewDelegate
 
 /**
  *
@@ -44,6 +69,24 @@
   if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )
     _NSLOG(@"pin %@ confirmed.",self.parameter.vaultPIN);
 }
+
+/**
+ *
+ */
+-(void) passwordViewDigitsEntered:(PasswordView *)passwordView allDigits:(BOOL)allDigits
+{ _NSLOG_SELECTOR;
+
+  if( allDigits )
+  {
+    if( [self.passwordView.password isEqualToString:self.parameter.vaultPIN] )
+      self.createPUKButton.enabled = YES;
+    else
+      [self.passwordView resetDigits];
+  } /* of if */
+  else
+    self.createPUKButton.enabled = NO;
+}
+
 
 #pragma mark prepare Segue
 

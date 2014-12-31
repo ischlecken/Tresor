@@ -200,6 +200,18 @@
 /**
  *
  */
+-(void) setDisplayDigits:(BOOL)displayDigits
+{ self->_displayDigits = displayDigits;
+  
+  if( self.dotLayers )
+    for( ButtonLayer* dl in self.dotLayers )
+      dl.displayDigit = displayDigits;
+  
+}
+
+/**
+ *
+ */
 -(ButtonLayer*) buttonLayerForCALayer:(CALayer*)layer
 { ButtonLayer* result = nil;
   
@@ -222,9 +234,10 @@
 -(void) layoutSublayersOfLayer:(CALayer *)layer
 { //_NSLOG_FRAME(@"frame=", layer.frame);
   
-  NSUInteger columns       = self.bounds.size.width<self.bounds.size.height ? 4 : 6;
-  CGFloat    padding       =14.0;
-  CGFloat    buttonPadding =14.0;
+  BOOL       isPortrait    = self.bounds.size.width<self.bounds.size.height;
+  NSUInteger columns       = isPortrait ? 4    : 8;
+  CGFloat    padding       = isPortrait ? 14.0 : 6;
+  CGFloat    buttonPadding = isPortrait ? 14.0 : 6;
   CGFloat    width         = (self.bounds.size.width-padding*2.0)/columns;
   CGFloat    height        = width;
   

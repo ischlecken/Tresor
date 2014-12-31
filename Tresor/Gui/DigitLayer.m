@@ -117,10 +117,18 @@
 -(id<CAAction>) actionForKey:(NSString *)key
 { //_NSLOG(@"[%@]: digit=%@",key,self.digit);
 
-  if( [key isEqualToString:@"digit"] )
-    return [DigitLayerDigitColorAction new];
+  id<CAAction> result = nil;
   
-  return nil;
+  if( [key isEqualToString:@"digit"] )
+  { DigitLayerDigitColorAction* action = [DigitLayerDigitColorAction new];
+    
+    if( self.displayDigit )
+      action.duration = 36.0;
+    
+    result = action;
+  } /* of if */
+  
+  return result;
 }
 
 /**

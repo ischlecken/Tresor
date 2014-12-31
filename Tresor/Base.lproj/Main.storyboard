@@ -389,7 +389,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="maxDigits">
-                                <integer key="value" value="6"/>
+                                <integer key="value" value="8"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="displayDigits" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -586,7 +586,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="maxDigits">
-                                <integer key="value" value="6"/>
+                                <integer key="value" value="8"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -601,6 +601,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="createPUKButton" destination="SCk-O2-ncC" id="ZjJ-lx-GMi"/>
+                        <outlet property="passwordView" destination="DXN-Sw-GhV" id="XTs-yT-JHp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lS-Sf-6Cl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,6 +18,7 @@
 
 @interface DigitLayer : CALayer
 @property(strong,nonatomic) NSString* digit;
+@property(assign,nonatomic) BOOL      displayDigit;
 @property(strong,nonatomic) UIColor*  digitColor;
 @property(strong,nonatomic) NSString* fontName;
 @end

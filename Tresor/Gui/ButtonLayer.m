@@ -127,6 +127,14 @@
 }
 
 
+/**
+ *
+ */
+-(void) setDisplayDigit:(BOOL)displayDigit
+{ self->_displayDigit = displayDigit;
+  
+  self.digitLabel.displayDigit = displayDigit;
+}
 
 /**
  *
@@ -158,7 +166,7 @@
     { OnAnimationAction* action = [OnAnimationAction new];
       
       if( self.displayDigit )
-        action.disappearDuration = 12.0f;
+        action.disappearDuration = 36.0;
       
       result = action;
     } /* of else */

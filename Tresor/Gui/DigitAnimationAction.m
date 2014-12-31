@@ -24,14 +24,27 @@
 /**
  *
  */
+-(instancetype)init
+{ self = [super init];
+  
+  if( self )
+  { self.duration = 1.8;
+  }
+  
+  return self;
+}
+
+/**
+ *
+ */
 -(void) runActionForKey:(NSString *)event object:(id)anObject arguments:(NSDictionary *)dict
 { DigitLayer*       layer    = (DigitLayer*)anObject;
-  CFTimeInterval    duration = 1.8;
+  CFTimeInterval    duration = self.duration;
   
   CABasicAnimation* anim3 = [CABasicAnimation animationWithKeyPath:@"digitColor"];
   anim3.duration            = duration;
-  anim3.fromValue           = (id)[UIColor blackColor].CGColor;
-  anim3.toValue             = (id)[UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
+  anim3.fromValue           = (id)[UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
+  anim3.toValue             = (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor;
   anim3.fillMode            = kCAFillModeForwards;
   anim3.removedOnCompletion = NO;
   [layer addAnimation:anim3 forKey:@"digitColorAnim"];

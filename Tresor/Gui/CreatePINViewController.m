@@ -45,7 +45,7 @@
 { [super viewWillAppear:animated];
   
   [self.passwordView resetDigits];
-  self.confirmButton = NO;
+  self.confirmButton.enabled = NO;
 }
 
 

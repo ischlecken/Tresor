@@ -52,7 +52,7 @@
   CABasicAnimation* anim3 = [CABasicAnimation animationWithKeyPath:@"fillColor"];
   anim3.duration            = duration;
   anim3.fromValue           = (id)[UIColor clearColor].CGColor;
-  anim3.toValue             = (id)[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+  anim3.toValue             = (id)[UIColor orangeColor].CGColor;
   anim3.fillMode            = kCAFillModeRemoved;
   anim3.removedOnCompletion = NO;
   [layer addAnimation:anim3 forKey:@"fillColorAnim"];
@@ -60,8 +60,8 @@
   CABasicAnimation* anim4 = [CABasicAnimation animationWithKeyPath:@"fillColor"];
   anim4.beginTime           = CACurrentMediaTime()+duration;
   anim4.duration            = self.disappearDuration;
-  anim4.fromValue           = (id)[UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
-  anim4.toValue             = (id)[UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
+  anim4.fromValue           = (id)[UIColor orangeColor].CGColor;
+  anim4.toValue             = (id)[UIColor whiteColor].CGColor;
   anim4.fillMode            = kCAFillModeForwards;
   anim4.removedOnCompletion = NO;
   [layer addAnimation:anim4 forKey:@"fillColor1Anim"];

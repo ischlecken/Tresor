@@ -19,6 +19,6 @@
 "EditAction.Favorite" = "Favorite";
 
 "GeneratePin"         = "Generate";
-"GeneratingPin"       = "generating pin";
-
+"GeneratingPin"       = "Generating PIN";
+"ConfirmPIN"          = "Confirm";
 
