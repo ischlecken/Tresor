@@ -21,4 +21,6 @@
 "GeneratePin"         = "Generate";
 "GeneratingPin"       = "Generating PIN";
 "ConfirmPIN"          = "Confirm";
-
+"GeneratingPUK"       = "Generating PUK";
+"CreatePUKMessage"    = "Create PUK bla fasel";
+"ConfirmPUKMessage"   = "Confirm your PUK";

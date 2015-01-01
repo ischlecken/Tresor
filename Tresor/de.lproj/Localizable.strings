@@ -19,3 +19,7 @@
 "GeneratePin"         = "Erzeugen";
 "GeneratingPin"       = "Erzeuge PIN";
 "ConfirmPIN"          = "Bestätigen";
+"GeneratingPUK"       =" Erzeuge PUK";
+
+"CreatePUKMessage"    = "Erzeuge PUK bla fasel";
+"ConfirmPUKMessage"   = "Bestätigen Sie Ihre PUK";

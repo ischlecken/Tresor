@@ -16,35 +16,39 @@
  * Copyright (c) 2014 ischlecken.
  */
 #import "PUKViewController.h"
+#import "MBProgressHUD.h"
 
 @interface PUKViewController () <UITextFieldDelegate>
-@property(nonatomic,weak  ) IBOutlet UIScrollView* scrollView;
-@property(nonatomic,weak  ) IBOutlet UIView*       contentView;
+@property(nonatomic,weak  ) IBOutlet UIScrollView*    scrollView;
+@property(nonatomic,weak  ) IBOutlet UIView*          contentView;
 
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_0;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_1;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_2;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_3;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_0;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_1;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_2;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_3;
 
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_4;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_5;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_6;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_7;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_4;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_5;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_6;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_7;
 
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_8;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_9;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_a;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_b;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_8;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_9;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_a;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_b;
 
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_c;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_d;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_e;
-@property(nonatomic,weak  ) IBOutlet UITextField*  textField_f;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_c;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_d;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_e;
+@property(nonatomic,weak  ) IBOutlet UITextField*     textField_f;
 
-@property(nonatomic,weak  ) IBOutlet UITextField*  activeTextField;
+@property(nonatomic,weak  ) IBOutlet UITextField*     activeTextField;
+@property(nonatomic,weak  ) IBOutlet UILabel*         messageLabel;
 
-@property(nonatomic,strong)          NSArray*      textFields;
-@property(nonatomic,assign)          BOOL          triggerNextPUK;
+@property(nonatomic,weak  ) IBOutlet UIBarButtonItem* confirmButton;
+
+@property(nonatomic,strong)          NSArray*         textFields;
+@property(nonatomic,assign)          BOOL             triggerNextPUK;
 @end
 
 @implementation PUKViewController
@@ -81,13 +85,6 @@
                                                                     multiplier:1.0
                                                                       constant:-8];
   [self.view addConstraint:rightConstraint];
-  
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-  {
-    self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
-    
-    _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
-  });
 }
 
 /**
@@ -107,10 +104,33 @@
                                              object:nil];
   
   for( UITextField* tf in self.textFields )
-    tf.enabled = self.validatePUK;
+  { tf.enabled = self.validatePUK;
+    tf.text    = nil;
+  } /* of if */
 
-  self.triggerNextPUK = YES;
-  [self nextDisplayPUK];
+  if( !self.validatePUK )
+  { MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+    hud.labelText = _LSTR(@"GeneratingPUK");
+
+    self.messageLabel.text     = _LSTR(@"CreatePUKMessage");
+    
+    self.confirmButton.enabled = NO;
+    self.parameter.vaultPUK    = nil;
+    self.triggerNextPUK        = YES;
+    [self nextDisplayPUK];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    { self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
+     
+      _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
+    });
+  } /* of if */
+  else
+  { self.messageLabel.text     = _LSTR(@"ConfirmPUKMessage");
+    self.confirmButton.enabled = NO;
+    
+    [self.textFields[0] becomeFirstResponder];
+  } /* of else */
 }
 
 /**
@@ -141,6 +161,11 @@
       { [self nextDisplayPUK];
       });
   } /* of if */
+  else
+  { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+  
+    self.confirmButton.enabled = YES;
+  } /* of else */
   
   //_NSLOG(@"puk:%@",puk);
   
