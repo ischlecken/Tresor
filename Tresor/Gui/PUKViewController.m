@@ -93,6 +93,24 @@
   
   self.allowedCharacters   = chset;
   self.lowercaseCharacters = [NSCharacterSet characterSetWithCharactersInString:@"abcdef"];
+  
+  if( !self.validatePUK )
+  { MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+    hud.labelText = _LSTR(@"GeneratingPUK");
+    
+    self.messageLabel.text     = _LSTR(@"CreatePUKMessage");
+    
+    self.confirmButton.enabled = NO;
+    self.parameter.vaultPUK    = nil;
+    self.triggerNextPUK        = YES;
+    [self nextDisplayPUK];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    { self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
+     
+      _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
+    });
+  } /* of if */
 }
 
 /**
@@ -111,30 +129,18 @@
                                                name:UIKeyboardWillHideNotification
                                              object:nil];
   
-  for( UITextField* tf in self.textFields )
-  { tf.enabled              = self.validatePUK;
+  for( NSUInteger i=0;i<self.textFields.count;i++ )
+  { UITextField* tf = self.textFields[i];
+    
+    tf.enabled              = self.validatePUK;
     tf.text                 = nil;
     tf.clearsOnBeginEditing = YES;
+    
+    if( !self.validatePUK && self.parameter.vaultPUK && i<self.parameter.vaultPUK.length )
+      tf.text = [self.parameter.vaultPUK substringWithRange:NSMakeRange(i, 1)];
   } /* of if */
 
-  if( !self.validatePUK )
-  { MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-    hud.labelText = _LSTR(@"GeneratingPUK");
-
-    self.messageLabel.text     = _LSTR(@"CreatePUKMessage");
-    
-    self.confirmButton.enabled = NO;
-    self.parameter.vaultPUK    = nil;
-    self.triggerNextPUK        = YES;
-    [self nextDisplayPUK];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    { self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
-     
-      _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
-    });
-  } /* of if */
-  else
+  if( self.validatePUK )
   { self.messageLabel.text     = _LSTR(@"ConfirmPUKMessage");
     self.confirmButton.enabled = NO;
     

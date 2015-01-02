@@ -18,8 +18,10 @@
 
 "GeneratePin"         = "Erzeugen";
 "GeneratingPin"       = "Erzeuge PIN";
-"ConfirmPIN"          = "Bestätigen";
+"PINConfirmed"        = "Bestätigt";
 "GeneratingPUK"       =" Erzeuge PUK";
 
 "CreatePUKMessage"    = "Erzeuge PUK bla fasel";
 "ConfirmPUKMessage"   = "Bestätigen Sie Ihre PUK";
+
+"PINCheckFailedTitle" = "PIN bei Prüfung durchgefallen!";

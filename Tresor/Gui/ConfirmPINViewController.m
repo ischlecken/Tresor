@@ -35,7 +35,7 @@
 { [super viewDidLoad];
   
   self.passwordView.showButton    = PasswordViewShowButtonWhenAllDigitsAreEntered;
-  self.passwordView.buttonText    = _LSTR(@"ConfirmPIN");
+  self.passwordView.buttonText    = _LSTR(@"PINConfirmed");
 }
 
 
@@ -55,8 +55,7 @@
  *
  */
 -(void) passwordViewCanceled:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
+{
 }
 
 
@@ -64,9 +63,7 @@
  *
  */
 -(void) passwordViewButtonPushed:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-  if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )
+{ if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )
     _NSLOG(@"pin %@ confirmed.",self.parameter.vaultPIN);
 }
 
@@ -74,9 +71,7 @@
  *
  */
 -(void) passwordViewDigitsEntered:(PasswordView *)passwordView allDigits:(BOOL)allDigits
-{ _NSLOG_SELECTOR;
-
-  if( allDigits )
+{ if( allDigits )
   {
     if( [self.passwordView.password isEqualToString:self.parameter.vaultPIN] )
       self.createPUKButton.enabled = YES;

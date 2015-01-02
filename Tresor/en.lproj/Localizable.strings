@@ -20,7 +20,9 @@
 
 "GeneratePin"         = "Generate";
 "GeneratingPin"       = "Generating PIN";
-"ConfirmPIN"          = "Confirm";
+"PINConfirmed"        = "Confirmed";
 "GeneratingPUK"       = "Generating PUK";
 "CreatePUKMessage"    = "Create PUK bla fasel";
 "ConfirmPUKMessage"   = "Confirm your PUK";
+
+"PINCheckFailedTitle" = "PIN check failed!";

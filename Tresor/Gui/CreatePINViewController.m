@@ -71,10 +71,9 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
   { _NSLOG(@"generatePIN.start");
    
-    NSError* error      = nil;
-    NSData*  derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2CC withLength:keySize usingSalt:salt andIterations:iterations error:&error];
-   
-    NSString* pin       = [[derivedKey hexStringValue] substringToIndex:self.passwordView.maxDigits];
+    NSError*  error      = nil;
+    NSData*   derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2CC withLength:keySize usingSalt:salt andIterations:iterations error:&error];
+    NSString* pin        = [[derivedKey hexStringValue] substringToIndex:self.passwordView.maxDigits];
    _NSLOG(@"generatePIN.stop:<%@>",pin);
    
    dispatch_async(dispatch_get_main_queue(), ^
@@ -92,8 +91,7 @@
  *
  */
 -(void) passwordViewCanceled:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
+{
 }
 
 
@@ -101,24 +99,60 @@
  *
  */
 -(void) passwordViewButtonPushed:(PasswordView *)passwordView
-{ _NSLOG_SELECTOR;
-  
-  [self generatePIN];
+{ [self generatePIN];
 }
 
 /**
  *
  */
 -(void) passwordViewDigitsEntered:(PasswordView *)passwordView allDigits:(BOOL)allDigits
-{ _NSLOG_SELECTOR;
-  
-  self.confirmButton.enabled = allDigits;
+{ self.confirmButton.enabled = allDigits;
   
   if( allDigits )
     self.parameter.vaultPIN = passwordView.password;
 }
 
 #pragma mark prepare Segue
+
+/**
+ *
+ */
+-(BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{ BOOL result = YES;
+  
+  if( [identifier isEqualToString:@"ConfirmPIN"] )
+  {
+    if( self.parameter.vaultPIN )
+    { NSString* allowedChars = @"0123456789ABCDEF";
+      
+      for( NSUInteger i=0;i<allowedChars.length;i++ )
+      { unichar ch = [allowedChars characterAtIndex:i];
+        
+        if( [self.parameter.vaultPIN containsOnlyCharacter:ch] )
+        { result = NO;
+         
+          NSString* msg = [NSString stringWithFormat:@"PIN contains only character %@",[allowedChars substringWithRange:NSMakeRange(i, 1)]];
+          
+          _NSLOG(@"%@",msg);
+          
+          UIAlertController* alert = [UIAlertController alertControllerWithTitle:_LSTR(@"PINCheckFailedTitle") message:msg preferredStyle:UIAlertControllerStyleAlert];
+          
+          [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
+          { self.confirmButton.enabled = NO;
+            
+            [self.passwordView resetDigits];
+          }]];
+          
+          [self presentViewController:alert animated:YES completion:NULL];
+          
+          break;
+        } /* of if */
+      } /* of for */
+    } /* of if */
+  } /* of if */
+  
+  return result;
+}
 
 /**
  *
