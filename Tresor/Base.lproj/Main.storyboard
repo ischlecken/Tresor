@@ -557,6 +557,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createPINButton" destination="9JO-ik-e1E" id="rdB-CI-APY"/>
                         <outlet property="vaultIcon" destination="lml-IY-xJQ" id="GBa-X2-KqJ"/>
                         <outlet property="vaultName" destination="J9q-Xe-2cu" id="ycB-lO-VGB"/>
                         <outlet property="vaultType" destination="8uY-0k-m9e" id="Sdb-70-Vql"/>

@@ -48,6 +48,8 @@
 @property(nonatomic,weak  ) IBOutlet UIBarButtonItem* confirmButton;
 
 @property(nonatomic,strong)          NSArray*         textFields;
+@property(nonatomic,strong)          NSCharacterSet*  allowedCharacters;
+@property(nonatomic,strong)          NSCharacterSet*  lowercaseCharacters;
 @property(nonatomic,assign)          BOOL             triggerNextPUK;
 @end
 
@@ -85,6 +87,12 @@
                                                                     multiplier:1.0
                                                                       constant:-8];
   [self.view addConstraint:rightConstraint];
+  
+  NSMutableCharacterSet* chset = [NSMutableCharacterSet decimalDigitCharacterSet];
+  [chset addCharactersInString:@"abcdefABCDEF"];
+  
+  self.allowedCharacters   = chset;
+  self.lowercaseCharacters = [NSCharacterSet characterSetWithCharactersInString:@"abcdef"];
 }
 
 /**
@@ -104,8 +112,9 @@
                                              object:nil];
   
   for( UITextField* tf in self.textFields )
-  { tf.enabled = self.validatePUK;
-    tf.text    = nil;
+  { tf.enabled              = self.validatePUK;
+    tf.text                 = nil;
+    tf.clearsOnBeginEditing = YES;
   } /* of if */
 
   if( !self.validatePUK )
@@ -219,20 +228,98 @@
  *
  */
 -(void) textFieldDidBeginEditing:(UITextField *)textField
-{ _NSLOG_SELECTOR;
- 
-  self.activeTextField = textField;
+{ self.activeTextField = textField;
+  
+  [textField setSelectedTextRange:nil];
 }
 
 /**
  *
  */
 -(void) textFieldDidEndEditing:(UITextField *)textField
-{ _NSLOG_SELECTOR;
-  
-  self.activeTextField = nil;
+{ self.activeTextField = nil;
 }
 
+/**
+ *
+ */
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{ BOOL result                   = YES;
+  BOOL foundLowercaseCharacters = NO;
+  BOOL gotoNextTextfield        = NO;
+  
+  if( string )
+    for( NSUInteger i=0;i<string.length;i++ )
+    { unichar ch = [string characterAtIndex:i];
+      
+      if( ![self.allowedCharacters characterIsMember:ch] )
+      { result = NO;
+        
+        break;
+      } /* of if */
+      
+      if( !foundLowercaseCharacters )
+        foundLowercaseCharacters = [self.lowercaseCharacters characterIsMember:ch];
+    } /* of for */
+  
+  if( result && string && string.length>0 && textField.text.length+string.length>1 )
+    result = NO;
+
+  if( result && string && string.length>0 && textField.text.length+string.length>=1 )
+    gotoNextTextfield = YES;
+
+  if( result && foundLowercaseCharacters )
+  { result         = NO;
+    textField.text = [textField.text stringByReplacingCharactersInRange:range withString:[string uppercaseString]];
+  } /* of if */
+  
+  //_NSLOG(@"r[%ld,%ld] s<%@>:%ld",(long)range.location,(long)range.length,string,(long)result);
+  
+  if( gotoNextTextfield )
+    dispatch_async(dispatch_get_main_queue(), ^{ [self gotoNextTextfield]; });
+  
+  return result;
+}
+
+/**
+ *
+ */
+-(void) gotoNextTextfield
+{
+  for( NSUInteger i=0;i<self.textFields.count;i++ )
+    if( self.activeTextField==self.textFields[i] )
+    {
+      if( i>=self.textFields.count-1 )
+      { [self.textFields[i] resignFirstResponder];
+        [self checkPUK];
+      } /* of if */
+      else
+        [self.textFields[i+1] becomeFirstResponder];
+      
+      break;
+    } /* of if */
+}
+
+/**
+ *
+ */
+-(void) checkPUK
+{ NSMutableString* confirmedPUK = [[NSMutableString alloc] initWithCapacity:16];
+  
+  for( NSUInteger i=0;i<self.textFields.count;i++ )
+    [confirmedPUK appendString:[self.textFields[i] text]];
+  
+  _NSLOG(@"confirmedPUK:%@",confirmedPUK);
+  
+  if( self.parameter.vaultPUK && [self.parameter.vaultPUK isEqualToString:confirmedPUK] )
+    self.confirmButton.enabled = YES;
+  else
+  { for( NSUInteger i=0;i<self.textFields.count;i++ )
+      [self.textFields[i] setText:nil];
+    
+    [self.textFields[0] becomeFirstResponder];
+  } /* of else */
+}
 
 #pragma mark prepare Segue
 

@@ -13,6 +13,7 @@
 @property(weak   , nonatomic) IBOutlet UITextField*             vaultName;
 @property(weak   , nonatomic) IBOutlet UIImageView*             vaultIcon;
 @property(weak   , nonatomic) IBOutlet UIPickerView*            vaultType;
+@property(weak   , nonatomic) IBOutlet UIBarButtonItem*         createPINButton;
 
 @property(strong , nonatomic)          UIImagePickerController* imgPicker;
 @end
@@ -78,6 +79,8 @@
   
   if( self->_parameter.vaultType!=NSUIntegerMax )
     [self.vaultType selectRow:self->_parameter.vaultType inComponent:0 animated:NO];
+  
+  self.createPINButton.enabled = NO;
 }
 
 /**
@@ -183,6 +186,21 @@
 { _NSLOG_SELECTOR;
   
   self.parameter.vaultName = textField.text;
+}
+
+/**
+ *
+ */
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{ BOOL       result    = YES;
+  NSUInteger newLength = textField.text.length;
+  
+  if( string.length>0 )
+    newLength += string.length;
+  
+  self.createPINButton.enabled = newLength>0;
+  
+  return result;
 }
 
 #pragma mark prepare Segue
