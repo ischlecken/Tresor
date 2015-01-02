@@ -193,6 +193,7 @@
 -(void) generateKeyFromPassword:(NSString*)password
 { _NSLOG_SELECTOR;
   
+#if 0
   VaultAlgorithmT vat          = vaultAES256;
   AlgorithmInfoT  vai          = VaultAlgorithmInfo[vat];
   
@@ -226,6 +227,22 @@
       [self presentViewController:alert animated:YES completion:NULL];
     });
   });
+#else
+  MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+  hud.labelText = _LSTR(@"calculating key");
+  
+  PMKPromise* passwordPromise = [NSData generatePINWithLength:VaultAlgorithmInfo[vaultAES256].keySize usingIterations:1000000];
+  
+  passwordPromise.then(^(NSString* pin)
+  { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"DerivedKey" message:pin preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
+    [self presentViewController:alert animated:YES completion:NULL];
+    
+  });
+#endif
 }
 
 #pragma mark Modelchanged

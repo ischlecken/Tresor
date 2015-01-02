@@ -55,33 +55,15 @@
 -(void) generatePIN
 { _NSLOG_SELECTOR;
   
-  NSUInteger      keySize      = self.passwordView.maxDigits;
-  NSData*         passwordData = [NSData dataWithRandom:keySize];
-  NSData*         salt         = [NSData dataWithRandom:keySize];
-
-#if TARGET_IPHONE_SIMULATOR
-  NSUInteger      iterations   = 4000000;
-#else
-  NSUInteger      iterations   = 1000000;
-#endif
-  
   MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
   hud.labelText = _LSTR(@"GeneratingPin");
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
-  { _NSLOG(@"generatePIN.start");
-   
-    NSError*  error      = nil;
-    NSData*   derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2CC withLength:keySize usingSalt:salt andIterations:iterations error:&error];
-    NSString* pin        = [[derivedKey hexStringValue] substringToIndex:self.passwordView.maxDigits];
-   _NSLOG(@"generatePIN.stop:<%@>",pin);
-   
-   dispatch_async(dispatch_get_main_queue(), ^
-   { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
-     
-     for( NSUInteger i=0;i<pin.length;i++ )
-       [self.passwordView addDigit:[pin substringWithRange:NSMakeRange(i, 1)]];
-   });
+
+  [NSData generatePINWithLength:self.passwordView.maxDigits usingIterations:1000000]
+  .then(^(NSString* pin)
+  { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+    
+    for( NSUInteger i=0;i<pin.length;i++ )
+      [self.passwordView addDigit:[pin substringWithRange:NSMakeRange(i, 1)]];
   });
 }
 
