@@ -18,7 +18,14 @@
 @property(strong,nonatomic) UIImage*   vaultIcon;
 
 @property(strong,nonatomic) NSString*  vaultPIN;
+@property(strong,nonatomic) NSString*  vaultPINKdfAlgorithm;
+@property(strong,nonatomic) NSNumber*  vaultPINKdfIterations;
+@property(strong,nonatomic) NSString*  vaultPINKdfSalt;
+
 @property(strong,nonatomic) NSString*  vaultPUK;
+@property(strong,nonatomic) NSString*  vaultPUKKdfAlgorithm;
+@property(strong,nonatomic) NSNumber*  vaultPUKKdfIterations;
+@property(strong,nonatomic) NSString*  vaultPUKKdfSalt;
 
 +(instancetype) editVaultParameterWithVault:(Vault*)vault;
 

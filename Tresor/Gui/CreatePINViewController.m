@@ -58,9 +58,11 @@
   MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
   hud.labelText = _LSTR(@"GeneratingPin");
 
-  [NSData generatePINWithLength:self.passwordView.maxDigits usingIterations:1000000]
-  .then(^(NSString* pin)
-  { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+  [NSData generatePINWithLength:self.passwordView.maxDigits]
+  .then(^(NSString* pin,NSNumber* iterations,NSData* salt,NSString* kdfAlgorithm)
+  { _NSLOG(@"pin:%@ iterations:%@ salt:%@",pin,iterations,salt);
+    
+    [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
     
     for( NSUInteger i=0;i<pin.length;i++ )
       [self.passwordView addDigit:[pin substringWithRange:NSMakeRange(i, 1)]];

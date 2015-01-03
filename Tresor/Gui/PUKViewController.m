@@ -105,10 +105,14 @@
     self.triggerNextPUK        = YES;
     [self nextDisplayPUK];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    { self.parameter.vaultPUK = [[NSData dataWithRandom:8] hexStringValue];
-     
-      _NSLOG(@"vaultPUK:%@",self.parameter.vaultPUK);
+    [NSData generatePINWithLength:16]
+    .then(^(NSString* pin,NSNumber* iterations,NSData* salt,NSString* kdfAlgorithm)
+    { _NSLOG(@"puk:%@ iterations:%@ salt:%@",pin,iterations,salt);
+      
+      self.parameter.vaultPUK              = pin;
+      self.parameter.vaultPUKKdfAlgorithm  = kdfAlgorithm;
+      self.parameter.vaultPUKKdfIterations = iterations;
+      self.parameter.vaultPUKKdfSalt       = [salt hexStringValue];
     });
   } /* of if */
 }

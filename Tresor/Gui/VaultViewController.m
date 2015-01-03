@@ -158,9 +158,7 @@
   if( pvc.password )
   { UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Password" message:pvc.password preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                      { [self generateKeyFromPassword:pvc.password];
-                      }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
     
     dispatch_async(dispatch_get_main_queue(), ^
     { [self presentViewController:alert animated:YES completion:NULL];
@@ -185,69 +183,7 @@
 }
 
 
-#define _DUMMYSALT [NSData dataWithUTF8String:@"01234567891123456789212345678931"]
-
-/**
- *
- */
--(void) generateKeyFromPassword:(NSString*)password
-{ _NSLOG_SELECTOR;
-  
-#if 0
-  VaultAlgorithmT vat          = vaultAES256;
-  AlgorithmInfoT  vai          = VaultAlgorithmInfo[vat];
-  
-  NSData*         passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-  NSUInteger      keySize      = vai.keySize;
-#if TARGET_IPHONE_SIMULATOR
-  NSUInteger      iterations   = 4000000;
-#else
-  NSUInteger      iterations   = 1000000;
-#endif
-  
-  NSData*         salt         = _DUMMYSALT; //[NSData dataWithRandom:keySize];
-  
-  MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-  hud.labelText = _LSTR(@"calculating key");
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
-  { _NSLOG(@"derivedKey.start");
-    
-    NSError* error      = nil;
-    NSData*  derivedKey = [passwordData deriveKeyWithAlgorithm:deriveKeyAlgoPBKDF2CC withLength:keySize usingSalt:salt andIterations:iterations error:&error];
-  
-    _NSLOG(@"derivedKey.stop:<%@>",[derivedKey hexStringValue]);
- 
-    dispatch_async(dispatch_get_main_queue(), ^
-    { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
-      
-      UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"DerivedKey" message:[derivedKey hexStringValue] preferredStyle:UIAlertControllerStyleAlert];
-      
-      [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
-      [self presentViewController:alert animated:YES completion:NULL];
-    });
-  });
-#else
-  MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-  hud.labelText = _LSTR(@"calculating key");
-  
-  PMKPromise* passwordPromise = [NSData generatePINWithLength:VaultAlgorithmInfo[vaultAES256].keySize usingIterations:1000000];
-  
-  passwordPromise.then(^(NSString* pin)
-  { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
-    
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"DerivedKey" message:pin preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
-    [self presentViewController:alert animated:YES completion:NULL];
-    
-  });
-#endif
-}
-
 #pragma mark Modelchanged
-
-
 
 /**
  *
