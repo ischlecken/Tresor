@@ -8,24 +8,9 @@
 #import "Vault.h"
 
 @interface EditVaultParameter : NSObject
-
-@property(strong,nonatomic) Vault*     vault;
-
-@property(strong,nonatomic) NSString*  vaultName;
-@property(assign,nonatomic) NSUInteger vaultType;
-@property(strong,nonatomic) NSArray*   vaultTypes;
-
-@property(strong,nonatomic) UIImage*   vaultIcon;
-
-@property(strong,nonatomic) NSString*  vaultPIN;
-@property(strong,nonatomic) NSString*  vaultPINKdfAlgorithm;
-@property(strong,nonatomic) NSNumber*  vaultPINKdfIterations;
-@property(strong,nonatomic) NSString*  vaultPINKdfSalt;
-
-@property(strong,nonatomic) NSString*  vaultPUK;
-@property(strong,nonatomic) NSString*  vaultPUKKdfAlgorithm;
-@property(strong,nonatomic) NSNumber*  vaultPUKKdfIterations;
-@property(strong,nonatomic) NSString*  vaultPUKKdfSalt;
+@property(strong,nonatomic) Vault*          vault;
+@property(strong,nonatomic) NSArray*        vaultTypes;
+@property(strong,nonatomic) VaultParameter* vaultParameter;
 
 +(instancetype) editVaultParameterWithVault:(Vault*)vault;
 

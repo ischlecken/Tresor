@@ -100,19 +100,19 @@
     
     self.messageLabel.text     = _LSTR(@"CreatePUKMessage");
     
-    self.confirmButton.enabled = NO;
-    self.parameter.vaultPUK    = nil;
-    self.triggerNextPUK        = YES;
+    self.confirmButton.enabled        = NO;
+    self.parameter.vaultParameter.puk = nil;
+    self.triggerNextPUK               = YES;
     [self nextDisplayPUK];
     
     [NSData generatePINWithLength:16]
-    .then(^(NSString* pin,NSNumber* iterations,NSData* salt,NSString* kdfAlgorithm)
-    { _NSLOG(@"puk:%@ iterations:%@ salt:%@",pin,iterations,salt);
+    .then(^(GeneratedPIN* pinInfo)
+    { _NSLOG(@"puk:%@ iterations:%ld salt:%@",pinInfo.pin,(long)pinInfo.iterations,pinInfo.salt);
       
-      self.parameter.vaultPUK              = pin;
-      self.parameter.vaultPUKKdfAlgorithm  = kdfAlgorithm;
-      self.parameter.vaultPUKKdfIterations = iterations;
-      self.parameter.vaultPUKKdfSalt       = [salt hexStringValue];
+      self.parameter.vaultParameter.puk           = pinInfo.pin;
+      self.parameter.vaultParameter.kdfAlgorithm  = pinInfo.algorithm;
+      self.parameter.vaultParameter.kdfIterations = pinInfo.iterations;
+      self.parameter.vaultParameter.kdfSalt       = pinInfo.salt;
     });
   } /* of if */
 }
@@ -140,8 +140,8 @@
     tf.text                 = nil;
     tf.clearsOnBeginEditing = YES;
     
-    if( !self.validatePUK && self.parameter.vaultPUK && i<self.parameter.vaultPUK.length )
-      tf.text = [self.parameter.vaultPUK substringWithRange:NSMakeRange(i, 1)];
+    if( !self.validatePUK && self.parameter.vaultParameter.puk && i<self.parameter.vaultParameter.puk.length )
+      tf.text = [self.parameter.vaultParameter.puk substringWithRange:NSMakeRange(i, 1)];
   } /* of if */
 
   if( self.validatePUK )
@@ -170,7 +170,7 @@
  *
  */
 -(void) nextDisplayPUK
-{ NSString* puk = self.parameter.vaultPUK;
+{ NSString* puk = self.parameter.vaultParameter.puk;
   
   if( puk==nil )
   { puk = [[NSData dataWithRandom:8] hexStringValue];
@@ -321,7 +321,7 @@
   
   _NSLOG(@"confirmedPUK:%@",confirmedPUK);
   
-  if( self.parameter.vaultPUK && [self.parameter.vaultPUK isEqualToString:confirmedPUK] )
+  if( self.parameter.vaultParameter.puk && [self.parameter.vaultParameter.puk isEqualToString:confirmedPUK] )
     self.confirmButton.enabled = YES;
   else
   { for( NSUInteger i=0;i<self.textFields.count;i++ )

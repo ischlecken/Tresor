@@ -115,11 +115,12 @@
   
   if( [unwindSegue.identifier isEqualToString:@"CreateVault"] )
   { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
-    NSError*                   error = nil;
-    Vault*                     vault = [Vault vaultObjectWithName:evvc.parameter.vaultName andType:[evvc.parameter selectedVaultType] andError:&error];
+    
+    [Vault vaultObjectWithParameter:evvc.parameter.vaultParameter]
+    .catch(^(NSError* error)
+    { addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
+    });
 
-    if( vault==nil )
-      addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
   } /* of if */
 }
 
@@ -134,10 +135,10 @@
     NSError*                   error = nil;
     Vault*                     vault = evvc.parameter.vault;
     
-    vault.vaultname = evvc.parameter.vaultName;
+    vault.vaultname = evvc.parameter.vaultParameter.name;
     vault.vaulttype = [evvc.parameter selectedVaultType];
-    if( evvc.parameter.vaultIcon )
-      vault.vaulticon = UIImagePNGRepresentation(evvc.parameter.vaultIcon);
+    if( evvc.parameter.vaultParameter.icon )
+      vault.vaulticon = UIImagePNGRepresentation(evvc.parameter.vaultParameter.icon);
       
     [_MOC save:&error];
     

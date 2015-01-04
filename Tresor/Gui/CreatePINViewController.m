@@ -59,13 +59,13 @@
   hud.labelText = _LSTR(@"GeneratingPin");
 
   [NSData generatePINWithLength:self.passwordView.maxDigits]
-  .then(^(NSString* pin,NSNumber* iterations,NSData* salt,NSString* kdfAlgorithm)
-  { _NSLOG(@"pin:%@ iterations:%@ salt:%@",pin,iterations,salt);
+  .then(^(GeneratedPIN* pinInfo)
+  { _NSLOG(@"pin:%@ iterations:%ld salt:%@",pinInfo.pin,(long)pinInfo.iterations,pinInfo.salt);
     
     [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
     
-    for( NSUInteger i=0;i<pin.length;i++ )
-      [self.passwordView addDigit:[pin substringWithRange:NSMakeRange(i, 1)]];
+    for( NSUInteger i=0;i<pinInfo.pin.length;i++ )
+      [self.passwordView addDigit:[pinInfo.pin substringWithRange:NSMakeRange(i, 1)]];
   });
 }
 
@@ -93,7 +93,7 @@
 { self.confirmButton.enabled = allDigits;
   
   if( allDigits )
-    self.parameter.vaultPIN = passwordView.password;
+    self.parameter.vaultParameter.pin = passwordView.password;
 }
 
 #pragma mark prepare Segue
@@ -106,13 +106,13 @@
   
   if( [identifier isEqualToString:@"ConfirmPIN"] )
   {
-    if( self.parameter.vaultPIN )
+    if( self.parameter.vaultParameter.pin )
     { NSString* allowedChars = @"0123456789ABCDEF";
       
       for( NSUInteger i=0;i<allowedChars.length;i++ )
       { unichar ch = [allowedChars characterAtIndex:i];
         
-        if( [self.parameter.vaultPIN containsOnlyCharacter:ch] )
+        if( [self.parameter.vaultParameter.pin containsOnlyCharacter:ch] )
         { result = NO;
          
           NSString* msg = [NSString stringWithFormat:@"PIN contains only character %@",[allowedChars substringWithRange:NSMakeRange(i, 1)]];

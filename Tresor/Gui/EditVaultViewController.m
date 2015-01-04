@@ -49,7 +49,7 @@
  *
  */
 -(EditVaultParameter*)parameter
-{ self->_parameter.vaultName = self.vaultName.text;
+{ self->_parameter.vaultParameter.name = self.vaultName.text;
 
   return self->_parameter;
 }
@@ -72,13 +72,18 @@
   
   [self.vaultType reloadAllComponents];
   
-  self.vaultName.text = self->_parameter.vaultName;
+  self.vaultName.text = self->_parameter.vaultParameter.name;
   
-  if( self->_parameter.vaultIcon )
-    self.vaultIcon.image = self->_parameter.vaultIcon;
+  if( self->_parameter.vaultParameter.icon )
+    self.vaultIcon.image = self->_parameter.vaultParameter.icon;
   
-  if( self->_parameter.vaultType!=NSUIntegerMax )
-    [self.vaultType selectRow:self->_parameter.vaultType inComponent:0 animated:NO];
+  if( self->_parameter.vaultParameter.type!=nil )
+    for( NSUInteger i=0;i<self->_parameter.vaultTypes.count;i++ )
+      if( [self->_parameter.vaultTypes[i] isEqualToString:self->_parameter.vaultParameter.type] )
+      { [self.vaultType selectRow:i inComponent:0 animated:NO];
+        
+        break;
+      } /* of if */
   
   self.createPINButton.enabled = NO;
 }
@@ -139,7 +144,7 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 { _NSLOG_SELECTOR;
 
-  self.parameter.vaultType = row;
+  self.parameter.vaultParameter.type = self.parameter.vaultTypes[row];
 }
 
 
@@ -165,7 +170,7 @@
   self.vaultIcon.image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   
-  self.parameter.vaultIcon = self.vaultIcon.image;
+  self.parameter.vaultParameter.icon = self.vaultIcon.image;
   
   [self dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -185,7 +190,7 @@
 -(void) textFieldDidEndEditing:(UITextField *)textField
 { _NSLOG_SELECTOR;
   
-  self.parameter.vaultName = textField.text;
+  self.parameter.vaultParameter.name = textField.text;
 }
 
 /**

@@ -63,8 +63,8 @@
  *
  */
 -(void) passwordViewButtonPushed:(PasswordView *)passwordView
-{ if( [self.parameter.vaultPIN isEqualToString:passwordView.password] )
-    _NSLOG(@"pin %@ confirmed.",self.parameter.vaultPIN);
+{ if( [self.parameter.vaultParameter.pin isEqualToString:passwordView.password] )
+    _NSLOG(@"pin %@ confirmed.",self.parameter.vaultParameter.pin);
 }
 
 /**
@@ -73,7 +73,7 @@
 -(void) passwordViewDigitsEntered:(PasswordView *)passwordView allDigits:(BOOL)allDigits
 { if( allDigits )
   {
-    if( [self.passwordView.password isEqualToString:self.parameter.vaultPIN] )
+    if( [self.passwordView.password isEqualToString:self.parameter.vaultParameter.pin] )
       self.createPUKButton.enabled = YES;
     else
       [self.passwordView resetDigits];
