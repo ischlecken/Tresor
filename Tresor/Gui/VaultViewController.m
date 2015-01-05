@@ -117,6 +117,7 @@
   { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
     
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+    hud.color     = [UIColor orangeColor];
     hud.labelText = _LSTR(@"CreatingVault");
     
     [Vault vaultObjectWithParameter:evvc.parameter.vaultParameter]
