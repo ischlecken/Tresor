@@ -26,3 +26,5 @@
 "ConfirmPUKMessage"   = "Confirm your PUK";
 
 "PINCheckFailedTitle" = "PIN check failed!";
+
+"CreatingVault"       = "Creating Vault ...";

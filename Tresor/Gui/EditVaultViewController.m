@@ -202,10 +202,23 @@
   
   if( string.length>0 )
     newLength += string.length;
+  else
+    newLength -= range.length;
+  
+  _NSLOG(@"range:(%ld,%ld) newLength:%ld",(long)range.location,(long)range.length,(long)newLength);
   
   self.createPINButton.enabled = newLength>0;
   
   return result;
+}
+
+/**
+ *
+ */
+-(BOOL) textFieldShouldClear:(UITextField *)textField
+{ self.createPINButton.enabled = NO;
+  
+  return YES;
 }
 
 #pragma mark prepare Segue

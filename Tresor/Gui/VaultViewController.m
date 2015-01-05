@@ -116,9 +116,15 @@
   if( [unwindSegue.identifier isEqualToString:@"CreateVault"] )
   { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
     
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+    hud.labelText = _LSTR(@"CreatingVault");
+    
     [Vault vaultObjectWithParameter:evvc.parameter.vaultParameter]
     .catch(^(NSError* error)
     { addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
+    })
+    .finally(^()
+    { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
     });
 
   } /* of if */
