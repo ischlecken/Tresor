@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 ischlecken. All rights reserved.
 //
 
+
+
 @interface VaultViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property(strong,nonatomic) NSFetchedResultsController* fetchedResultsController;

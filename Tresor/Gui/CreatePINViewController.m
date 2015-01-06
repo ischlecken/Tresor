@@ -56,6 +56,7 @@
 { _NSLOG_SELECTOR;
   
   MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+  hud.color     = _HUDCOLOR;
   hud.labelText = _LSTR(@"GeneratingPin");
 
   [NSData generatePINWithLength:self.passwordView.maxDigits]

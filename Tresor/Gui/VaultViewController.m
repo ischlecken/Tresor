@@ -117,10 +117,21 @@
   { EditVaultViewController*   evvc  = unwindSegue.sourceViewController;
     
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-    hud.color     = [UIColor orangeColor];
+    hud.color     = _HUDCOLOR;
     hud.labelText = _LSTR(@"CreatingVault");
     
     [Vault vaultObjectWithParameter:evvc.parameter.vaultParameter]
+    .then(^(Vault* vault)
+    {
+      for( MasterKey* mk in vault.masterkeys )
+      { _NSLOG(@"mk:%@",mk);
+        
+        [mk decryptedMasterKeyUsingPIN:evvc.parameter.vaultParameter.pin]
+        .then(^(NSData* decryptedKey)
+        { _NSLOG(@"decryptedKey:%@",[decryptedKey hexStringValue]);
+        });
+      } /* of for */
+    })
     .catch(^(NSError* error)
     { addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
     })

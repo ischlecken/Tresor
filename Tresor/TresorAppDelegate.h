@@ -18,6 +18,7 @@
 
 #define _APPDELEGATE              ((TresorAppDelegate*) [UIApplication sharedApplication].delegate)
 #define _APPWINDOW                _APPDELEGATE.window
+#define _HUDCOLOR                 [UIColor colorWithRed:255.0/255.0 green:84.0/255.0 blue:0 alpha:0.8]
 
 @interface TresorAppDelegate : UIResponder <UIApplicationDelegate>
 @property(nonatomic,strong) UIWindow* window;

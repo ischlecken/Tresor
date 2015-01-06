@@ -84,6 +84,20 @@
   [CryptoService sharedInstance].delegate = nil;
 }
 
+/**
+ *
+ */
+-(void)applicationProtectedDataWillBecomeUnavailable:(UIApplication *)application
+{ _NSLOG_SELECTOR;
+}
+
+
+/**
+ *
+ */
+-(void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application
+{ _NSLOG_SELECTOR;
+}
 
 #pragma mark DecryptedPayloadKeyPromiseDelegate
 

@@ -96,6 +96,7 @@
   
   if( !self.validatePUK )
   { MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+    hud.color     = _HUDCOLOR;
     hud.labelText = _LSTR(@"GeneratingPUK");
     
     self.messageLabel.text     = _LSTR(@"CreatePUKMessage");
