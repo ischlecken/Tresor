@@ -126,6 +126,9 @@
       for( MasterKey* mk in vault.masterkeys )
       { _NSLOG(@"mk:%@",mk);
         
+        if( ![mk.authentication isEqualToString:@"pin"] )
+          continue;
+        
         [mk decryptedMasterKeyUsingPIN:evvc.parameter.vaultParameter.pin]
         .then(^(NSData* decryptedKey)
         { _NSLOG(@"decryptedKey:%@",[decryptedKey hexStringValue]);
