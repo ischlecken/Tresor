@@ -6,5 +6,6 @@ platform :ios, '8.1'
 target 'Tresor' do
   pod 'TresorLibrary', :path => './TresorLibrary'
   pod 'MBProgressHUD', '~> 0.8'
+  pod 'SSKeychain'
   pod 'PromiseKit'
 end

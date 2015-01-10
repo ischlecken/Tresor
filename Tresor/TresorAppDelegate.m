@@ -17,6 +17,7 @@
  */
 #import "PasswordViewController1.h"
 #import "UIViewController+PromiseKit.h"
+#import "SSKeychain.h"
 
 @interface TresorAppDelegate () <DecryptedPayloadKeyPromiseDelegate>
 @property NSData* lastPasswordKey;
@@ -36,6 +37,10 @@
   [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]]];
   
   self.window.rootViewController.view.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+  
+  NSArray* allAccounts = [SSKeychain allAccounts];
+  for( id account in allAccounts )
+    _NSLOG("account:%@",account);
 
   return YES;
 }
