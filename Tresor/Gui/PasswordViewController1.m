@@ -53,8 +53,10 @@
   
   PasswordView* pv = (PasswordView*)self.view;
   
-  pv.maxDigits = 6;
-  pv.delegate  = self;
+  pv.maxDigits  = 8;
+  pv.showButton = PasswordViewShowButtonWhenAllDigitsAreEntered;
+  pv.buttonText = _LSTR(@"CheckPIN");
+  pv.delegate   = self;
 }
 
 /**

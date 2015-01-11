@@ -27,3 +27,5 @@
 "PINCheckFailedTitle" = "PIN bei Prüfung durchgefallen!";
 
 "CreatingVault"       = "Tresor wird initialisiert...";
+
+"CheckPIN"            = "Prüfen";

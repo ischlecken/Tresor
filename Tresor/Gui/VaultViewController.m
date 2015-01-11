@@ -78,15 +78,15 @@
     if( vault.commit )
       [vault.commit parentPathForPath:[NSIndexPath new]]
       .then(^(NSArray* parentPath)
-            { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-              
-              if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-                return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-              
-              payloadItemListViewController.readonlyPayloadItemList = decryptedPayload;
-              
-              return (id) decryptedPayload;
-            });
+      { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+        
+        if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+          return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+        
+        payloadItemListViewController.readonlyPayloadItemList = decryptedPayload;
+        
+        return (id) decryptedPayload;
+      });
     
   } /* of if */
   else if( [[segue identifier] isEqualToString:@"CreateVaultSegue"] )
@@ -122,25 +122,18 @@
     
     [Vault vaultObjectWithParameter:evvc.parameter.vaultParameter]
     .then(^(Vault* vault)
-    {
-      for( MasterKey* mk in vault.masterkeys )
-      { _NSLOG(@"mk:%@",mk);
+    { MasterKey* mk = vault.pinMasterKey;
         
-        if( ![mk.authentication isEqualToString:@"pin"] )
-          continue;
-        
-        [mk decryptedMasterKeyUsingPIN:evvc.parameter.vaultParameter.pin]
-        .then(^(NSData* decryptedKey)
-        { _NSLOG(@"decryptedKey:%@",[decryptedKey hexStringValue]);
-        });
-      } /* of for */
+      [mk decryptedMasterKeyUsingPIN:evvc.parameter.vaultParameter.pin]
+      .then(^(NSData* decryptedKey)
+      { _NSLOG(@"decryptedKey:%@",[decryptedKey hexStringValue]);
+      });
     })
     .catch(^(NSError* error)
     { addToErrorList(@"error while createing vault",error,AddErrorUIFeedback);
     })
     .finally(^()
-    { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
-    });
+    { [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES]; });
 
   } /* of if */
 }

@@ -20,8 +20,8 @@
 #import "SSKeychain.h"
 
 @interface TresorAppDelegate () <DecryptedPayloadKeyPromiseDelegate>
-@property NSData* lastPasswordKey;
-@property NSDate* lastPasswordKeyTS;
+@property NSData* decryptedMasterKey;
+@property NSDate* decryptedMasterKeyTS;
 @end
 
 @implementation TresorAppDelegate
@@ -114,9 +114,9 @@
   
   PMKPromise* promise = nil;
   
-  if( self.lastPasswordKey && self.lastPasswordKeyTS.timeIntervalSinceNow>-60.0 )
-  { self.lastPasswordKeyTS = [NSDate date];
-    promise = [PMKPromise promiseWithValue:self.lastPasswordKey];
+  if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-60.0 )
+  { self.decryptedMasterKeyTS = [NSDate date];
+    promise = [PMKPromise promiseWithValue:self.decryptedMasterKey];
   } /* of if */
   else
   { UIViewController*         vc = self.window.rootViewController;
@@ -124,19 +124,27 @@
     
     pvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     promise = [vc promiseViewController:pvc animated:YES completion:nil]
-    .then(^(NSString* password)
-    { _NSLOG(@"password=%@",password);
+    .then(^(NSString* pin)
+    { _NSLOG(@"pin=%@",pin);
       
-      return [password dataUsingEncoding:NSUTF8StringEncoding];
+      MasterKey* pinMasterKey = [[payload vault] pinMasterKey];
+      id         result       = nil;
+      
+      if( pinMasterKey )
+        result = [pinMasterKey decryptedMasterKeyUsingPIN:pin];
+      else
+        result = _TRESORERROR(TresorErrorCouldNotFindPINMasterKey);
+      
+      return result;
     })
     .pause(2.0)
-    .then(^(NSData* passwordKey)
-    { _NSLOG(@"passwordKey=%@",passwordKey);
+    .then(^(NSData* decryptedMasterKey)
+    { _NSLOG(@"decryptedMasterKey=%@",decryptedMasterKey);
       
-      self.lastPasswordKey   = passwordKey;
-      self.lastPasswordKeyTS = [NSDate date];
+      self.decryptedMasterKey   = decryptedMasterKey;
+      self.decryptedMasterKeyTS = [NSDate date];
             
-      return passwordKey;
+      return decryptedMasterKey;
     });
   } /* of else */
   

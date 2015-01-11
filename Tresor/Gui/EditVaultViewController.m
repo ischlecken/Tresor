@@ -221,6 +221,17 @@
   return YES;
 }
 
+/**
+ *
+ */
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{ _NSLOG_SELECTOR;
+  
+  [textField resignFirstResponder];
+  
+  return YES;
+}
+
 #pragma mark prepare Segue
 
 /**

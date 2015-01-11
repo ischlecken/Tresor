@@ -28,3 +28,5 @@
 "PINCheckFailedTitle" = "PIN check failed!";
 
 "CreatingVault"       = "Creating Vault ...";
+
+"CheckPIN"            = "Check";
