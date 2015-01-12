@@ -19,7 +19,7 @@
 #import "UIViewController+PromiseKit.h"
 #import "SSKeychain.h"
 
-@interface TresorAppDelegate () <DecryptedPayloadKeyPromiseDelegate>
+@interface TresorAppDelegate () <DecryptedMasterKeyPromiseDelegate>
 @property NSData* decryptedMasterKey;
 @property NSDate* decryptedMasterKeyTS;
 @end
@@ -104,12 +104,12 @@
 { _NSLOG_SELECTOR;
 }
 
-#pragma mark DecryptedPayloadKeyPromiseDelegate
+#pragma mark DecryptedMasterKeyPromiseDelegate
 
 /**
  *
  */
--(PMKPromise*) decryptedPayloadKeyPromiseForPayload:(Payload*)payload
+-(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
 { _NSLOG_SELECTOR;
   
   PMKPromise* promise = nil;
@@ -118,7 +118,7 @@
   { self.decryptedMasterKeyTS = [NSDate date];
     promise = [PMKPromise promiseWithValue:self.decryptedMasterKey];
   } /* of if */
-  else
+  else if( masterKey )
   { UIViewController*         vc = self.window.rootViewController;
     PasswordViewController1* pvc = [PasswordViewController1 new];
     
@@ -127,15 +127,7 @@
     .then(^(NSString* pin)
     { _NSLOG(@"pin=%@",pin);
       
-      MasterKey* pinMasterKey = [[payload vault] pinMasterKey];
-      id         result       = nil;
-      
-      if( pinMasterKey )
-        result = [pinMasterKey decryptedMasterKeyUsingPIN:pin];
-      else
-        result = _TRESORERROR(TresorErrorCouldNotFindPINMasterKey);
-      
-      return result;
+      return [masterKey decryptedMasterKeyUsingPIN:pin];
     })
     .pause(2.0)
     .then(^(NSData* decryptedMasterKey)
