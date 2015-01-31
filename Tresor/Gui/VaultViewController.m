@@ -76,6 +76,7 @@
     payloadItemListViewController.path  = [NSIndexPath new];
     
     if( vault.commit )
+    {
       [vault.commit parentPathForPath:[NSIndexPath new]]
       .then(^(NSArray* parentPath)
       { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
@@ -85,8 +86,22 @@
         
         payloadItemListViewController.readonlyPayloadItemList = decryptedPayload;
         
+        [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
+        
         return (id) decryptedPayload;
+      })
+      .catch(^(NSError* error)
+      { _NSLOG(@"Error while decrypting payload:%@",error);
+        
+        MBProgressHUD* hud = [MBProgressHUD HUDForView:_APPWINDOW];
+        
+        hud.color     = [UIColor redColor];
+        hud.labelText = _LSTR(@"ErrorDecryptingPayload");
+        hud.mode      = MBProgressHUDModeText;
+        
+        [hud hide:YES afterDelay:5];
       });
+    }
     
   } /* of if */
   else if( [[segue identifier] isEqualToString:@"CreateVaultSegue"] )

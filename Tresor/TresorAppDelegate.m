@@ -18,6 +18,7 @@
 #import "PasswordViewController1.h"
 #import "UIViewController+PromiseKit.h"
 #import "SSKeychain.h"
+#import "MBProgressHUD.h"
 
 @interface TresorAppDelegate () <DecryptedMasterKeyPromiseDelegate>
 @property NSData* decryptedMasterKey;
@@ -120,6 +121,11 @@
       promise = [vc promiseViewController:pvc animated:YES completion:nil]
       .then(^(NSString* pin)
       { _NSLOG(@"pin               :%@",pin);
+        
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
+        
+        hud.color     = _HUDCOLOR;
+        hud.labelText = _LSTR(@"DecryptPayload");
         
         return [masterKey decryptedMasterKeyUsingPIN:pin];
       })

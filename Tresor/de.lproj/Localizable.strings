@@ -29,3 +29,6 @@
 "CreatingVault"       = "Tresor wird initialisiert...";
 
 "CheckPIN"            = "Prüfen";
+
+"DecryptPayload"         = "Entschlüsselung läuft...";
+"ErrorDecryptingPayload" = "Fehler bei Entschlüsselung!";
