@@ -86,7 +86,7 @@
 		855CE1281A20E81800E9CF50 /* ShimmeringTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShimmeringTextLayer.h; sourceTree = "<group>"; };
 		855CE1291A20E81800E9CF50 /* ShimmeringTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShimmeringTextLayer.m; sourceTree = "<group>"; };
 		855CE12A1A20E81800E9CF50 /* VaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VaultViewController.h; sourceTree = "<group>"; };
-		855CE12B1A20E81800E9CF50 /* VaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VaultViewController.m; sourceTree = "<group>"; };
+		855CE12B1A20E81800E9CF50 /* VaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VaultViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		855CE1401A20E8CA00E9CF50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		855CE1431A20E8E800E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		85FAA37F1A3DF92E007F05BA /* CreatePINViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePINViewController.h; sourceTree = "<group>"; };
 		85FAA3801A3DF92E007F05BA /* CreatePINViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePINViewController.m; sourceTree = "<group>"; };
 		85FAA3811A3DF92E007F05BA /* PUKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUKViewController.h; sourceTree = "<group>"; };
-		85FAA3821A3DF92E007F05BA /* PUKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUKViewController.m; sourceTree = "<group>"; };
+		85FAA3821A3DF92E007F05BA /* PUKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PUKViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8A3541B7466EE09A78E3B8E2 /* Pods-Tresor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.release.xcconfig"; sourceTree = "<group>"; };
 		AB39618325C324E94269A090 /* libPods-Tresor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tresor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0830C71FA5DBE9145658677 /* Pods-Tresor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tresor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tresor/Pods-Tresor.debug.xcconfig"; sourceTree = "<group>"; };

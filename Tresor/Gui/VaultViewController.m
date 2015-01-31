@@ -126,7 +126,7 @@
         
       [mk decryptedMasterKeyUsingPIN:evvc.parameter.vaultParameter.pin]
       .then(^(NSData* decryptedKey)
-      { _NSLOG(@"decryptedKey:%@",[decryptedKey hexStringValue]);
+      { _NSLOG(@"decryptedKey:%@",[decryptedKey shortHexStringValue]);
       });
     })
     .catch(^(NSError* error)

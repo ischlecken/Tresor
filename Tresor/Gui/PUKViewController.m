@@ -202,9 +202,7 @@
  *
  */
 -(void) keyboardDidShow:(NSNotification *)notification
-{ _NSLOG_SELECTOR;
-  
-  NSDictionary* info   = [notification userInfo];
+{ NSDictionary* info   = [notification userInfo];
   CGRect        kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
   
   kbRect = [self.view convertRect:kbRect fromView:nil];
@@ -225,9 +223,7 @@
  *
  */
 -(void) keyboardWillBeHidden:(NSNotification *)notification
-{ _NSLOG_SELECTOR;
-  
-  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+{ UIEdgeInsets contentInsets = UIEdgeInsetsZero;
 
   self.scrollView.contentInset         = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
@@ -338,9 +334,7 @@
  *
  */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{ _NSLOG(@"[%@]",segue.identifier);
-  
-  if( [[segue identifier] isEqualToString:@"ConfirmPUK"] )
+{ if( [[segue identifier] isEqualToString:@"ConfirmPUK"] )
   { id vc0 = [segue destinationViewController];
     
     if( [vc0 conformsToProtocol:@protocol(EditVaultParameter)] )

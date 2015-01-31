@@ -133,8 +133,6 @@
 -(void) setEditMode:(BOOL)enable
 { BOOL actEnable = [self.tableView isEditing];
  
-  _NSLOG(@" actEnable:%ld enable:%ld",(long)actEnable,(long)enable);
-  
   if( actEnable!=enable )
   {
     if( enable )
@@ -181,9 +179,7 @@
  *
  */
 -(IBAction) editAction:(id)sender
-{ _NSLOG_SELECTOR;
-  
-  self.navigationItem.rightBarButtonItem.enabled = NO;
+{ self.navigationItem.rightBarButtonItem.enabled = NO;
   
   [_TRESORMODEL editMode:YES forVault:self.vault];
   [self setEditMode:YES];
@@ -193,9 +189,7 @@
  *
  */
 -(IBAction) addItemAction:(id)sender
-{ _NSLOG_SELECTOR;
-  
-  [self disableToolbarItems];
+{ [self disableToolbarItems];
   
   Commit*  nextCommit = self.vault.nextCommit;
   
@@ -237,9 +231,7 @@
  *
  */
 -(IBAction) commitAction:(id)sender
-{ _NSLOG_SELECTOR;
-  
-  [self disableToolbarItems];
+{ [self disableToolbarItems];
   [self cancelEditUI];
   
   NSError* error      = nil;
@@ -274,23 +266,21 @@
  *
  */
 -(IBAction) addFolderAction:(id)sender
-{ _NSLOG_SELECTOR;
+{
 }
 
 /**
  *
  */
 -(IBAction) folderAction:(id)sender
-{ _NSLOG_SELECTOR;
+{
 }
 
 /**
  *
  */
 -(IBAction) cancelEditAction:(id)sender
-{ _NSLOG_SELECTOR;
-  
-  [self cancelEditUI];
+{ [self cancelEditUI];
   
   NSError* error = nil;
   if( ![self.vault cancelNextCommit:&error] )
@@ -301,9 +291,7 @@
  *
  */
 -(void) cancelEditUI
-{ _NSLOG_SELECTOR;
-  
-  [_TRESORMODEL editMode:NO forVault:self.vault];
+{ [_TRESORMODEL editMode:NO forVault:self.vault];
   
   [self setEditMode:NO];
   
@@ -350,8 +338,6 @@
   if( self.secretIndexPath )
     result++;
 
-  _NSLOG(@" number of rows:%ld",(long int)result);
-  
   return result;
 }
 
@@ -506,9 +492,7 @@
  *
  */
 -(NSArray*) tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{ _NSLOG_SELECTOR;
-  
-  NSArray* result =
+{ NSArray* result =
   @[
     [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:_LSTR(@"EditAction.Delete") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
      { _NSLOG_SELECTOR;

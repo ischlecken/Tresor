@@ -68,9 +68,7 @@
  *
  */
 -(void) initControls
-{ _NSLOG_SELECTOR;
-  
-  [self.vaultType reloadAllComponents];
+{ [self.vaultType reloadAllComponents];
   
   self.vaultName.text = self->_parameter.vaultParameter.name;
   
@@ -104,9 +102,7 @@
  *
  */
 -(IBAction)imageTapped:(id)sender
-{ _NSLOG_SELECTOR;
-  
-  [self.vaultName resignFirstResponder];
+{ [self.vaultName resignFirstResponder];
     
   self.imgPicker = [[UIImagePickerController alloc] init];
   self.imgPicker.allowsEditing = YES;
@@ -142,9 +138,7 @@
  *
  */
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{ _NSLOG_SELECTOR;
-
-  self.parameter.vaultParameter.type = self.parameter.vaultTypes[row];
+{ self.parameter.vaultParameter.type = self.parameter.vaultTypes[row];
 }
 
 
@@ -188,9 +182,7 @@
  *
  */
 -(void) textFieldDidEndEditing:(UITextField *)textField
-{ _NSLOG_SELECTOR;
-  
-  self.parameter.vaultParameter.name = textField.text;
+{ self.parameter.vaultParameter.name = textField.text;
 }
 
 /**
@@ -205,7 +197,7 @@
   else
     newLength -= range.length;
   
-  _NSLOG(@"range:(%ld,%ld) newLength:%ld",(long)range.location,(long)range.length,(long)newLength);
+  //_NSLOG(@"range:(%ld,%ld) newLength:%ld",(long)range.location,(long)range.length,(long)newLength);
   
   self.createPINButton.enabled = newLength>0;
   
@@ -225,9 +217,7 @@
  *
  */
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
-{ _NSLOG_SELECTOR;
-  
-  [textField resignFirstResponder];
+{ [textField resignFirstResponder];
   
   return YES;
 }
@@ -238,9 +228,7 @@
  *
  */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{ _NSLOG(@"[%@]",segue.identifier);
-  
-  if( [[segue identifier] isEqualToString:@"CreatePIN"] )
+{ if( [[segue identifier] isEqualToString:@"CreatePIN"] )
   { id vc0 = [segue destinationViewController];
     
     if( [vc0 conformsToProtocol:@protocol(EditVaultParameter)] )

@@ -102,9 +102,7 @@
  *
  */
 -(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
-{ _NSLOG_SELECTOR;
-  
-  PMKPromise* promise = nil;
+{ PMKPromise* promise = nil;
   
   if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-60.0 )
   { self.decryptedMasterKeyTS = [NSDate date];
@@ -121,13 +119,13 @@
       pvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
       promise = [vc promiseViewController:pvc animated:YES completion:nil]
       .then(^(NSString* pin)
-      { _NSLOG(@"pin=%@",pin);
+      { _NSLOG(@"pin               :%@",pin);
         
         return [masterKey decryptedMasterKeyUsingPIN:pin];
       })
       //.pause(2.0)
       .then(^(NSData* decryptedMasterKey)
-      { _NSLOG(@"decryptedMasterKey=%@",decryptedMasterKey);
+      { _NSLOG(@"decryptedMasterKey:%@",[decryptedMasterKey shortHexStringValue]);
         
         self.decryptedMasterKey   = decryptedMasterKey;
         self.decryptedMasterKeyTS = [NSDate date];
