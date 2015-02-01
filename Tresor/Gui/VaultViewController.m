@@ -30,8 +30,22 @@
   self.title = _TRESORCONFIG.appName;
   
   [_TRESORMODEL addObserver:self forKeyPath:@"vaultsInEditMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+  
+  [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateTimer:) userInfo:nil repeats:YES];
+  
+  self.timeoutProgressView.progress = 0.0;
 }
 
+/**
+ *
+ */
+-(void) updateTimer:(NSTimer *)timer
+{ float progress = [_APPDELEGATE checkMasterKeyTimeout];
+  
+  _NSLOG(@"progress:%f",progress);
+  
+  self.timeoutProgressView.progress = progress;
+}
 
 /**
  *

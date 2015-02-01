@@ -10,6 +10,7 @@
 
 @interface VaultViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property(strong,nonatomic) NSFetchedResultsController* fetchedResultsController;
+@property(strong,nonatomic)          NSFetchedResultsController* fetchedResultsController;
+@property(weak , nonatomic) IBOutlet UIProgressView*             timeoutProgressView;
 
 @end

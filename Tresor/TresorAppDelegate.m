@@ -21,8 +21,6 @@
 #import "MBProgressHUD.h"
 
 @interface TresorAppDelegate () <DecryptedMasterKeyPromiseDelegate>
-@property NSData* decryptedMasterKey;
-@property NSDate* decryptedMasterKeyTS;
 @end
 
 @implementation TresorAppDelegate
@@ -102,10 +100,25 @@
 /**
  *
  */
+-(float) checkMasterKeyTimeout
+{ float result = fmin(fabs([_APPDELEGATE.decryptedMasterKeyTS timeIntervalSinceNow]/kDecryptedMasterKeyTimeout),1.0);
+ 
+  if( result>=1.0 )
+  { self.decryptedMasterKey = nil;
+    
+    [[DecryptedObjectCache sharedInstance] flush];
+  } /* of if */
+  
+  return result;
+}
+
+/**
+ *
+ */
 -(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
 { PMKPromise* promise = nil;
   
-  if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-60.0 )
+  if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-kDecryptedMasterKeyTimeout )
   { self.decryptedMasterKeyTS = [NSDate date];
     
     promise = [PMKPromise promiseWithValue:self.decryptedMasterKey];

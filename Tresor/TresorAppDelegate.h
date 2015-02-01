@@ -20,6 +20,12 @@
 #define _APPWINDOW                _APPDELEGATE.window
 #define _HUDCOLOR                 [UIColor colorWithRed:255.0/255.0 green:84.0/255.0 blue:0 alpha:0.6]
 
+#define kDecryptedMasterKeyTimeout 60.0
+
 @interface TresorAppDelegate : UIResponder <UIApplicationDelegate>
 @property(nonatomic,strong) UIWindow* window;
+@property NSData*           decryptedMasterKey;
+@property NSDate*           decryptedMasterKeyTS;
+
+-(float) checkMasterKeyTimeout;
 @end

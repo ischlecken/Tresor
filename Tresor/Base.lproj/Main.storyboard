@@ -35,6 +35,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <progressView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="AXy-2p-Jok">
+                            <rect key="frame" x="0.0" y="-2" width="600" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" editingAccessoryType="detailDisclosureButton" textLabel="odU-yB-Orj" detailTextLabel="biT-7D-x9f" style="IBUITableViewCellStyleSubtitle" id="ADA-3u-k7G">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -106,6 +110,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="timeoutProgressView" destination="AXy-2p-Jok" id="Ccd-cn-fzu"/>
                         <segue destination="7DR-7M-QPd" kind="presentation" identifier="UpdateVaultSegue" id="u0K-m2-1RZ"/>
                     </connections>
                 </tableViewController>
