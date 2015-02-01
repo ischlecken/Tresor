@@ -31,6 +31,7 @@
 		855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE12B1A20E81800E9CF50 /* VaultViewController.m */; };
 		855CE1441A20E8E800E9CF50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1421A20E8E800E9CF50 /* Localizable.strings */; };
 		855CE1481A20E90200E9CF50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 855CE1461A20E90200E9CF50 /* InfoPlist.strings */; };
+		85A82CBA1A7EE1A5009FB65B /* DecryptedMasterKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A82CB91A7EE1A5009FB65B /* DecryptedMasterKey.m */; };
 		85FAA3781A3DCB54007F05BA /* EditVaultParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */; };
 		85FAA3831A3DF92E007F05BA /* ConfirmPINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FAA37C1A3DF92E007F05BA /* ConfirmPINViewController.m */; };
 		85FAA3851A3DF92E007F05BA /* CreatePINViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FAA3801A3DF92E007F05BA /* CreatePINViewController.m */; };
@@ -92,6 +93,8 @@
 		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		855CE1471A20E90200E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		855CE1491A20E90700E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85A82CB81A7EE1A5009FB65B /* DecryptedMasterKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecryptedMasterKey.h; sourceTree = "<group>"; };
+		85A82CB91A7EE1A5009FB65B /* DecryptedMasterKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecryptedMasterKey.m; sourceTree = "<group>"; };
 		85FAA3761A3DCB54007F05BA /* EditVaultParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVaultParameter.h; sourceTree = "<group>"; };
 		85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVaultParameter.m; sourceTree = "<group>"; };
 		85FAA37B1A3DF92E007F05BA /* ConfirmPINViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPINViewController.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				855CE1131A20E81800E9CF50 /* Gui */,
+				85A82CB81A7EE1A5009FB65B /* DecryptedMasterKey.h */,
+				85A82CB91A7EE1A5009FB65B /* DecryptedMasterKey.m */,
 				855CE0B51A20E79400E9CF50 /* TresorAppDelegate.h */,
 				855CE0B61A20E79400E9CF50 /* TresorAppDelegate.m */,
 				855CE0921A20E09500E9CF50 /* Main.storyboard */,
@@ -429,6 +434,7 @@
 				855CE13A1A20E81800E9CF50 /* ShimmeringTextLayer.m in Sources */,
 				855CE1311A20E81800E9CF50 /* ButtonLayer.m in Sources */,
 				855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */,
+				85A82CBA1A7EE1A5009FB65B /* DecryptedMasterKey.m in Sources */,
 				85FAA3851A3DF92E007F05BA /* CreatePINViewController.m in Sources */,
 				855CE1361A20E81800E9CF50 /* PasswordView.m in Sources */,
 				855CE1301A20E81800E9CF50 /* ButtonAnimationAction.m in Sources */,

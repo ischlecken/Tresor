@@ -13,14 +13,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  *
- * Copyright (c) 2014 ischlecken.
+ * Copyright (c) 2015 ischlecken.
  */
 
-#define _APPDELEGATE              ((TresorAppDelegate*) [UIApplication sharedApplication].delegate)
-#define _APPWINDOW                _APPDELEGATE.window
-#define _HUDCOLOR                 [UIColor colorWithRed:255.0/255.0 green:84.0/255.0 blue:0 alpha:0.6]
+#define kDecryptedMasterKeyTimeout 30.0
+
+@interface DecryptedMasterKey : NSObject
+@property(strong,nonatomic,readonly) NSData*   decryptedMasterKey;
+@property(strong,nonatomic,readonly) NSDate*   decryptedMasterKeyTS;
+@property(strong,nonatomic,readonly) NSNumber* timeoutProgress;
+@property(strong,nonatomic         ) Vault*    vault;
+@end
 
 
-@interface TresorAppDelegate : UIResponder <UIApplicationDelegate>
-@property(nonatomic,strong) UIWindow* window;
+@interface DecryptedMasterKeyManager : NSObject <DecryptedMasterKeyPromiseDelegate>
++(instancetype)        sharedInstance;
+-(DecryptedMasterKey*) getInfo:(Vault*)vault;
 @end

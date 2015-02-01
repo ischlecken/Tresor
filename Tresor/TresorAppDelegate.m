@@ -15,13 +15,8 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "PasswordViewController1.h"
-#import "UIViewController+PromiseKit.h"
 #import "SSKeychain.h"
-#import "MBProgressHUD.h"
-
-@interface TresorAppDelegate () <DecryptedMasterKeyPromiseDelegate>
-@end
+#import "DecryptedMasterKey.h"
 
 @implementation TresorAppDelegate
 
@@ -31,7 +26,7 @@
 -(BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 { _NSLOG(@"options:%@",launchOptions);
   
-  [CryptoService sharedInstance].delegate = self;
+  [CryptoService sharedInstance].delegate = [DecryptedMasterKeyManager sharedInstance];
   
   [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Background"]]];
   
@@ -95,66 +90,5 @@
 { _NSLOG_SELECTOR;
 }
 
-#pragma mark DecryptedMasterKeyPromiseDelegate
-
-/**
- *
- */
--(float) checkMasterKeyTimeout
-{ float result = fmin(fabs([_APPDELEGATE.decryptedMasterKeyTS timeIntervalSinceNow]/kDecryptedMasterKeyTimeout),1.0);
- 
-  if( result>=1.0 )
-  { self.decryptedMasterKey = nil;
-    
-    [[DecryptedObjectCache sharedInstance] flush];
-  } /* of if */
-  
-  return result;
-}
-
-/**
- *
- */
--(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
-{ PMKPromise* promise = nil;
-  
-  if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-kDecryptedMasterKeyTimeout )
-  { self.decryptedMasterKeyTS = [NSDate date];
-    
-    promise = [PMKPromise promiseWithValue:self.decryptedMasterKey];
-  } /* of if */
-  else
-  { self.decryptedMasterKey = nil;
-    
-    if( masterKey )
-    { UIViewController*         vc = self.window.rootViewController;
-      PasswordViewController1* pvc = [PasswordViewController1 new];
-      
-      pvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-      promise = [vc promiseViewController:pvc animated:YES completion:nil]
-      .then(^(NSString* pin)
-      { _NSLOG(@"pin               :%@",pin);
-        
-        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:_APPWINDOW animated:YES];
-        
-        hud.color     = _HUDCOLOR;
-        hud.labelText = _LSTR(@"DecryptPayload");
-        
-        return [masterKey decryptedMasterKeyUsingPIN:pin];
-      })
-      //.pause(2.0)
-      .then(^(NSData* decryptedMasterKey)
-      { _NSLOG(@"decryptedMasterKey:%@",[decryptedMasterKey shortHexStringValue]);
-        
-        self.decryptedMasterKey   = decryptedMasterKey;
-        self.decryptedMasterKeyTS = [NSDate date];
-              
-        return decryptedMasterKey;
-      });
-    } /* of if */
-  } /* of else */
-  
-  return promise;
-}
 
 @end

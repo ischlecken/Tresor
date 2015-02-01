@@ -8,6 +8,7 @@
 #import "TresorUtil.h"
 #import "MBProgressHUD.h"
 
+
 #define kSecretViewTag 142
 
 @interface PayloadItemListViewController ()
@@ -79,13 +80,19 @@
   @"youtube-new"];
   
   [_TRESORMODEL addObserver:self forKeyPath:@"vaultsInEditMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+  
+  self.decryptedMasterKey           = [[DecryptedMasterKeyManager sharedInstance] getInfo:self.vault];
+  self.timeoutProgressView.progress = [[self.decryptedMasterKey timeoutProgress] floatValue];
+  
+  [self.decryptedMasterKey addObserver:self forKeyPath:@"timeoutProgress" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 /**
  *
  */
 -(void) dealloc
-{ [_TRESORMODEL removeObserver:self forKeyPath:@"vaultsInEditMode"];
+{ [_TRESORMODEL            removeObserver:self forKeyPath:@"vaultsInEditMode"];
+  [self.decryptedMasterKey removeObserver:self forKeyPath:@"timeoutProgress"];
 }
 
 #pragma mark Modelchanged
@@ -120,10 +127,12 @@
  *
  */
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-  if( [keyPath isEqualToString:@"vaultsInEditMode"] )
+{ if( [keyPath isEqualToString:@"vaultsInEditMode"] )
   { [self setEditMode:[_TRESORMODEL isVaultInEditMode:self.vault]];
   } /* of if */
+  else if( [keyPath isEqualToString:@"timeoutProgress"] )
+  { self.timeoutProgressView.progress = [self.decryptedMasterKey.timeoutProgress floatValue];
+  } /* of else if */
 }
 
 #pragma mark Actions
@@ -493,6 +502,8 @@
         } /* of if */
         
         cell.accessoryView = nil;
+        
+        [MBProgressHUD hideHUDForView:_APPWINDOW animated:YES];
       });
     } /* of if */
     else
