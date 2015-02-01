@@ -26,9 +26,9 @@
 
 "PINCheckFailedTitle" = "PIN bei Prüfung durchgefallen!";
 
-"CreatingVault"       = "Tresor wird initialisiert...";
+"CreatingVault"       = "Tresor wird initialisiert ...";
 
-"CheckPIN"            = "Prüfen";
+"CheckPIN"            = "Entschlüsseln";
 
-"DecryptPayload"         = "Entschlüsselung läuft...";
+"DecryptPayload"         = "Entschlüsselung läuft ...";
 "ErrorDecryptingPayload" = "Fehler bei Entschlüsselung!";

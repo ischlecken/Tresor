@@ -29,7 +29,7 @@
 
 "CreatingVault"       = "Creating Vault ...";
 
-"CheckPIN"            = "Check";
+"CheckPIN"            = "Decrypt";
 
-"DecryptPayload"         = "Decrypt...";
+"DecryptPayload"         = "Decrypting ...";
 "ErrorDecryptingPayload" = "Decryption Error!";

@@ -6,6 +6,7 @@
 #import "TresorModel.h"
 #import "CryptoService.h"
 #import "TresorUtil.h"
+#import "MBProgressHUD.h"
 
 #define kSecretViewTag 142
 
@@ -472,6 +473,17 @@
         } /* of else */
         
         return (id) pl;
+      })
+      .catch(^(NSError* error)
+      { _NSLOG(@"Error while decrypting payload:%@",error);
+         
+         MBProgressHUD* hud = [MBProgressHUD HUDForView:_APPWINDOW];
+         
+         hud.color     = [UIColor redColor];
+         hud.labelText = _LSTR(@"ErrorDecryptingPayload");
+         hud.mode      = MBProgressHUDModeText;
+         
+         [hud hide:YES afterDelay:3];
       })
       .finally(^
       { if( [cell.accessoryView isKindOfClass:[UIActivityIndicatorView class]] )

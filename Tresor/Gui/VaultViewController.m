@@ -99,7 +99,7 @@
         hud.labelText = _LSTR(@"ErrorDecryptingPayload");
         hud.mode      = MBProgressHUDModeText;
         
-        [hud hide:YES afterDelay:5];
+        [hud hide:YES afterDelay:3];
       });
     }
     
