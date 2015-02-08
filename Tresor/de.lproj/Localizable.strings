@@ -54,6 +54,39 @@
 "settings.picker.colorSchemeName.gray"                      = "Grau";
 
 /**
+ * EditPayloadItem
+ */
+"editpayloaditemviewcontroller.sectiontitle.iconandname"    = "Suche und Symbol";
+"editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Symbolfarbe";
+
+"editpayloaditemviewcontroller.title.name"                  = "Suche";
+"editpayloaditemviewcontroller.title.icon"                  = "Ausgewähltes Symbol";
+"editpayloaditemviewcontroller.title.iconcolor"             = "Symbolfarbe";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#000000"    = "Schwarz";
+"editpayloaditemviewcontroller.picker.iconcolor.#ff0000"    = "Rot";
+"editpayloaditemviewcontroller.picker.iconcolor.#00ff00"    = "Grün";
+"editpayloaditemviewcontroller.picker.iconcolor.#0000ff"    = "Blau";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffff00"    = "Gelb";
+"editpayloaditemviewcontroller.picker.iconcolor.#00ffff"    = "Cyan";
+"editpayloaditemviewcontroller.picker.iconcolor.#ff00ff"    = "Magenta";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffffff"    = "Weiß";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#88ff00"    = "Chartreuse";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffddaa"    = "Navajo Weiß";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#052e66"    = "Saphirblau";
+"editpayloaditemviewcontroller.picker.iconcolor.#294582"    = "Bay of Many";
+"editpayloaditemviewcontroller.picker.iconcolor.#5770c4"    = "Indigo";
+"editpayloaditemviewcontroller.picker.iconcolor.#b06bdb"    = "Lavendel";
+"editpayloaditemviewcontroller.picker.iconcolor.#fa6e9c"    = "Rosa";
+"editpayloaditemviewcontroller.picker.iconcolor.#e36654"    = "Terracotta";
+"editpayloaditemviewcontroller.picker.iconcolor.#f29454"    = "Sandbraun";
+"editpayloaditemviewcontroller.picker.iconcolor.#f0bf52"    = "Ronchi";
+"editpayloaditemviewcontroller.picker.iconcolor.#d6cf69"    = "Tacha";
+"editpayloaditemviewcontroller.picker.iconcolor.#75db8c"    = "Pastelgrün";
+
+/**
  *
  */
 "RatingReminder.Title"                                      = "Bewerte «%1$@»";

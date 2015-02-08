@@ -286,7 +286,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1736" y="-946"/>
+            <point key="canvasLocation" x="1749" y="-954"/>
         </scene>
         <!--Payload Item List View Controller-->
         <scene sceneID="xKr-tU-N6a">
@@ -380,16 +380,17 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svU-Z6-cgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="12"/>
+            <point key="canvasLocation" x="1024" y="12"/>
         </scene>
         <!--Add Payload Item-->
         <scene sceneID="gtS-ec-s3X">
             <objects>
-                <tableViewController id="Cc8-V2-9kC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="aM6-n5-E2V">
+                <tableViewController id="Cc8-V2-9kC" customClass="EditPayloadItemViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aM6-n5-E2V">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="iKB-4f-1PF" style="IBUITableViewCellStyleDefault" id="QRg-dW-FGd">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -423,11 +424,60 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="nDI-FD-Wcn" kind="show" identifier="IconSelectSegue" id="MSd-0a-RS9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VeD-tt-blo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UJl-ii-gfH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="12"/>
+            <point key="canvasLocation" x="2474" y="12"/>
+        </scene>
+        <!--Select Icon View Controller-->
+        <scene sceneID="eFp-2i-Gfb">
+            <objects>
+                <collectionViewController id="nDI-FD-Wcn" customClass="SelectIconViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="def-xR-U3s">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aQM-Tf-cp4">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="yvd-qw-Z5p">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="42" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wireless" translatesAutoresizingMaskIntoConstraints="NO" id="AOp-Jj-opD">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AOp-Jj-opD" secondAttribute="trailing" id="D8K-1K-bSj"/>
+                                    <constraint firstItem="AOp-Jj-opD" firstAttribute="leading" secondItem="yvd-qw-Z5p" secondAttribute="leading" id="KBx-Fd-R0N"/>
+                                    <constraint firstAttribute="bottom" secondItem="AOp-Jj-opD" secondAttribute="bottom" id="Z5K-mH-4Na"/>
+                                    <constraint firstItem="AOp-Jj-opD" firstAttribute="top" secondItem="yvd-qw-Z5p" secondAttribute="top" id="nfR-AE-dRw"/>
+                                </constraints>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="nDI-FD-Wcn" id="rDq-Wo-hJK"/>
+                            <outlet property="delegate" destination="nDI-FD-Wcn" id="kbk-qi-Na2"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oKu-tC-08r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3188" y="12"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aV4-gM-eZy">
@@ -555,7 +605,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ba6-jC-1dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dC0-KM-BNh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1794" y="839"/>
+            <point key="canvasLocation" x="1749" y="839"/>
         </scene>
         <!--Web Page View Controller-->
         <scene sceneID="rib-k0-ovi">
@@ -606,7 +656,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o04-8U-hI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="839"/>
+            <point key="canvasLocation" x="1024" y="839"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eOw-gS-sKC">
@@ -702,7 +752,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1736" y="-1716"/>
+            <point key="canvasLocation" x="1749" y="-1716"/>
         </scene>
         <!--Confirm PIN-->
         <scene sceneID="qYV-0g-qbr">
@@ -1444,6 +1494,7 @@
         <image name="gear" width="32" height="32"/>
         <image name="password" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
+        <image name="wireless" width="32" height="32"/>
     </resources>
     <color key="tintColor" red="1" green="0.43008147720000001" blue="0.24258404780000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -32,6 +32,40 @@
 "ErrorDecryptingPayload"                                    = "Decryption Error!";
 
 /**
+ * EditPayloadItem
+ */
+"editpayloaditemviewcontroller.sectiontitle.iconandname"    = "Search and Icon";
+"editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Color of Icon";
+
+"editpayloaditemviewcontroller.title.name"                  = "Search";
+"editpayloaditemviewcontroller.title.icon"                  = "Selected Icon";
+"editpayloaditemviewcontroller.title.iconcolor"             = "Icon Color";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#000000"    = "Black";
+"editpayloaditemviewcontroller.picker.iconcolor.#ff0000"    = "Red";
+"editpayloaditemviewcontroller.picker.iconcolor.#00ff00"    = "Green";
+"editpayloaditemviewcontroller.picker.iconcolor.#0000ff"    = "Blue";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffff00"    = "Yellow";
+"editpayloaditemviewcontroller.picker.iconcolor.#00ffff"    = "Cyan";
+"editpayloaditemviewcontroller.picker.iconcolor.#ff00ff"    = "Magenta";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffffff"    = "White";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#88ff00"    = "Chartreuse";
+"editpayloaditemviewcontroller.picker.iconcolor.#ffddaa"    = "Navajo White";
+
+"editpayloaditemviewcontroller.picker.iconcolor.#052e66"    = "Deep Sapphire";
+"editpayloaditemviewcontroller.picker.iconcolor.#294582"    = "Bay of Many";
+"editpayloaditemviewcontroller.picker.iconcolor.#5770c4"    = "Indigo";
+"editpayloaditemviewcontroller.picker.iconcolor.#b06bdb"    = "Lavender";
+"editpayloaditemviewcontroller.picker.iconcolor.#fa6e9c"    = "Brink Pink";
+"editpayloaditemviewcontroller.picker.iconcolor.#e36654"    = "Terracotta";
+"editpayloaditemviewcontroller.picker.iconcolor.#f29454"    = "Sandy Brown";
+"editpayloaditemviewcontroller.picker.iconcolor.#f0bf52"    = "Ronchi";
+"editpayloaditemviewcontroller.picker.iconcolor.#d6cf69"    = "Tacha";
+"editpayloaditemviewcontroller.picker.iconcolor.#75db8c"    = "Pastel Green";
+
+
+/**
  * settings
  */
 "settings.sectiontitle.options"                             = "Options";

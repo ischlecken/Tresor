@@ -22,6 +22,7 @@
 		85175C091A8770A10069C489 /* SelectIconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C031A8770A10069C489 /* SelectIconViewController.m */; };
 		85175C0A1A8770A10069C489 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C051A8770A10069C489 /* SettingsViewController.m */; };
 		85175C0B1A8770A10069C489 /* WebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C071A8770A10069C489 /* WebPageViewController.m */; };
+		853C681A1A8814E9006A424A /* EditPayloadItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853C68191A8814E9006A424A /* EditPayloadItemViewController.m */; };
 		855CE08B1A20E09500E9CF50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE08A1A20E09500E9CF50 /* main.m */; };
 		855CE0941A20E09500E9CF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0921A20E09500E9CF50 /* Main.storyboard */; };
 		855CE0961A20E09500E9CF50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0951A20E09500E9CF50 /* Images.xcassets */; };
@@ -84,6 +85,8 @@
 		85175C051A8770A10069C489 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		85175C061A8770A10069C489 /* WebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPageViewController.h; sourceTree = "<group>"; };
 		85175C071A8770A10069C489 /* WebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WebPageViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		853C68181A8814E9006A424A /* EditPayloadItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPayloadItemViewController.h; sourceTree = "<group>"; };
+		853C68191A8814E9006A424A /* EditPayloadItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EditPayloadItemViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		855CE0851A20E09500E9CF50 /* Tresor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tresor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		855CE08A1A20E09500E9CF50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		855CE0931A20E09500E9CF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -122,8 +125,8 @@
 		855CE12A1A20E81800E9CF50 /* VaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VaultViewController.h; sourceTree = "<group>"; };
 		855CE12B1A20E81800E9CF50 /* VaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VaultViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		855CE1401A20E8CA00E9CF50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		855CE1431A20E8E800E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		855CE1431A20E8E800E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		855CE1451A20E8F200E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		855CE1471A20E90200E9CF50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		855CE1491A20E90700E9CF50 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85A82CB81A7EE1A5009FB65B /* DecryptedMasterKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecryptedMasterKey.h; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 		855CE1131A20E81800E9CF50 /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				853C68181A8814E9006A424A /* EditPayloadItemViewController.h */,
+				853C68191A8814E9006A424A /* EditPayloadItemViewController.m */,
 				85175C001A8770A10069C489 /* GradientView.h */,
 				85175C011A8770A10069C489 /* GradientView.m */,
 				85175C021A8770A10069C489 /* SelectIconViewController.h */,
@@ -520,6 +525,7 @@
 				855CE1371A20E81800E9CF50 /* PasswordViewController.m in Sources */,
 				85FAA3861A3DF92E007F05BA /* PUKViewController.m in Sources */,
 				85175C0A1A8770A10069C489 /* SettingsViewController.m in Sources */,
+				853C681A1A8814E9006A424A /* EditPayloadItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
