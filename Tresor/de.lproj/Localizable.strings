@@ -1,37 +1,35 @@
-"vault.title"="Tresor";
+"vault.title"                                               ="Tresor";
 
-"Options.settings"                          = "Einstellungen";
-"Options.about"                             = "Über %1$@";
-"Options.contact"                           = "Kontakt";
-"Options.errorlist"                         = "Fehlerprotokoll";
-"Options.walkthrough"                       = "Rundgang";
-"Options.purgefavorites"                    = "Favoriten löschen";
+"Options.settings"                                          = "Einstellungen";
+"Options.about"                                             = "Über %1$@";
+"Options.contact"                                           = "Kontakt";
+"Options.errorlist"                                         = "Fehlerprotokoll";
+"Options.walkthrough"                                       = "Rundgang";
+"Options.purgefavorites"                                    = "Favoriten löschen";
 
-"AboutTitle"   = "Über %1$@";
-"AboutMessage" = "Version %1$@ Build %2$@\nAuthor: iSchlecken\nSichere Passwörter\nauf meinem iPhone.";
 
-"EditAction.Delete"   = "Löschen";
-"EditAction.Keys"     = "Schlüssel";
-"EditAction.Key"      = "Schlüssel";
-"EditAction.More"     = "Mehr";
-"EditAction.Favorite" = "Favorit";
+"EditAction.Delete"                                         = "Löschen";
+"EditAction.Keys"                                           = "Schlüssel";
+"EditAction.Key"                                            = "Schlüssel";
+"EditAction.More"                                           = "Mehr";
+"EditAction.Favorite"                                       = "Favorit";
 
-"GeneratePin"         = "Erzeugen";
-"GeneratingPin"       = "Erzeuge PIN";
-"PINConfirmed"        = "Bestätigt";
-"GeneratingPUK"       =" Erzeuge PUK";
+"GeneratePin"                                               = "Erzeugen";
+"GeneratingPin"                                             = "Erzeuge PIN";
+"PINConfirmed"                                              = "Bestätigt";
+"GeneratingPUK"                                             =" Erzeuge PUK";
 
-"CreatePUKMessage"    = "Erzeuge PUK bla fasel";
-"ConfirmPUKMessage"   = "Bestätigen Sie Ihre PUK";
+"CreatePUKMessage"                                          = "Erzeuge PUK bla fasel";
+"ConfirmPUKMessage"                                         = "Bestätigen Sie Ihre PUK";
 
-"PINCheckFailedTitle" = "PIN bei Prüfung durchgefallen!";
+"PINCheckFailedTitle"                                       = "PIN bei Prüfung durchgefallen!";
 
-"CreatingVault"       = "Tresor wird initialisiert ...";
+"CreatingVault"                                             = "Tresor wird initialisiert ...";
 
-"CheckPIN"            = "Entschlüsseln";
+"CheckPIN"                                                  = "Entschlüsseln";
 
-"DecryptPayload"         = "Entschlüsselung läuft ...";
-"ErrorDecryptingPayload" = "Fehler bei Entschlüsselung!";
+"DecryptPayload"                                            = "Entschlüsselung läuft ...";
+"ErrorDecryptingPayload"                                    = "Fehler bei Entschlüsselung!";
 
 /**
  * settings

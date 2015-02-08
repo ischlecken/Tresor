@@ -1,38 +1,35 @@
-"vault.title"="Vault";
+"vault.title"                                               ="Vault";
 
-"Options.settings"                          = "Settings";
+"Options.settings"                                          = "Settings";
 
-"Options.about"                             = "About %1$@";
-"Options.contact"                           = "Contact us";
-"Options.errorlist"                         = "Error Protocol";
-"Options.colorscheme"                       = "Color Scheme";
-"Options.walkthrough"                       = "Walkthrough";
-"Options.purgefavorites"                    = "Purge Favorites";
+"Options.about"                                             = "About %1$@";
+"Options.contact"                                           = "Contact us";
+"Options.errorlist"                                         = "Error Protocol";
+"Options.colorscheme"                                       = "Color Scheme";
+"Options.walkthrough"                                       = "Walkthrough";
+"Options.purgefavorites"                                    = "Purge Favorites";
 
-"AboutTitle"   = "About %1$@";
-"AboutMessage" = "Version %1$@ Build %2$@\nAuthor: iSchlecken\nSecure passworts\non my iPhone.";
+"EditAction.Delete"                                         = "Delete";
+"EditAction.Keys"                                           = "Keys";
+"EditAction.Key"                                            = "Key";
+"EditAction.More"                                           = "More";
+"EditAction.Favorite"                                       = "Favorite";
 
-"EditAction.Delete"   = "Delete";
-"EditAction.Keys"     = "Keys";
-"EditAction.Key"      = "Key";
-"EditAction.More"     = "More";
-"EditAction.Favorite" = "Favorite";
+"GeneratePin"                                               = "Generate";
+"GeneratingPin"                                             = "Generating PIN";
+"PINConfirmed"                                              = "Confirmed";
+"GeneratingPUK"                                             = "Generating PUK";
+"CreatePUKMessage"                                          = "Create PUK bla fasel";
+"ConfirmPUKMessage"                                         = "Confirm your PUK";
 
-"GeneratePin"         = "Generate";
-"GeneratingPin"       = "Generating PIN";
-"PINConfirmed"        = "Confirmed";
-"GeneratingPUK"       = "Generating PUK";
-"CreatePUKMessage"    = "Create PUK bla fasel";
-"ConfirmPUKMessage"   = "Confirm your PUK";
+"PINCheckFailedTitle"                                       = "PIN check failed!";
 
-"PINCheckFailedTitle" = "PIN check failed!";
+"CreatingVault"                                             = "Creating Vault ...";
 
-"CreatingVault"       = "Creating Vault ...";
+"CheckPIN"                                                  = "Decrypt";
 
-"CheckPIN"            = "Decrypt";
-
-"DecryptPayload"         = "Decrypting ...";
-"ErrorDecryptingPayload" = "Decryption Error!";
+"DecryptPayload"                                            = "Decrypting ...";
+"ErrorDecryptingPayload"                                    = "Decryption Error!";
 
 /**
  * settings
