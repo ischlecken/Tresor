@@ -1,0 +1,60 @@
+{ "default" :
+  { "gradientColors"               : ["#f27127","#bf382c"],
+    "titleColor"                   : "#bf382c",
+    "optionOnColor"                : "#882a42",
+    "tintColor"                    : "#f27127",
+    "disabledColor"                : "#cccccc",
+    "headerMessageBackgroundColor" : "#114fcb",
+    "iconColors"                   : ["#052e66","#294582","#5770c4","#b06bdb",
+                                      "#fa6e9c","#e36654","#f29454","#f0bf52",
+                                      "#d6cf69","#75db8c","#000000","#ff0000",
+                                      "#00ff00","#0000ff","#ffff00","#00ffff",
+                                      "#ff00ff"]
+  },
+  
+  "bonbon" :
+  { "gradientColors"               : ["#FF8000","#FF00EF"],
+    "titleColor"                   : "#bf382c",
+    "optionOnColor"                : "#CC20FF",
+    "tintColor"                    : "#ffa500",
+    "disabledColor"                : "#dddddd",
+    "headerMessageBackgroundColor" : "#5770c4",
+    "iconColors"                   : ["#052e66","#294582","#5770c4","#b06bdb",
+                                      "#fa6e9c","#e36654","#f29454","#f0bf52",
+                                      "#d6cf69","#75db8c","#000000","#ff0000",
+                                      "#00ff00","#0000ff","#ffff00","#00ffff",
+                                      "#ff00ff"
+                                     ]
+  },
+
+  "blue" :
+  { "gradientColors"               : ["#1589FF","#2554C7"],
+    "titleColor"                   : "#bf382c",
+    "optionOnColor"                : "#CC20FF",
+    "tintColor"                    : "#2554C7",
+    "disabledColor"                : "#dddddd",
+    "headerMessageBackgroundColor" : "#5770c4",
+    "iconColors"                   : ["#052e66","#294582","#5770c4","#b06bdb",
+                                      "#fa6e9c","#e36654","#f29454","#f0bf52",
+                                      "#d6cf69","#75db8c","#000000","#ff0000",
+                                      "#00ff00","#0000ff","#ffff00","#00ffff",
+                                      "#ff00ff"
+                                      ]
+  },
+  
+  "gray" :
+  { "gradientColors"               : ["#736F6E","#5C5858"],
+    "titleColor"                   : "#bf382c",
+    "optionOnColor"                : "#CC20FF",
+    "tintColor"                    : "#5C5858",
+    "disabledColor"                : "#dddddd",
+    "headerMessageBackgroundColor" : "#5770c4",
+    "iconColors"                   : ["#052e66","#294582","#5770c4","#b06bdb",
+                                      "#fa6e9c","#e36654","#f29454","#f0bf52",
+                                      "#d6cf69","#75db8c","#000000","#ff0000",
+                                      "#00ff00","#0000ff","#ffff00","#00ffff",
+                                      "#ff00ff"
+                                      ]
+  }
+
+}

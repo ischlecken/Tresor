@@ -135,6 +135,48 @@
   } /* of else if */
 }
 
+/**
+ *
+ */
+-(void) addPayloadItem
+{ [self disableToolbarItems];
+  
+  Commit*  nextCommit = self.vault.nextCommit;
+  
+  if( nextCommit )
+  { NSUInteger iconIndex = random() % self.icons.count;
+    
+    [nextCommit addPayloadItemWithTitle:@"itemtestAddPayloadItemInCommit.0"
+                            andSubtitle:@"subtitletestAddPayloadItemInCommit.0"
+                                andIcon:self.icons[iconIndex]
+                              andObject:@"blatestAddPayloadItemInCommit.0"
+                                forPath:self.path
+     ]
+    .then(^(Commit* cm)
+     { NSError* error = nil;
+      
+       if( ![_MOC save:&error] )
+         return (id)error;
+      
+       return (id)[cm parentPathForPath:self.path];
+     })
+    .then(^(NSArray* parentPath)
+     { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+      
+       if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+         return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+      
+       self.editPayloadItemList = decryptedPayload;
+       [self.tableView reloadData];
+       [self enableToolbarItems];
+      
+       return (id) decryptedPayload;
+     });
+  } /* of if */
+  else
+    [self enableToolbarItems];
+}
+
 #pragma mark Actions
 
 /**
@@ -195,47 +237,6 @@
   [self setEditMode:YES];
 }
 
-/**
- *
- */
--(IBAction) addItemAction:(id)sender
-{ [self disableToolbarItems];
-  
-  Commit*  nextCommit = self.vault.nextCommit;
-  
-  if( nextCommit )
-  { NSUInteger iconIndex = random() % self.icons.count;
-    
-    [nextCommit addPayloadItemWithTitle:@"itemtestAddPayloadItemInCommit.0"
-                            andSubtitle:@"subtitletestAddPayloadItemInCommit.0"
-                                andIcon:self.icons[iconIndex]
-                                andObject:@"blatestAddPayloadItemInCommit.0"
-                                forPath:self.path
-    ]
-    .then(^(Commit* cm)
-    { NSError* error = nil;
-      
-      if( ![_MOC save:&error] )
-        return (id)error;
-      
-      return (id)[cm parentPathForPath:self.path];
-    })
-    .then(^(NSArray* parentPath)
-    { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-      
-      if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-        return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-      
-      self.editPayloadItemList = decryptedPayload;
-      [self.tableView reloadData];
-      [self enableToolbarItems];
-      
-      return (id) decryptedPayload;
-    });
-  } /* of if */
-  else
-    [self enableToolbarItems];
-}
 
 /**
  *
@@ -324,7 +325,37 @@
     bbi.enabled = NO;
 }
 
-#pragma mark - Table View
+#pragma mark Navigation
+
+
+
+/**
+ *
+ */
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{ if( [[segue identifier] isEqualToString:@"AddPayloadItemSegue"] )
+  {
+  } /* of if */
+}
+
+/**
+ *
+ */
+-(IBAction) unwindToPayloadItemListViewController:(UIStoryboardSegue *)unwindSegue
+{ if( [[unwindSegue identifier] isEqualToString:@"AddPayloadItemSegue"] )
+  { [self addPayloadItem];
+  
+    [self dismissViewControllerAnimated:YES completion:NULL];
+  } /* of if */
+  else if( [[unwindSegue identifier] isEqualToString:@"CancelPayloadItemSegue"] )
+  {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+  }
+}
+
+
+
+#pragma mark Table View
 
 /**
  *

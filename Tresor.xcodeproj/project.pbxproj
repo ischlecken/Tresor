@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		09D8419A01C6722DC46A0AC7 /* libPods-Tresor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB39618325C324E94269A090 /* libPods-Tresor.a */; };
+		85175BE91A8770560069C489 /* colorscheme.json in Resources */ = {isa = PBXBuildFile; fileRef = 85175BE71A8770560069C489 /* colorscheme.json */; };
+		85175BEA1A8770560069C489 /* iconlist.json in Resources */ = {isa = PBXBuildFile; fileRef = 85175BE81A8770560069C489 /* iconlist.json */; };
+		85175BF81A87708C0069C489 /* BooleanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175BED1A87708C0069C489 /* BooleanTableViewCell.m */; };
+		85175BF91A87708C0069C489 /* BooleanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85175BEE1A87708C0069C489 /* BooleanTableViewCell.xib */; };
+		85175BFA1A87708C0069C489 /* PickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175BF01A87708C0069C489 /* PickerTableViewCell.m */; };
+		85175BFB1A87708C0069C489 /* PickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85175BF11A87708C0069C489 /* PickerTableViewCell.xib */; };
+		85175BFC1A87708C0069C489 /* TextfieldBooleanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175BF31A87708C0069C489 /* TextfieldBooleanTableViewCell.m */; };
+		85175BFD1A87708C0069C489 /* TextfieldBooleanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85175BF41A87708C0069C489 /* TextfieldBooleanTableViewCell.xib */; };
+		85175BFE1A87708C0069C489 /* TextfieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175BF61A87708C0069C489 /* TextfieldTableViewCell.m */; };
+		85175BFF1A87708C0069C489 /* TextfieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85175BF71A87708C0069C489 /* TextfieldTableViewCell.xib */; };
+		85175C081A8770A10069C489 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C011A8770A10069C489 /* GradientView.m */; };
+		85175C091A8770A10069C489 /* SelectIconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C031A8770A10069C489 /* SelectIconViewController.m */; };
+		85175C0A1A8770A10069C489 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C051A8770A10069C489 /* SettingsViewController.m */; };
+		85175C0B1A8770A10069C489 /* WebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85175C071A8770A10069C489 /* WebPageViewController.m */; };
 		855CE08B1A20E09500E9CF50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE08A1A20E09500E9CF50 /* main.m */; };
 		855CE0941A20E09500E9CF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0921A20E09500E9CF50 /* Main.storyboard */; };
 		855CE0961A20E09500E9CF50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855CE0951A20E09500E9CF50 /* Images.xcassets */; };
@@ -22,7 +36,6 @@
 		855CE1321A20E81800E9CF50 /* DigitAnimationAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1191A20E81800E9CF50 /* DigitAnimationAction.m */; };
 		855CE1331A20E81800E9CF50 /* DigitLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11B1A20E81800E9CF50 /* DigitLayer.m */; };
 		855CE1341A20E81800E9CF50 /* EditVaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */; };
-		855CE1351A20E81800E9CF50 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE11F1A20E81800E9CF50 /* OptionsViewController.m */; };
 		855CE1361A20E81800E9CF50 /* PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1211A20E81800E9CF50 /* PasswordView.m */; };
 		855CE1371A20E81800E9CF50 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1231A20E81800E9CF50 /* PasswordViewController.m */; };
 		855CE1381A20E81800E9CF50 /* PasswordViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 855CE1251A20E81800E9CF50 /* PasswordViewController1.m */; };
@@ -49,6 +62,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		85175BE71A8770560069C489 /* colorscheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorscheme.json; sourceTree = "<group>"; };
+		85175BE81A8770560069C489 /* iconlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iconlist.json; sourceTree = "<group>"; };
+		85175BEC1A87708C0069C489 /* BooleanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooleanTableViewCell.h; sourceTree = "<group>"; };
+		85175BED1A87708C0069C489 /* BooleanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooleanTableViewCell.m; sourceTree = "<group>"; };
+		85175BEE1A87708C0069C489 /* BooleanTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooleanTableViewCell.xib; sourceTree = "<group>"; };
+		85175BEF1A87708C0069C489 /* PickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTableViewCell.h; sourceTree = "<group>"; };
+		85175BF01A87708C0069C489 /* PickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTableViewCell.m; sourceTree = "<group>"; };
+		85175BF11A87708C0069C489 /* PickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerTableViewCell.xib; sourceTree = "<group>"; };
+		85175BF21A87708C0069C489 /* TextfieldBooleanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextfieldBooleanTableViewCell.h; sourceTree = "<group>"; };
+		85175BF31A87708C0069C489 /* TextfieldBooleanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextfieldBooleanTableViewCell.m; sourceTree = "<group>"; };
+		85175BF41A87708C0069C489 /* TextfieldBooleanTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldBooleanTableViewCell.xib; sourceTree = "<group>"; };
+		85175BF51A87708C0069C489 /* TextfieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextfieldTableViewCell.h; sourceTree = "<group>"; };
+		85175BF61A87708C0069C489 /* TextfieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextfieldTableViewCell.m; sourceTree = "<group>"; };
+		85175BF71A87708C0069C489 /* TextfieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldTableViewCell.xib; sourceTree = "<group>"; };
+		85175C001A8770A10069C489 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		85175C011A8770A10069C489 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		85175C021A8770A10069C489 /* SelectIconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectIconViewController.h; sourceTree = "<group>"; };
+		85175C031A8770A10069C489 /* SelectIconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectIconViewController.m; sourceTree = "<group>"; };
+		85175C041A8770A10069C489 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		85175C051A8770A10069C489 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		85175C061A8770A10069C489 /* WebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPageViewController.h; sourceTree = "<group>"; };
+		85175C071A8770A10069C489 /* WebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WebPageViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		855CE0851A20E09500E9CF50 /* Tresor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tresor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		855CE08A1A20E09500E9CF50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		855CE0931A20E09500E9CF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,8 +109,6 @@
 		855CE11B1A20E81800E9CF50 /* DigitLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitLayer.m; sourceTree = "<group>"; };
 		855CE11C1A20E81800E9CF50 /* EditVaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVaultViewController.h; sourceTree = "<group>"; };
 		855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVaultViewController.m; sourceTree = "<group>"; };
-		855CE11E1A20E81800E9CF50 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
-		855CE11F1A20E81800E9CF50 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		855CE1201A20E81800E9CF50 /* PasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordView.h; sourceTree = "<group>"; };
 		855CE1211A20E81800E9CF50 /* PasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordView.m; sourceTree = "<group>"; };
 		855CE1221A20E81800E9CF50 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
@@ -128,6 +161,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85175BEB1A8770640069C489 /* Tableviewcells */ = {
+			isa = PBXGroup;
+			children = (
+				85175BEC1A87708C0069C489 /* BooleanTableViewCell.h */,
+				85175BED1A87708C0069C489 /* BooleanTableViewCell.m */,
+				85175BEE1A87708C0069C489 /* BooleanTableViewCell.xib */,
+				85175BEF1A87708C0069C489 /* PickerTableViewCell.h */,
+				85175BF01A87708C0069C489 /* PickerTableViewCell.m */,
+				85175BF11A87708C0069C489 /* PickerTableViewCell.xib */,
+				85175BF21A87708C0069C489 /* TextfieldBooleanTableViewCell.h */,
+				85175BF31A87708C0069C489 /* TextfieldBooleanTableViewCell.m */,
+				85175BF41A87708C0069C489 /* TextfieldBooleanTableViewCell.xib */,
+				85175BF51A87708C0069C489 /* TextfieldTableViewCell.h */,
+				85175BF61A87708C0069C489 /* TextfieldTableViewCell.m */,
+				85175BF71A87708C0069C489 /* TextfieldTableViewCell.xib */,
+			);
+			name = Tableviewcells;
+			sourceTree = "<group>";
+		};
 		855CE07C1A20E09500E9CF50 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +218,8 @@
 		855CE0881A20E09500E9CF50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				85175BE71A8770560069C489 /* colorscheme.json */,
+				85175BE81A8770560069C489 /* iconlist.json */,
 				855CE0AE1A20E73E00E9CF50 /* Tresor.entitlements */,
 				855CE1461A20E90200E9CF50 /* InfoPlist.strings */,
 				855CE1421A20E8E800E9CF50 /* Localizable.strings */,
@@ -199,18 +253,25 @@
 		855CE1131A20E81800E9CF50 /* Gui */ = {
 			isa = PBXGroup;
 			children = (
-				85FAA37A1A3DF801007F05BA /* Animations */,
-				85FAA3791A3DF7E2007F05BA /* Password */,
+				85175C001A8770A10069C489 /* GradientView.h */,
+				85175C011A8770A10069C489 /* GradientView.m */,
+				85175C021A8770A10069C489 /* SelectIconViewController.h */,
+				85175C031A8770A10069C489 /* SelectIconViewController.m */,
+				85175C041A8770A10069C489 /* SettingsViewController.h */,
+				85175C051A8770A10069C489 /* SettingsViewController.m */,
+				85175C061A8770A10069C489 /* WebPageViewController.h */,
+				85175C071A8770A10069C489 /* WebPageViewController.m */,
 				85FAA3761A3DCB54007F05BA /* EditVaultParameter.h */,
 				85FAA3771A3DCB54007F05BA /* EditVaultParameter.m */,
 				855CE11C1A20E81800E9CF50 /* EditVaultViewController.h */,
 				855CE11D1A20E81800E9CF50 /* EditVaultViewController.m */,
-				855CE11E1A20E81800E9CF50 /* OptionsViewController.h */,
-				855CE11F1A20E81800E9CF50 /* OptionsViewController.m */,
 				855CE1261A20E81800E9CF50 /* PayloadItemListViewController.h */,
 				855CE1271A20E81800E9CF50 /* PayloadItemListViewController.m */,
 				855CE12A1A20E81800E9CF50 /* VaultViewController.h */,
 				855CE12B1A20E81800E9CF50 /* VaultViewController.m */,
+				85175BEB1A8770640069C489 /* Tableviewcells */,
+				85FAA37A1A3DF801007F05BA /* Animations */,
+				85FAA3791A3DF7E2007F05BA /* Password */,
 			);
 			path = Gui;
 			sourceTree = "<group>";
@@ -371,11 +432,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				855CE0B71A20E79400E9CF50 /* initialdata.json in Resources */,
+				85175BFF1A87708C0069C489 /* TextfieldTableViewCell.xib in Resources */,
 				855CE0B91A20E79400E9CF50 /* tresor.caf in Resources */,
+				85175BFD1A87708C0069C489 /* TextfieldBooleanTableViewCell.xib in Resources */,
+				85175BFB1A87708C0069C489 /* PickerTableViewCell.xib in Resources */,
 				855CE0941A20E09500E9CF50 /* Main.storyboard in Resources */,
 				855CE0B81A20E79400E9CF50 /* Settings.bundle in Resources */,
+				85175BE91A8770560069C489 /* colorscheme.json in Resources */,
 				855CE1441A20E8E800E9CF50 /* Localizable.strings in Resources */,
+				85175BEA1A8770560069C489 /* iconlist.json in Resources */,
 				855CE1481A20E90200E9CF50 /* InfoPlist.strings in Resources */,
+				85175BF91A87708C0069C489 /* BooleanTableViewCell.xib in Resources */,
 				855CE0961A20E09500E9CF50 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,23 +496,30 @@
 			files = (
 				855CE1381A20E81800E9CF50 /* PasswordViewController1.m in Sources */,
 				855CE08B1A20E09500E9CF50 /* main.m in Sources */,
+				85175BFE1A87708C0069C489 /* TextfieldTableViewCell.m in Sources */,
 				855CE1391A20E81800E9CF50 /* PayloadItemListViewController.m in Sources */,
+				85175C0B1A8770A10069C489 /* WebPageViewController.m in Sources */,
 				85FAA3781A3DCB54007F05BA /* EditVaultParameter.m in Sources */,
 				855CE13A1A20E81800E9CF50 /* ShimmeringTextLayer.m in Sources */,
+				85175BFA1A87708C0069C489 /* PickerTableViewCell.m in Sources */,
 				855CE1311A20E81800E9CF50 /* ButtonLayer.m in Sources */,
+				85175C091A8770A10069C489 /* SelectIconViewController.m in Sources */,
 				855CE13B1A20E81800E9CF50 /* VaultViewController.m in Sources */,
 				85A82CBA1A7EE1A5009FB65B /* DecryptedMasterKey.m in Sources */,
+				85175C081A8770A10069C489 /* GradientView.m in Sources */,
 				85FAA3851A3DF92E007F05BA /* CreatePINViewController.m in Sources */,
+				85175BFC1A87708C0069C489 /* TextfieldBooleanTableViewCell.m in Sources */,
 				855CE1361A20E81800E9CF50 /* PasswordView.m in Sources */,
 				855CE1301A20E81800E9CF50 /* ButtonAnimationAction.m in Sources */,
 				85FAA3831A3DF92E007F05BA /* ConfirmPINViewController.m in Sources */,
+				85175BF81A87708C0069C489 /* BooleanTableViewCell.m in Sources */,
 				855CE1331A20E81800E9CF50 /* DigitLayer.m in Sources */,
 				855CE1321A20E81800E9CF50 /* DigitAnimationAction.m in Sources */,
-				855CE1351A20E81800E9CF50 /* OptionsViewController.m in Sources */,
 				855CE1341A20E81800E9CF50 /* EditVaultViewController.m in Sources */,
 				855CE0BA1A20E79400E9CF50 /* TresorAppDelegate.m in Sources */,
 				855CE1371A20E81800E9CF50 /* PasswordViewController.m in Sources */,
 				85FAA3861A3DF92E007F05BA /* PUKViewController.m in Sources */,
+				85175C0A1A8770A10069C489 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,3 +32,111 @@
 
 "DecryptPayload"         = "Entschlüsselung läuft ...";
 "ErrorDecryptingPayload" = "Fehler bei Entschlüsselung!";
+
+/**
+ * settings
+ */
+"settings.sectiontitle.search"                              = "Suche";
+"settings.sectiontitle.notification"                        = "Benachrichtigung";
+"settings.sectiontitle.about"                               = "Über";
+
+"settings.title.serviceName"                                = "Dienstname";
+"settings.title.maxResultsetSize"                           = "Max. Ergebnisanzahl";
+"settings.title.searchRadiusInMeter"                        = "Suchradius";
+"settings.title.searchRadiusInYard"                         = "Suchradius";
+"settings.title.locationOffset"                             = "Testpositionsoffset";
+"settings.title.notificationEnabled"                        = "Benachrichtigung";
+"settings.title.notificationRadiusInMeter"                  = "Radius";
+"settings.title.notificationRadiusInYard"                   = "Radius";
+"settings.title.notificationDurationInMinutes"              = "Dauer";
+"settings.title.help"                                       = "Hilfe";
+"settings.title.visit"                                      = "«%1$@» besuchen";
+"settings.title.contact"                                    = "«%1$@» kontaktieren";
+"settings.title.rate"                                       = "«%1$@» bewerten";
+"settings.title.about"                                      = "Über «%1$@»";
+"settings.title.colorSchemeName"                            = "Farbschema";
+
+"settings.picker.searchRadiusInMeter.500"                   = "500 Meter";
+"settings.picker.searchRadiusInMeter.800"                   = "800 Meter";
+"settings.picker.searchRadiusInMeter.1000"                  = "1 km";
+"settings.picker.searchRadiusInMeter.2000"                  = "2 km";
+"settings.picker.searchRadiusInMeter.5000"                  = "5 km";
+"settings.picker.searchRadiusInMeter.10000"                 = "10 km";
+"settings.picker.searchRadiusInMeter.20000"                 = "20 km";
+"settings.picker.searchRadiusInMeter.50000"                 = "50 km";
+"settings.picker.searchRadiusInMeter.100000"                = "100 km";
+"settings.picker.searchRadiusInMeter.500000"                = "500 km";
+
+"settings.picker.searchRadiusInYard.500"                    = "500 yards";
+"settings.picker.searchRadiusInYard.800"                    = "800 yards";
+"settings.picker.searchRadiusInYard.1000"                   = "1000 yards";
+"settings.picker.searchRadiusInYard.1760"                   = "1 mile";
+"settings.picker.searchRadiusInYard.3520"                   = "2 miles";
+"settings.picker.searchRadiusInYard.8800"                   = "5 miles";
+"settings.picker.searchRadiusInYard.17600"                  = "10 miles";
+"settings.picker.searchRadiusInYard.35200"                  = "20 miles";
+"settings.picker.searchRadiusInYard.88000"                  = "50 miles";
+"settings.picker.searchRadiusInYard.176000"                 = "100 miles";
+
+"settings.picker.notificationRadiusInMeter.50"              = "50 Meter";
+"settings.picker.notificationRadiusInMeter.100"             = "100 Meter";
+"settings.picker.notificationRadiusInMeter.200"             = "200 Meter";
+"settings.picker.notificationRadiusInMeter.500"             = "500 Meter";
+"settings.picker.notificationRadiusInMeter.800"             = "800 Meter";
+"settings.picker.notificationRadiusInMeter.1000"            = "1 km";
+"settings.picker.notificationRadiusInMeter.2000"            = "2 km";
+"settings.picker.notificationRadiusInMeter.5000"            = "5 km";
+"settings.picker.notificationRadiusInMeter.10000"           = "10 km";
+
+"settings.picker.notificationRadiusInYard.50"               = "500 Yard";
+"settings.picker.notificationRadiusInYard.100"              = "100 Yard";
+"settings.picker.notificationRadiusInYard.200"              = "200 Yard";
+"settings.picker.notificationRadiusInYard.500"              = "500 Yard";
+"settings.picker.notificationRadiusInYard.800"              = "800 Yard";
+"settings.picker.notificationRadiusInYard.1000"             = "1000 Yard";
+"settings.picker.notificationRadiusInYard.1760"             = "1 Meile";
+"settings.picker.notificationRadiusInYard.3520"             = "2 Meilen";
+"settings.picker.notificationRadiusInYard.8800"             = "5 Meilen";
+
+"settings.picker.notificationDurationInMinutes.10"          = "10 Minuten";
+"settings.picker.notificationDurationInMinutes.30"          = "30 Minuten";
+"settings.picker.notificationDurationInMinutes.60"          = "1 Stunde";
+"settings.picker.notificationDurationInMinutes.120"         = "2 Stunden";
+
+"settings.picker.locationOffset.NotSet"                     = "-";
+
+"settings.picker.serviceName.auto"                          = "Meine Position benutzen";
+"settings.picker.serviceName.US"                            = "Vereinigte Staaten";
+"settings.picker.serviceName.UK"                            = "Großbritannien";
+"settings.picker.serviceName.DE"                            = "Deutschand";
+"settings.picker.serviceName.NL"                            = "Niederlande";
+"settings.picker.serviceName.IT"                            = "Italien";
+"settings.picker.serviceName.ES"                            = "Spanien";
+"settings.picker.serviceName.TR"                            = "Türkey";
+"settings.picker.serviceName.FR"                            = "Frankreich";
+"settings.picker.serviceName.CA"                            = "Canada";
+
+
+"settings.picker.colorSchemeName.default"                   = "Standard";
+"settings.picker.colorSchemeName.bonbon"                    = "Bonbon";
+"settings.picker.colorSchemeName.blue"                      = "Blau";
+"settings.picker.colorSchemeName.gray"                      = "Grau";
+
+/**
+ *
+ */
+"RatingReminder.Title"                                      = "Bewerte «%1$@»";
+"RatingReminder.Message"                                    = "Falls Ihnen «%1$@» gefällt, wäre es großartig, wenn Sie sich eine Minute Zeit für eine Bewertung nähmen. Danke für Ihre Unterstützung!";
+"RatingReminder.RateNow.Title"                              = "Jetzt bewerten";
+"RatingReminder.RemindLater.Title"                          = "Später vielleicht";
+"RatingReminder.NoNever.Title"                              = "Nein, Danke";
+
+/**
+ * contact email
+ */
+"contact.subject"                                           = "%1$@ Kontakt über iOS App";
+"contact.message"                                           = "Hallo %1$@, ";
+
+"TresorUtil.AboutTitle"                                     = "Über «%1$@»";
+"TresorUtil.AboutMessage"                                   = "Version %1$@ Build %2$@\n\nSpeichert ihre Geheimnisse\nsicher.";
+"TresorUtil.OKButtonTitle"                                  = "OK";
