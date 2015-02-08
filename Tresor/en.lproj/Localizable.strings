@@ -34,85 +34,19 @@
 /**
  * settings
  */
-"settings.sectiontitle.search"                              = "Search";
-"settings.sectiontitle.notification"                        = "Notification";
+"settings.sectiontitle.options"                             = "Options";
+"settings.sectiontitle.ui"                                  = "GUI";
 "settings.sectiontitle.about"                               = "About";
 
-"settings.title.serviceName"                                = "Service Name";
-"settings.title.maxResultsetSize"                           = "Max. Records";
-"settings.title.searchRadiusInMeter"                        = "Searchradius";
-"settings.title.searchRadiusInYard"                         = "Searchradius";
-"settings.title.locationOffset"                             = "Test Location Offset";
-"settings.title.notificationEnabled"                        = "Notification enabled";
-"settings.title.notificationRadiusInMeter"                  = "Notification radius";
-"settings.title.notificationRadiusInYard"                   = "Notification radius";
-"settings.title.notificationDurationInMinutes"              = "Duration";
+"settings.title.useCloud"                                   = "iCloud";
+"settings.title.useTouchID"                                 = "TouchID";
+
 "settings.title.help"                                       = "Help";
 "settings.title.visit"                                      = "Visit «%1$@» Site";
 "settings.title.contact"                                    = "Contact «%1$@»";
 "settings.title.rate"                                       = "Rate «%1$@»";
 "settings.title.about"                                      = "About «%1$@»";
 "settings.title.colorSchemeName"                            = "Color Scheme";
-
-"settings.picker.searchRadiusInMeter.500"                   = "500 Meter";
-"settings.picker.searchRadiusInMeter.800"                   = "800 Meter";
-"settings.picker.searchRadiusInMeter.1000"                  = "1 km";
-"settings.picker.searchRadiusInMeter.2000"                  = "2 km";
-"settings.picker.searchRadiusInMeter.5000"                  = "5 km";
-"settings.picker.searchRadiusInMeter.10000"                 = "10 km";
-"settings.picker.searchRadiusInMeter.20000"                 = "20 km";
-"settings.picker.searchRadiusInMeter.50000"                 = "50 km";
-"settings.picker.searchRadiusInMeter.100000"                = "100 km";
-"settings.picker.searchRadiusInMeter.500000"                = "500 km";
-
-"settings.picker.searchRadiusInYard.500"                    = "500 yards";
-"settings.picker.searchRadiusInYard.800"                    = "800 yards";
-"settings.picker.searchRadiusInYard.1000"                   = "1000 yards";
-"settings.picker.searchRadiusInYard.1760"                   = "1 mile";
-"settings.picker.searchRadiusInYard.3520"                   = "2 miles";
-"settings.picker.searchRadiusInYard.8800"                   = "5 miles";
-"settings.picker.searchRadiusInYard.17600"                  = "10 miles";
-"settings.picker.searchRadiusInYard.35200"                  = "20 miles";
-"settings.picker.searchRadiusInYard.88000"                  = "50 miles";
-"settings.picker.searchRadiusInYard.176000"                 = "100 miles";
-
-"settings.picker.notificationRadiusInMeter.50"              = "50 Meter";
-"settings.picker.notificationRadiusInMeter.100"             = "100 Meter";
-"settings.picker.notificationRadiusInMeter.200"             = "200 Meter";
-"settings.picker.notificationRadiusInMeter.500"             = "500 Meter";
-"settings.picker.notificationRadiusInMeter.800"             = "800 Meter";
-"settings.picker.notificationRadiusInMeter.1000"            = "1 km";
-"settings.picker.notificationRadiusInMeter.2000"            = "2 km";
-"settings.picker.notificationRadiusInMeter.5000"            = "5 km";
-"settings.picker.notificationRadiusInMeter.10000"           = "10 km";
-
-"settings.picker.notificationRadiusInYard.50"               = "500 yards";
-"settings.picker.notificationRadiusInYard.100"              = "100 yards";
-"settings.picker.notificationRadiusInYard.200"              = "200 yards";
-"settings.picker.notificationRadiusInYard.500"              = "500 yards";
-"settings.picker.notificationRadiusInYard.800"              = "800 yards";
-"settings.picker.notificationRadiusInYard.1000"             = "1000 yards";
-"settings.picker.notificationRadiusInYard.1760"             = "1 mile";
-"settings.picker.notificationRadiusInYard.3520"             = "2 miles";
-"settings.picker.notificationRadiusInYard.8800"             = "5 miles";
-
-"settings.picker.notificationDurationInMinutes.10"          = "10 minutes";
-"settings.picker.notificationDurationInMinutes.30"          = "30 minutes";
-"settings.picker.notificationDurationInMinutes.60"          = "1 hour";
-"settings.picker.notificationDurationInMinutes.120"         = "2 hours";
-
-"settings.picker.locationOffset.NotSet"                     = "-";
-
-"settings.picker.serviceName.auto"                          = "Use Current Location";
-"settings.picker.serviceName.US"                            = "United States";
-"settings.picker.serviceName.UK"                            = "United Kingdom";
-"settings.picker.serviceName.DE"                            = "Germany";
-"settings.picker.serviceName.NL"                            = "Netherlands";
-"settings.picker.serviceName.IT"                            = "Italy";
-"settings.picker.serviceName.ES"                            = "Spain";
-"settings.picker.serviceName.TR"                            = "Turkey";
-"settings.picker.serviceName.FR"                            = "France";
-"settings.picker.serviceName.CA"                            = "Canada";
 
 "settings.picker.colorSchemeName.default"                   = "Standard";
 "settings.picker.colorSchemeName.bonbon"                    = "Bonbon";

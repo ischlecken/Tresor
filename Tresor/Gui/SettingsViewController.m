@@ -10,8 +10,8 @@
 #import "PickerTableViewCell.h"
 #import "WebPageViewController.h"
 
-#define kSectionTitleSearch       @"search"
-#define kSectionTitleNotification @"notification"
+#define kSectionTitleOptions      @"options"
+#define kSectionTitleUI           @"ui"
 #define kSectionTitleAbout        @"about"
 
 
@@ -21,9 +21,6 @@
                                       UIPickerViewDataSource,UIPickerViewDelegate>
 @property(nonatomic, strong)          NSArray*      sections;
 @property(nonatomic, strong)          NSIndexPath*  pickerIndexPath;
-
-@property(nonatomic, strong)          NSArray*      configParameter;
-
 @end
 
 @implementation SettingsViewController
@@ -104,50 +101,29 @@
     [self.tableView endUpdates];
   };
   
-  NSArray* searchSectionItems =
-  @[ [SettingsItem settingItemWithTitle:@"maxResultsetSize"
-                              andCellId:@"DetailCell"
-                        andSelectAction:pickerSelectAction
-                        andPickerValues:@[@5,@10,@20,@50,@100]],
-     
-     [SettingsItem settingItemWithTitle:@"searchRadiusInMeter"
-                              andCellId:@"DetailCell"
-                        andSelectAction:pickerSelectAction
-                        andPickerValues:@[@800,@1000,@2000,@5000,@10000,@20000,@50000,@100000]],
-     
-#ifdef VCTY_TEST_LOCATIONOFFSET
-     [SettingsItem settingItemWithTitle:@"locationOffset"
-                              andCellId:@"DetailCell"
-                        andSelectAction:pickerSelectAction
-                        andPickerValues:_TRESORCONFIG.locationOffsetNames],
-#endif
+  NSArray* optionsSectionItems =
+  @[
+    [SettingsItem settingItemWithTitle:@"useCloud"
+                             andCellId:@"BooleanCell"],
+    
+    [SettingsItem settingItemWithTitle:@"useTouchID"
+                             andCellId:@"BooleanCell"],
   ];
-  [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:kSectionTitleSearch andItems:[[NSMutableArray alloc] initWithArray:searchSectionItems]]];
+  [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:kSectionTitleOptions andItems:[[NSMutableArray alloc] initWithArray:optionsSectionItems]]];
   
-  NSArray* notificationSectionItems =
-  @[ [SettingsItem settingItemWithTitle:@"notificationEnabled"
-                              andCellId:@"BooleanCell"],
+  NSArray* uiSectionItems =
+  @[ [SettingsItem settingItemWithTitle:@"colorSchemeName"
+                              andCellId:@"DetailCell"
+                        andSelectAction:pickerSelectAction
+                        andPickerValues:[_TRESORCONFIG colorSchemeNames]],
      
-     [SettingsItem settingItemWithTitle:@"notificationRadiusInMeter"
-                              andCellId:@"DetailCell"
-                        andSelectAction:pickerSelectAction
-                        andPickerValues:@[@50,@100,@200,@500,@1000,@2000,@5000,@10000]],
-
-     [SettingsItem settingItemWithTitle:@"notificationDurationInMinutes"
-                              andCellId:@"DetailCell"
-                        andSelectAction:pickerSelectAction
-                        andPickerValues:@[@10,@30,@60,@120]],
+     
   
   ];
-  [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:kSectionTitleNotification andItems:[[NSMutableArray alloc] initWithArray:notificationSectionItems]]];
+  [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:kSectionTitleUI andItems:[[NSMutableArray alloc] initWithArray:uiSectionItems]]];
   
   NSArray* aboutSectionItems =
   @[
-     [SettingsItem settingItemWithTitle:@"colorSchemeName"
-                             andCellId:@"DetailCell"
-                       andSelectAction:pickerSelectAction
-                       andPickerValues:[_TRESORCONFIG colorSchemeNames]],
-    
      [SettingsItem settingItemWithTitle:@"help"
                               andCellId:@"BasicCell"
                         andSelectAction:^(NSIndexPath* indexPath,SettingsItem *item)
@@ -195,19 +171,10 @@
       { [TresorUtil aboutDialogue:self];
       }],
   ];
-  
   [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:kSectionTitleAbout andItems:[[NSMutableArray alloc] initWithArray:aboutSectionItems]]];
   
   self.sections = sectionInfo;
-  
-  self.configParameter = @[@"serviceNames"];
-  
-  for( NSString* configKeyPath in self.configParameter )
-    [[TresorConfig sharedInstance] addObserver:self
-                                      forKeyPath:configKeyPath
-                                         options:NSKeyValueObservingOptionNew
-                                         context:NULL];
-  
+
   self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[_TRESORCONFIG colorWithName:kTitleColorName]};
 }
 
@@ -237,14 +204,6 @@
   } /* of if */
 }
 
-
-/**
- *
- */
--(void) dealloc
-{ for( NSString* configKeyPath in self.configParameter )
-    [[TresorConfig sharedInstance] removeObserver:self forKeyPath:configKeyPath];
-}
 
 
 #pragma mark Datamodel
@@ -346,9 +305,12 @@
 -(void) tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 { UITableViewHeaderFooterView* header = (UITableViewHeaderFooterView*)view;
 
-  header.textLabel.textColor=[UIColor whiteColor];
+  header.textLabel.textColor=[UIColor grayColor];
 }
 
+/**
+ *
+ */
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 { UITableViewCell* cell          = nil;
   SectionInfo*     si            = self.sections[indexPath.section];
@@ -569,14 +531,5 @@
   } /* of if */
 }
 
-#pragma mark Notifications
 
-/**
- *
- */
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{ _NSLOG(@"keyPath=%@",keyPath);
-  
-  
-}
 @end
