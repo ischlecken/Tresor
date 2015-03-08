@@ -7,7 +7,7 @@
 #import "CryptoService.h"
 #import "TresorUtil.h"
 #import "MBProgressHUD.h"
-
+#import "EditPayloadItemViewController.h"
 
 #define kSecretViewTag 142
 
@@ -138,18 +138,17 @@
 /**
  *
  */
--(void) addPayloadItem
+-(void) addPayloadItem:(PayloadItem*)pi
 { [self disableToolbarItems];
   
   Commit*  nextCommit = self.vault.nextCommit;
   
   if( nextCommit )
-  { NSUInteger iconIndex = random() % self.icons.count;
-    
-    [nextCommit addPayloadItemWithTitle:@"itemtestAddPayloadItemInCommit.0"
-                            andSubtitle:@"subtitletestAddPayloadItemInCommit.0"
-                                andIcon:self.icons[iconIndex]
-                              andObject:@"blatestAddPayloadItemInCommit.0"
+  { [nextCommit addPayloadItemWithTitle:pi.title
+                            andSubtitle:pi.subtitle
+                                andIcon:pi.icon
+                           andIconColor:pi.iconcolor
+                              andObject:@"payload"
                                 forPath:self.path
      ]
     .then(^(Commit* cm)
@@ -236,6 +235,47 @@
   [_TRESORMODEL editMode:YES forVault:self.vault];
   [self setEditMode:YES];
 }
+
+#if 0
+-(IBAction) addItemAction:(id)sender
+{ [self disableToolbarItems];
+  
+  Commit*  nextCommit = self.vault.nextCommit;
+  
+  if( nextCommit )
+  { NSUInteger iconIndex = random() % self.icons.count;
+    
+    [nextCommit addPayloadItemWithTitle:@"itemtestAddPayloadItemInCommit.0"
+                            andSubtitle:@"subtitletestAddPayloadItemInCommit.0"
+                                andIcon:self.icons[iconIndex]
+                              andObject:@"blatestAddPayloadItemInCommit.0"
+                                forPath:self.path
+     ]
+    .then(^(Commit* cm)
+          { NSError* error = nil;
+            
+            if( ![_MOC save:&error] )
+              return (id)error;
+            
+            return (id)[cm parentPathForPath:self.path];
+          })
+    .then(^(NSArray* parentPath)
+          { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+            
+            if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+              return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+            
+            self.editPayloadItemList = decryptedPayload;
+            [self.tableView reloadData];
+            [self enableToolbarItems];
+            
+            return (id) decryptedPayload;
+          });
+  } /* of if */
+  else
+    [self enableToolbarItems];
+}
+#endif
 
 
 /**
@@ -334,7 +374,16 @@
  */
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 { if( [[segue identifier] isEqualToString:@"AddPayloadItemSegue"] )
-  {
+  { UINavigationController*        nc = (UINavigationController*)segue.destinationViewController;
+    EditPayloadItemViewController* vc = (EditPayloadItemViewController*) nc.topViewController;
+    
+    NSArray* iconColors = [_TRESORCONFIG colorWithName:kIconColorsName];
+    
+    vc.payloadItem = [[PayloadItem alloc] initWithTitle:@"title"
+                                            andSubtitle:@"subtitle"
+                                                andIcon:self.icons[0]
+                                           andIconColor:[iconColors[0] colorHexString]
+                                     andPayloadObjectId:nil];
   } /* of if */
 }
 
@@ -343,7 +392,9 @@
  */
 -(IBAction) unwindToPayloadItemListViewController:(UIStoryboardSegue *)unwindSegue
 { if( [[unwindSegue identifier] isEqualToString:@"AddPayloadItemSegue"] )
-  { [self addPayloadItem];
+  { EditPayloadItemViewController* vc = (EditPayloadItemViewController*) unwindSegue.sourceViewController;
+  
+    [self addPayloadItem:vc.payloadItem];
   
     [self dismissViewControllerAnimated:YES completion:NULL];
   } /* of if */

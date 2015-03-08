@@ -37,8 +37,9 @@
 "editpayloaditemviewcontroller.sectiontitle.iconandname"    = "Search and Icon";
 "editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Color of Icon";
 
-"editpayloaditemviewcontroller.title.name"                  = "Search";
-"editpayloaditemviewcontroller.title.icon"                  = "Selected Icon";
+"editpayloaditemviewcontroller.title.title"                 = "Title";
+"editpayloaditemviewcontroller.title.subtitle"              = "Subtitle";
+"editpayloaditemviewcontroller.title.icon"                  = "Icon";
 "editpayloaditemviewcontroller.title.iconcolor"             = "Icon Color";
 
 "editpayloaditemviewcontroller.picker.iconcolor.#000000"    = "Black";

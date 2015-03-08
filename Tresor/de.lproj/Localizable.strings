@@ -59,7 +59,8 @@
 "editpayloaditemviewcontroller.sectiontitle.iconandname"    = "Suche und Symbol";
 "editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Symbolfarbe";
 
-"editpayloaditemviewcontroller.title.name"                  = "Suche";
+"editpayloaditemviewcontroller.title.title"                 = "Titel";
+"editpayloaditemviewcontroller.title.subtitle"              = "Untertitel";
 "editpayloaditemviewcontroller.title.icon"                  = "Ausgewähltes Symbol";
 "editpayloaditemviewcontroller.title.iconcolor"             = "Symbolfarbe";
 

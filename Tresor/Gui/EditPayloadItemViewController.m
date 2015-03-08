@@ -28,7 +28,10 @@
   NSMutableArray* sectionInfo   = [[NSMutableArray alloc] initWithCapacity:3];
   
   NSArray* nameAndIconItems =
-  @[ [SettingsItem settingItemWithTitle:@"name"
+  @[ [SettingsItem settingItemWithTitle:@"title"
+                              andCellId:@"TextfieldCell"],
+     
+     [SettingsItem settingItemWithTitle:@"subtitle"
                               andCellId:@"TextfieldCell"],
      
      [SettingsItem settingItemWithTitle:@"icon"
@@ -131,7 +134,13 @@
   { TextfieldTableViewCell* tbcell = (TextfieldTableViewCell*)cell;
     
     tbcell.titleLabel.text         = displayOption;
-    tbcell.inputField.text         = self.title;
+    tbcell.inputField.text         = nil;
+    
+    if( [setting.title isEqualToString:@"title"] )
+      tbcell.inputField.text = self.payloadItem.title;
+    else if( [setting.title isEqualToString:@"subtitle"] )
+      tbcell.inputField.text = self.payloadItem.subtitle;
+    
     tbcell.inputField.keyboardType = setting.keyboardType;
     tbcell.context                 = setting;
     tbcell.delegate                = self;
@@ -186,7 +195,12 @@
 -(void) inputFieldChanged:(NSString*)text forTextfieldTableViewCell:(TextfieldTableViewCell*)tableViewCell andContext:(id)context
 { _NSLOG(@"text:%@",text);
   
-  self.payloadItem = [self.payloadItem updateTitle:text];
+  SettingsItem* setting = (SettingsItem*)context;
+  
+  if( [setting.title isEqualToString:@"title"] )
+    self.payloadItem = [self.payloadItem updateTitle:text];
+  else if( [setting.title isEqualToString:@"subtitle"] )
+    self.payloadItem = [self.payloadItem updateSubtitle:text];
 }
 
 
@@ -325,7 +339,7 @@
 /**
  *
  */
-- (IBAction)unwindToSearchRequestsEditViewController:(UIStoryboardSegue *)unwindSegue
+- (IBAction)unwindToEditPayloadItemViewController:(UIStoryboardSegue *)unwindSegue
 { _NSLOG_SELECTOR;
   
   if( [[unwindSegue identifier] isEqualToString:@"UnwindSelectIconSegue"] )
