@@ -138,7 +138,7 @@
 /**
  *
  */
--(void) addPayloadItem:(PayloadItem*)pi
+-(void) addPayloadItem:(EditPayloadItemData*)pi
 { [self disableToolbarItems];
   
   Commit*  nextCommit = self.vault.nextCommit;
@@ -148,7 +148,7 @@
                             andSubtitle:pi.subtitle
                                 andIcon:pi.icon
                            andIconColor:pi.iconcolor
-                              andObject:@"payload"
+                              andObject:pi.payloadObject
                                 forPath:self.path
      ]
     .then(^(Commit* cm)
@@ -379,11 +379,14 @@
     
     NSArray* iconColors = [_TRESORCONFIG colorWithName:kIconColorsName];
     
-    vc.payloadItem = [[PayloadItem alloc] initWithTitle:@"title"
-                                            andSubtitle:@"subtitle"
-                                                andIcon:self.icons[0]
-                                           andIconColor:[iconColors[0] colorHexString]
-                                     andPayloadObjectId:nil];
+    vc.item = [EditPayloadItemData new];
+    
+    vc.item.title              = @"title";
+    vc.item.subtitle           = @"subtitle";
+    vc.item.icon               = self.icons[0];
+    vc.item.iconcolor          = [iconColors[0] colorHexString];
+    vc.item.payloadObjectClass = [NSString class];
+    vc.item.payloadObject      = nil;
   } /* of if */
 }
 
@@ -394,7 +397,7 @@
 { if( [[unwindSegue identifier] isEqualToString:@"AddPayloadItemSegue"] )
   { EditPayloadItemViewController* vc = (EditPayloadItemViewController*) unwindSegue.sourceViewController;
   
-    [self addPayloadItem:vc.payloadItem];
+    [self addPayloadItem:vc.item];
   
     [self dismissViewControllerAnimated:YES completion:NULL];
   } /* of if */

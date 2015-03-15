@@ -57,12 +57,13 @@
  * EditPayloadItem
  */
 "editpayloaditemviewcontroller.sectiontitle.iconandname"    = "Suche und Symbol";
-"editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Symbolfarbe";
+"editpayloaditemviewcontroller.sectiontitle.iconcolor"      = "Symbol und Farbe";
 
 "editpayloaditemviewcontroller.title.title"                 = "Titel";
 "editpayloaditemviewcontroller.title.subtitle"              = "Untertitel";
 "editpayloaditemviewcontroller.title.icon"                  = "Ausgewähltes Symbol";
 "editpayloaditemviewcontroller.title.iconcolor"             = "Symbolfarbe";
+"editpayloaditemviewcontroller.title.data"                  = "Daten";
 
 "editpayloaditemviewcontroller.picker.iconcolor.#000000"    = "Schwarz";
 "editpayloaditemviewcontroller.picker.iconcolor.#ff0000"    = "Rot";

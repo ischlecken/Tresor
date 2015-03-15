@@ -6,6 +6,14 @@
 #import "TextfieldTableViewCell.h"
 #import "PickerTableViewCell.h"
 
+#pragma mark - EditPayloadItemData
+
+@implementation EditPayloadItemData
+
+@end
+
+#pragma mark - EditPayloadItemViewController
+
 @interface EditPayloadItemViewController () <TextfieldTableViewCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 @property(nonatomic, strong) NSArray*      sections;
 @property(nonatomic, strong) NSIndexPath*  pickerIndexPath;
@@ -27,16 +35,18 @@
 
   NSMutableArray* sectionInfo   = [[NSMutableArray alloc] initWithCapacity:3];
   
-  NSArray* nameAndIconItems =
+  NSMutableArray* nameAndIconItems = [[NSMutableArray alloc] initWithArray:
   @[ [SettingsItem settingItemWithTitle:@"title"
                               andCellId:@"TextfieldCell"],
      
      [SettingsItem settingItemWithTitle:@"subtitle"
-                              andCellId:@"TextfieldCell"],
+                              andCellId:@"TextfieldCell"]
      
-     [SettingsItem settingItemWithTitle:@"icon"
-                              andCellId:@"Cell"]
-  ];
+  ]];
+  
+  if( [self.item.payloadObjectClass isSubclassOfClass:[NSString class]] )
+    [nameAndIconItems addObject:[SettingsItem settingItemWithTitle:@"data" andCellId:@"TextfieldCell"]];
+  
   [sectionInfo addObject:[MutableSectionInfo sectionWithTitle:@"iconandname" andItems:[[NSMutableArray alloc] initWithArray:nameAndIconItems]]];
   
   NSArray*        iconColors         = [_TRESORCONFIG colorWithName:kIconColorsName];
@@ -51,20 +61,24 @@
   NSInteger       selectedIconColor      = -1;
   
   for( NSInteger i=0;i<iconColorsValues.count;i++ )
-    if( [[iconColorsValues objectAtIndex:i] isEqualToString:self.payloadItem.iconcolor] )
+    if( [[iconColorsValues objectAtIndex:i] isEqualToString:self.item.iconcolor] )
     { selectedIconColor = i;
   
       break;
     } /* of if */
   
   if( selectedIconColor==-1 )
-  { [iconColorsValues insertObject:self.payloadItem.iconcolor atIndex:0];
+  { [iconColorsValues insertObject:self.item.iconcolor atIndex:0];
     
     selectedIconColor = 0;
   } /* of if */
   
   NSArray* iconColorSectionItems =
-  @[ [SettingsItem settingItemWithTitle:@"iconcolor"
+  @[
+    [SettingsItem settingItemWithTitle:@"icon"
+                             andCellId:@"Cell"],
+
+    [SettingsItem settingItemWithTitle:@"iconcolor"
                               andCellId:@"PickerCell"
                         andPickerValues:iconColorsValues
                         andSelectedPickerValue:selectedIconColor]
@@ -137,9 +151,11 @@
     tbcell.inputField.text         = nil;
     
     if( [setting.title isEqualToString:@"title"] )
-      tbcell.inputField.text = self.payloadItem.title;
+      tbcell.inputField.text = self.item.title;
     else if( [setting.title isEqualToString:@"subtitle"] )
-      tbcell.inputField.text = self.payloadItem.subtitle;
+      tbcell.inputField.text = self.item.subtitle;
+    else if( [setting.title isEqualToString:@"data"] && self.item.payloadObject && [self.item.payloadObject isKindOfClass:[NSString class]] )
+      tbcell.inputField.text = (NSString*)self.item.payloadObject;
     
     tbcell.inputField.keyboardType = setting.keyboardType;
     tbcell.context                 = setting;
@@ -165,7 +181,7 @@
     cell.accessoryType        = UITableViewCellAccessoryNone;
     
     if( [setting.title isEqualToString:@"icon"] )
-    { cell.imageView.image = [UIImage imageNamed:self.payloadItem.icon];
+    { cell.imageView.image = [UIImage imageNamed:self.item.icon];
       cell.accessoryType   = UITableViewCellAccessoryDisclosureIndicator;
     } /* of if */
   } /* of else */
@@ -198,9 +214,11 @@
   SettingsItem* setting = (SettingsItem*)context;
   
   if( [setting.title isEqualToString:@"title"] )
-    self.payloadItem = [self.payloadItem updateTitle:text];
+    self.item.title = text;
   else if( [setting.title isEqualToString:@"subtitle"] )
-    self.payloadItem = [self.payloadItem updateSubtitle:text];
+    self.item.subtitle = text;
+  else if( [setting.title isEqualToString:@"data"] )
+    self.item.payloadObject = text;
 }
 
 
@@ -315,7 +333,7 @@
   { SettingsItem* si       = [self.sections[indexPath.section] items][indexPath.row];
     id            rowValue = si.pickerValues[row];
     
-    self.payloadItem       = [self.payloadItem updateIconColor:rowValue];
+    self.item.iconcolor    = rowValue;
     si.selectedPickerValue = row;
     
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -331,7 +349,7 @@
 { if( [[segue identifier] isEqualToString:@"IconSelectSegue"] )
   { SelectIconViewController* vc = [segue destinationViewController];
     
-    vc.selectedIconName = self.payloadItem.icon;
+    vc.selectedIconName = self.item.icon;
   } /* of if */
 }
 
@@ -339,14 +357,14 @@
 /**
  *
  */
-- (IBAction)unwindToEditPayloadItemViewController:(UIStoryboardSegue *)unwindSegue
+-(IBAction) unwindToEditPayloadItemViewController:(UIStoryboardSegue *)unwindSegue
 { _NSLOG_SELECTOR;
   
   if( [[unwindSegue identifier] isEqualToString:@"UnwindSelectIconSegue"] )
   { SelectIconViewController* vc = unwindSegue.sourceViewController;
     
     if( vc.selectedIconName )
-    { self.payloadItem = [self.payloadItem updateIcon:vc.selectedIconName];
+    { self.item.icon = vc.selectedIconName;
       
       [self.tableView reloadData];
     } /* of if */
