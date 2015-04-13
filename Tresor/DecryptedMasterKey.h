@@ -16,7 +16,7 @@
  * Copyright (c) 2015 ischlecken.
  */
 
-#define kDecryptedMasterKeyTimeout 30.0
+#define kDecryptedMasterKeyTimeout 300.0
 
 @interface DecryptedMasterKey : NSObject
 @property(strong,nonatomic,readonly) NSData*   decryptedMasterKey;
