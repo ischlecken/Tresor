@@ -17,7 +17,6 @@
  */
 #import "DecryptedMasterKey.h"
 #import "PasswordViewController1.h"
-#import "UIViewController+PromiseKit.h"
 #import "MBProgressHUD.h"
 
 #pragma mark - DecryptedMasterKey
@@ -55,14 +54,14 @@
 /**
  *
  */
--(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
-{ PMKPromise* promise = nil;
+-(AnyPromise*) decryptedMasterKey:(MasterKey*)masterKey
+{ AnyPromise* promise = nil;
   
   if( self.decryptedMasterKey && self.decryptedMasterKeyTS.timeIntervalSinceNow>-kDecryptedMasterKeyTimeout )
   { self->_decryptedMasterKeyTS = [NSDate date];
     [self updateTimeout];
     
-    promise = [PMKPromise promiseWithValue:self.decryptedMasterKey];
+    promise = [AnyPromise promiseWithValue:self.decryptedMasterKey];
   } /* of if */
   else
   { self->_decryptedMasterKey = nil;
@@ -162,8 +161,8 @@
 /**
  *
  */
--(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
-{ PMKPromise* result = nil;
+-(AnyPromise*) decryptedMasterKey:(MasterKey*)masterKey
+{ AnyPromise* result = nil;
  
   if( masterKey==nil || masterKey.vault==nil )
     @throw [NSException exceptionWithName:@"masterKeyVaultNotSetException" reason:nil userInfo:nil];

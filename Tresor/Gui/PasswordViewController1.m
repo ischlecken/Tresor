@@ -18,13 +18,14 @@
 
 #import "PasswordViewController1.h"
 #import "PasswordView.h"
-#import "UIViewController+PromiseKit.h"
+
 
 @interface PasswordViewController1 () <PasswordViewDelegate>
 @end
 
 @implementation PasswordViewController1
-
+{ PMKResolver resolver;
+}
 
 /**
  *
@@ -34,7 +35,9 @@
   
   if (self)
   {
-  }
+    _promise = [AnyPromise promiseWithResolverBlock:^(PMKResolver resolve)
+    { self->resolver = resolve; }];
+  } /* of if */
   
   return self;
 }
@@ -50,7 +53,7 @@
  */
 -(void) viewDidLoad
 { [super viewDidLoad];
-  
+
   PasswordView* pv = (PasswordView*)self.view;
   
   pv.maxDigits  = 8;
@@ -71,7 +74,7 @@
 -(void) passwordViewCanceled:(PasswordView *)passwordView
 { _NSLOG_SELECTOR;
   
-  [self reject:_TRESORERROR(TresorErrorNoPassword)];
+  self->resolver(_TRESORERROR(TresorErrorNoPassword));
 }
 
 
@@ -83,7 +86,7 @@
   
   self.password = ((PasswordView*)self.view).password;
   
-  [self fulfill:self.password];
+  self->resolver(self.password);
 }
 
 @end

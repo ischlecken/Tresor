@@ -17,5 +17,6 @@
  */
 
 @interface PasswordViewController1 : UIViewController
-@property NSString* password;
+@property            NSString*   password;
+@property (readonly) AnyPromise* promise;
 @end

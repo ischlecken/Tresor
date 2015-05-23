@@ -15,8 +15,8 @@
  *
  * Copyright (c) 2014 ischlecken.
  */
-#import "SSKeychain.h"
 #import "DecryptedMasterKey.h"
+#import <SSKeychain/SSKeychain.h>
 
 @implementation TresorAppDelegate
 
