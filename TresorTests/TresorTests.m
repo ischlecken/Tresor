@@ -13,6 +13,8 @@ BOOL gInited = FALSE;
 
 #define kVaultName @"vault-test"
 #define kVaultType @"vault-type"
+#define kVaultPin  @"01234567"
+#define kVaultPuk  @"0123456789abcdef"
 
 @interface TresorTests : XCTestCase
 
@@ -34,6 +36,8 @@ BOOL gInited = FALSE;
     _TRESORCONFIG.databaseStoreName = @"testcase.sqlite";
     [[TresorFileUtil sharedInstance] deleteFileURL:[_TRESORCONFIG databaseStoreURL] didFailWithError:&error];
     [_TRESORMODEL resetCoreDataObjects];
+    
+    [MasterKey deleteAllKeychainMasterkeys];
   } /* of if */
 }
 
@@ -46,32 +50,108 @@ BOOL gInited = FALSE;
 }
 
 
+
 /*
  *
  */
--(void) test01CreateVault
-{ XCTestExpectation* expection = [self expectationWithDescription:@"Should be a Vault object."];
+-(void) test001CreateVault
+{ XCTestExpectation* expection    = [self expectationWithDescription:@"Should reject promise with error."];
+  PMKPromise* vaultPromise = [Vault vaultObjectWithParameter:nil];
+  XCTAssertNotNil(vaultPromise);
   
-  VaultParameter* vp = [VaultParameter new];
+  vaultPromise.catch(^(NSError* error)
+  { _NSLOG(@"error:%@",error);
+    
+    [expection fulfill];
+    XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorMandatoryVaultParameterNotSet,@"Unexpected error:%@",error);
+  });
+  
+  [self waitForExpectationsWithTimeout:4 handler:nil];
+}
+
+/*
+ *
+ */
+-(void) test002CreateVault
+{ XCTestExpectation* expection = [self expectationWithDescription:@"Should reject promise with error."];
+  VaultParameter*    vp        = [VaultParameter new];
   vp.name = kVaultName;
   vp.type = kVaultType;
   
   PMKPromise* vaultPromise = [Vault vaultObjectWithParameter:vp];
+  XCTAssertNotNil(vaultPromise);
+  
+  vaultPromise.catch(^(NSError* error)
+  { _NSLOG(@"error:%@",error);
+   
+    [expection fulfill];
+    XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorMandatoryVaultParameterNotSet,@"Unexpected error:%@",error);
+  });
+  
+  [self waitForExpectationsWithTimeout:4 handler:nil];
+}
+
+/**
+ *
+ */
+-(VaultParameter*) createVaultParameter
+{ VaultParameter* vp = [VaultParameter new];
+  vp.name = kVaultName;
+  vp.type = kVaultType;
+  vp.pin  = kVaultPin;
+  vp.puk  = kVaultPuk;
+
+  return vp;
+}
+
+/*
+ *
+ */
+-(void) test003CreateVault
+{ XCTestExpectation* expection    = [self expectationWithDescription:@"Should be a Vault object."];
+  VaultParameter*    vp           = [self createVaultParameter];
+  PMKPromise*        vaultPromise = [Vault vaultObjectWithParameter:vp];
+  XCTAssertNotNil(vaultPromise);
   
   vaultPromise.then(^(Vault* vault)
   { XCTAssert([vault isKindOfClass:[Vault class]], @"Should be a Vault object.");
     
     [expection fulfill];
+  })
+  .catch(^(NSError* error)
+  { _NSLOG(@"error:%@",error);
+   
+    XCTAssertFalse(error,@"Unexpected error:%@",error);
   });
   
-  [self waitForExpectationsWithTimeout:5 handler:nil];
+  [self waitForExpectationsWithTimeout:20 handler:nil];
+}
+
+/*
+ *
+ */
+-(void) test004CreateVaultWithSameName
+{ XCTestExpectation* expection    = [self expectationWithDescription:@"Should reject promise with error."];
+  VaultParameter*    vp           = [self createVaultParameter];
+  PMKPromise*        vaultPromise = [Vault vaultObjectWithParameter:vp];
+  XCTAssertNotNil(vaultPromise);
+  
+  vaultPromise.catch(^(NSError* error)
+  { _NSLOG(@"error:%@",error);
+    
+    [expection fulfill];
+   
+    XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorVaultNameShouldBeUnique,@"Unexpected error:%@",error);
+  });
+  
+  [self waitForExpectationsWithTimeout:4 handler:nil];
 }
 
 
 /*
  *
  */
-- (void)test02FindVault
+- (void)test010FindVault
 { NSError* error = nil;
   
   Vault* v = [Vault findVaultByName:kVaultName andError:&error];
@@ -85,7 +165,7 @@ BOOL gInited = FALSE;
 /*
  *
  */
-- (void)test99PerformanceExample
+- (void)test999PerformanceExample
 {
     // This is an example of a performance test case.
     [self measureBlock:^{
