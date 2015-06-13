@@ -331,17 +331,17 @@
     else
       [nextCommit parentPathForPath:self.path]
       .then(^(NSArray* parentPath)
-            { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-              
-              if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-                return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-              
-              self.readonlyPayloadItemList = decryptedPayload;
-              [self.tableView reloadData];
-              [self enableToolbarItems];
-              
-              return (id) decryptedPayload;
-            });
+      { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+        
+        if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+          return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+        
+        self.readonlyPayloadItemList = decryptedPayload;
+        [self.tableView reloadData];
+        [self enableToolbarItems];
+        
+        return (id) decryptedPayload;
+      });
   } /* of if */
   else
     [self enableToolbarItems];

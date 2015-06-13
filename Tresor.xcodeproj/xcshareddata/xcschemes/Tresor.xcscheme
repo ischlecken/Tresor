@@ -51,6 +51,29 @@
                BlueprintName = "TresorTests"
                ReferencedContainer = "container:Tresor.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TresorTests/test001CreateVault">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test002CreateVault">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test003CreateVault">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test004CreateVaultWithSameName">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test010FindVault">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test011AllVaults">
+               </Test>
+               <Test
+                  Identifier = "TresorTests/test999PerformanceExample">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
