@@ -10,6 +10,16 @@
 
 @implementation EditPayloadItemData
 
+
+/**
+ *
+ */
+-(NSString*) description
+{ NSString* result = [NSString stringWithFormat:@"title:%@ subtitle:%@ icon:%@ iconcolor:%@ payloadobject:%@",
+                      self.title,self.subtitle,self.icon,self.iconcolor,self.payloadObject];
+  
+  return result;
+}
 @end
 
 #pragma mark - EditPayloadItemViewController

@@ -141,39 +141,66 @@
 -(void) addPayloadItem:(EditPayloadItemData*)pi
 { [self disableToolbarItems];
   
-  Commit*  nextCommit = self.vault.nextCommit;
+  _NSLOG(@"addPayloadItem:pi=%@",pi);
   
-  if( nextCommit )
-  { [nextCommit addPayloadItemWithTitle:pi.title
-                            andSubtitle:pi.subtitle
-                                andIcon:pi.icon
-                           andIconColor:pi.iconcolor
-                              andObject:pi.payloadObject
-                                forPath:self.path
-     ]
-    .then(^(Commit* cm)
-     { NSError* error = nil;
-      
-       if( ![_MOC save:&error] )
-         return (id)error;
-      
-       return (id)[cm parentPathForPath:self.path];
-     })
-    .then(^(NSArray* parentPath)
-     { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-      
-       if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-         return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-      
-       self.editPayloadItemList = decryptedPayload;
-       [self.tableView reloadData];
-       [self enableToolbarItems];
-      
-       return (id) decryptedPayload;
-     });
+  if( pi.title && pi.subtitle && pi.payloadObject )
+  { Commit*  nextCommit = self.vault.nextCommit;
+    
+    if( nextCommit )
+    { [nextCommit addPayloadItemWithTitle:pi.title
+                              andSubtitle:pi.subtitle
+                                  andIcon:pi.icon
+                             andIconColor:pi.iconcolor
+                                andObject:pi.payloadObject
+                                  forPath:self.path
+       ]
+      .then(^(Commit* cm)
+       { NSError* error = nil;
+        
+         if( ![_MOC save:&error] )
+           return (id)error;
+        
+         return (id)[cm parentPathForPath:self.path];
+       })
+      .then(^(NSArray* parentPath)
+       { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+        
+         if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+           return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+        
+         self.editPayloadItemList = decryptedPayload;
+         [self.tableView reloadData];
+         [self enableToolbarItems];
+        
+         return (id) decryptedPayload;
+       });
+    } /* of if */
+    else
+      [self enableToolbarItems];
   } /* of if */
   else
+  { _NSLOG(@"mandatory fields not set...");
+    
     [self enableToolbarItems];
+  } /* of else */
+}
+
+/**
+ *
+ */
+-(void) deletePayloadItem:(NSIndexPath*)indexPath
+{ _NSLOG(@"indexPath:%@",indexPath);
+
+  NSError* error      = nil;
+  Commit*  nextCommit = [self.vault useOrCreateNextCommit:&error];
+  
+  if( nextCommit )
+  { [nextCommit deletePayloadItemForPath:self.path atPosition:indexPath.row]
+    .then(^(Commit* commit)
+    {
+      [self commitChanges:@"Item deleted"];
+    });
+  } /* of if */
 }
 
 #pragma mark Actions
@@ -282,6 +309,13 @@
  *
  */
 -(IBAction) commitAction:(id)sender
+{ [self commitChanges:@"successfull added"];
+}
+
+/**
+ *
+ */
+-(void) commitChanges:(NSString*)commitMessage
 { [self disableToolbarItems];
   [self cancelEditUI];
   
@@ -289,7 +323,7 @@
   Commit*  nextCommit = self.vault.nextCommit;
   
   if( nextCommit )
-  { nextCommit.message = @"successfull added";
+  { nextCommit.message = commitMessage;
     self.vault.commit  = nextCommit;
     
     if( ![_MOC save:&error] )
@@ -297,17 +331,17 @@
     else
       [nextCommit parentPathForPath:self.path]
       .then(^(NSArray* parentPath)
-      { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
-        
-        if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
-          return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
-        
-        self.readonlyPayloadItemList = decryptedPayload;
-        [self.tableView reloadData];
-        [self enableToolbarItems];
-        
-        return (id) decryptedPayload;
-      });
+            { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+              
+              if( ![decryptedPayload isKindOfClass:[PayloadItemList class]] )
+                return (id) _TRESORERROR(TresorErrorUnexpectedObjectClass);
+              
+              self.readonlyPayloadItemList = decryptedPayload;
+              [self.tableView reloadData];
+              [self enableToolbarItems];
+              
+              return (id) decryptedPayload;
+            });
   } /* of if */
   else
     [self enableToolbarItems];
@@ -603,13 +637,15 @@
 { NSArray* result =
   @[
     [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:_LSTR(@"EditAction.Delete") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-     { _NSLOG_SELECTOR;
+     { _NSLOG(@"Delete...");
+       
+       [self deletePayloadItem:indexPath];
      }],
     [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.Key") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-     { _NSLOG_SELECTOR;
+     { _NSLOG(@"Key...");
      }],
     [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:_LSTR(@"EditAction.Favorite") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-     { _NSLOG_SELECTOR;
+     { _NSLOG(@"Favorite...");
      }],
     ];
   
