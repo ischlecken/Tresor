@@ -11,20 +11,52 @@
 
 BOOL gInited = FALSE;
 
-#define kVaultName  @"vault-test"
-#define kVaultName1 @"vault-test1"
-#define kVaultName2 @"vault-test2"
-#define kVaultType  @"vault-type"
-#define kVaultPin   @"01234567"
-#define kVaultPuk   @"0123456789abcdef"
+#define kVaultName             @"vault-test"
+#define kVaultName1            @"vault-test1"
+#define kVaultName2            @"vault-test2"
+#define kVaultType             @"vault-type"
+#define kVaultPin              @"01234567"
+#define kVaultPuk              @"0123456789abcdef"
+
+#define kPayloadItemTitle1     @"PayloadTitle1"
+#define kPayloadItemSubtitle1  @"PayloadSubtitle1"
+#define kPayloadItemIcon1      @"PayloadIcon1"
+#define kPayloadItemIconcolor1 @"PayloadIconcolor1"
+#define kPayloadItemData1      @"PayloadData1"
 
 #define kCommitMsg  @"Initial Commit Test Message"
 
-@interface TresorTests : XCTestCase
-
+@interface TresorTests : XCTestCase<DecryptedMasterKeyPromiseDelegate>
+@property NSMutableDictionary* decryptedMasterKeys;
 @end
 
 @implementation TresorTests
+
+/**
+ *
+ */
+-(PMKPromise*) decryptedMasterKey:(MasterKey*)masterKey
+{ _NSLOG_SELECTOR;
+  
+  PMKPromise* result          = nil;
+  NSString*   dictionaryKey   = [NSString stringWithFormat:@"%@:%@",masterKey.cryptoiv,masterKey.kdfsalt];
+  NSData*     cachedMasterKey = [self.decryptedMasterKeys objectForKey:dictionaryKey];
+  
+  if( cachedMasterKey==nil )
+  { result = [masterKey decryptedMasterKeyUsingPIN:kVaultPin]
+    .then(^(NSData* decryptedMasterKey)
+    { _NSLOG(@"cachedKey:%@",dictionaryKey);
+            
+      [self.decryptedMasterKeys setObject:decryptedMasterKey forKey:dictionaryKey];
+      
+      return [AnyPromise promiseWithValue:cachedMasterKey];
+    });
+  } /* of if */
+  else
+    result = [AnyPromise promiseWithValue:cachedMasterKey];
+  
+  return result;
+}
 
 /*
  *
@@ -35,7 +67,10 @@ BOOL gInited = FALSE;
   if( !gInited )
   { gInited = TRUE;
     
+    self.decryptedMasterKeys = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
     NSError* error = nil;
+    [CryptoService sharedInstance].delegate = self;
 
     _TRESORCONFIG.databaseStoreName = @"testcase.sqlite";
     [[TresorFileUtil sharedInstance] deleteFileURL:[_TRESORCONFIG databaseStoreURL] didFailWithError:&error];
@@ -66,8 +101,8 @@ BOOL gInited = FALSE;
   vaultPromise.catch(^(NSError* error)
   { _NSLOG(@"error:%@",error);
     
-    [expection fulfill];
     XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorMandatoryVaultParameterNotSet,@"Unexpected error:%@",error);
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:4 handler:nil];
@@ -88,8 +123,8 @@ BOOL gInited = FALSE;
   vaultPromise.catch(^(NSError* error)
   { _NSLOG(@"error:%@",error);
    
-    [expection fulfill];
     XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorMandatoryVaultParameterNotSet,@"Unexpected error:%@",error);
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:4 handler:nil];
@@ -126,6 +161,7 @@ BOOL gInited = FALSE;
   { _NSLOG(@"error:%@",error);
    
     XCTAssertFalse(error,@"Unexpected error:%@",error);
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:20 handler:nil];
@@ -143,9 +179,9 @@ BOOL gInited = FALSE;
   vaultPromise.catch(^(NSError* error)
   { _NSLOG(@"error:%@",error);
     
-    [expection fulfill];
-   
     XCTAssert([error.domain isEqualToString:kTresorErrorDomain] && error.code==TresorErrorVaultNameShouldBeUnique,@"Unexpected error:%@",error);
+
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:4 handler:nil];
@@ -205,6 +241,7 @@ BOOL gInited = FALSE;
   { _NSLOG(@"error:%@",error);
            
     XCTAssertFalse(error,@"Unexpected error:%@",error);
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:600 handler:nil];
@@ -257,6 +294,81 @@ BOOL gInited = FALSE;
   { _NSLOG(@"error:%@",error);
    
     XCTAssertFalse(error,@"Unexpected error:%@",error);
+    [expection fulfill];
+  });
+  
+  [self waitForExpectationsWithTimeout:60 handler:nil];
+}
+
+/**
+ *
+ */
+-(void) test021AddPayloadItem
+{ XCTestExpectation* expection    = [self expectationWithDescription:@"Add Payload Item."];
+  VaultParameter*    vp           = [self createVaultParameter];
+  PMKPromise*        vaultPromise = [Vault vaultObjectWithParameter:vp];
+  NSIndexPath*       path         = [NSIndexPath new];
+  XCTAssertNotNil(vaultPromise);
+  
+  vaultPromise
+  .then(^(Vault* vault)
+  { XCTAssert([vault isKindOfClass:[Vault class]], @"Should be a Vault object.");
+    
+    [self createInitial:vault withCommitMessage:kCommitMsg];
+    
+    NSError* error         = nil;
+    Vault*   v             = [Vault findVaultByName:vp.name andError:&error];
+    XCTAssertNotNil(v);
+    
+    Commit*  c             = v.commit;
+    XCTAssertNotNil(c);
+    XCTAssertEqual(c.message, kCommitMsg);
+  
+    return [c addPayloadItemWithTitle:kPayloadItemTitle1
+                          andSubtitle:kPayloadItemSubtitle1
+                              andIcon:kPayloadItemIcon1
+                         andIconColor:kPayloadItemIconcolor1
+                            andObject:kPayloadItemData1
+                              forPath:path];
+  })
+  .then(^(Commit* changedCommit)
+  { NSError* error = nil;
+   
+    XCTAssertTrue( [_MOC save:&error] );
+    
+    return [changedCommit parentPathForPath:path];
+  })
+  .then(^(NSArray* parentPath)
+  { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
+    
+    XCTAssertTrue( [decryptedPayload isKindOfClass:[PayloadItemList class]] );
+    
+    PayloadItemList* plil = (PayloadItemList*)decryptedPayload;
+    PayloadItem*     pli  = [plil objectAtIndex:[plil count]-1];
+    
+    XCTAssertEqual(pli.title    , kPayloadItemTitle1);
+    XCTAssertEqual(pli.subtitle , kPayloadItemSubtitle1);
+    XCTAssertEqual(pli.icon     , kPayloadItemIcon1);
+    XCTAssertEqual(pli.iconcolor, kPayloadItemIconcolor1);
+    
+    NSError* error   = nil;
+    Payload* payload = [pli payload:&error];
+    
+    XCTAssertNotNil(payload);
+    
+    return [[CryptoService sharedInstance] decryptPayload:payload];
+  })
+  .then(^(id decryptedPayload)
+  { XCTAssertTrue( [decryptedPayload isKindOfClass:[NSString class]] );
+    XCTAssertEqual(decryptedPayload, kPayloadItemData1);
+    
+    [expection fulfill];
+  })
+  .catch(^(NSError* error)
+  { _NSLOG(@"error:%@",error);
+   
+    XCTAssertFalse(error,@"Unexpected error:%@",error);
+    [expection fulfill];
   });
   
   [self waitForExpectationsWithTimeout:60 handler:nil];

@@ -572,7 +572,7 @@
   else
   { PayloadItem* item        = [self.payloadItemList objectAtIndex:[indexPath row]];
     NSError*     error       = nil;
-    Payload*     itemPayload = (Payload*)[_MOC loadObjectWithObjectID:item.payloadoid andError:&error];
+    Payload*     itemPayload = [item payload:&error];
       
     if( error==nil )
     { UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -677,7 +677,7 @@
   NSIndexPath* secretIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
   
   /**
-   * remote other open picker cell if exists
+   * optionally removing other open picker cell
    */
   if( self.secretIndexPath!=nil && [self indexPathIsSecretCell:self.secretIndexPath] && ![self.secretIndexPath isEqual:secretIndexPath] )
   {

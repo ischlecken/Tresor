@@ -71,6 +71,9 @@
                   Identifier = "TresorTests/test011AllVaults">
                </Test>
                <Test
+                  Identifier = "TresorTests/test020CreateCommit">
+               </Test>
+               <Test
                   Identifier = "TresorTests/test999PerformanceExample">
                </Test>
             </SkippedTests>
