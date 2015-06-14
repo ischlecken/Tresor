@@ -45,11 +45,11 @@ BOOL gInited = FALSE;
   if( cachedMasterKey==nil )
   { result = [masterKey decryptedMasterKeyUsingPIN:kVaultPin]
     .then(^(NSData* decryptedMasterKey)
-    { _NSLOG(@"cachedKey:%@",dictionaryKey);
+    { _NSLOG(@"cachedKey:%@ decryptedMasterKey:%@",dictionaryKey,[decryptedMasterKey shortHexStringValue]);
             
       [self.decryptedMasterKeys setObject:decryptedMasterKey forKey:dictionaryKey];
       
-      return [AnyPromise promiseWithValue:cachedMasterKey];
+      return [AnyPromise promiseWithValue:decryptedMasterKey];
     });
   } /* of if */
   else
@@ -258,7 +258,7 @@ BOOL gInited = FALSE;
   
   initialCommit.message = kCommitMsg;
   
-  [vault setHead:initialCommit];
+  [vault setHeadCommit:initialCommit];
   
   XCTAssertTrue([_MOC save:&error]);
   
@@ -346,10 +346,10 @@ BOOL gInited = FALSE;
     PayloadItemList* plil = (PayloadItemList*)decryptedPayload;
     PayloadItem*     pli  = [plil objectAtIndex:[plil count]-1];
     
-    XCTAssertEqual(pli.title    , kPayloadItemTitle1);
-    XCTAssertEqual(pli.subtitle , kPayloadItemSubtitle1);
-    XCTAssertEqual(pli.icon     , kPayloadItemIcon1);
-    XCTAssertEqual(pli.iconcolor, kPayloadItemIconcolor1);
+    XCTAssertEqualObjects(pli.title    , kPayloadItemTitle1);
+    XCTAssertEqualObjects(pli.subtitle , kPayloadItemSubtitle1);
+    XCTAssertEqualObjects(pli.icon     , kPayloadItemIcon1);
+    XCTAssertEqualObjects(pli.iconcolor, kPayloadItemIconcolor1);
     
     NSError* error   = nil;
     Payload* payload = [pli payload:&error];
@@ -358,9 +358,14 @@ BOOL gInited = FALSE;
     
     return [[CryptoService sharedInstance] decryptPayload:payload];
   })
-  .then(^(id decryptedPayload)
-  { XCTAssertTrue( [decryptedPayload isKindOfClass:[NSString class]] );
-    XCTAssertEqual(decryptedPayload, kPayloadItemData1);
+  .then(^(Payload* payload)
+  { XCTAssertTrue( [payload isKindOfClass:[Payload class]] );
+    
+    id decryptedPayload = [[DecryptedObjectCache sharedInstance] decryptedObjectForUniqueId:payload.uniqueObjectId];
+  
+    XCTAssertTrue( [decryptedPayload isKindOfClass:[NSString class]] );
+    
+    XCTAssertEqualObjects(decryptedPayload, kPayloadItemData1);
     
     [expection fulfill];
   })
