@@ -258,7 +258,7 @@ BOOL gInited = FALSE;
   
   initialCommit.message = kCommitMsg;
   
-  vault.commit = initialCommit;
+  [vault setHead:initialCommit];
   
   XCTAssertTrue([_MOC save:&error]);
   
@@ -284,7 +284,7 @@ BOOL gInited = FALSE;
     Vault*   v             = [Vault findVaultByName:vp.name andError:&error];
     XCTAssertNotNil(v);
     
-    Commit*  c             = v.commit;
+    Commit*  c             = v.headCommit;
     XCTAssertNotNil(c);
     XCTAssertEqual(c.message, kCommitMsg);
     
@@ -320,7 +320,7 @@ BOOL gInited = FALSE;
     Vault*   v             = [Vault findVaultByName:vp.name andError:&error];
     XCTAssertNotNil(v);
     
-    Commit*  c             = v.commit;
+    Commit*  c             = v.headCommit;
     XCTAssertNotNil(c);
     XCTAssertEqual(c.message, kCommitMsg);
   

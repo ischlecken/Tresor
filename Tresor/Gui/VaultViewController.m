@@ -73,9 +73,9 @@
     payloadItemListViewController.vault = vault;
     payloadItemListViewController.path  = [NSIndexPath new];
     
-    if( vault.commit )
+    if( vault.headCommit )
     {
-      [vault.commit parentPathForPath:[NSIndexPath new]]
+      [vault.headCommit parentPathForPath:[NSIndexPath new]]
       .then(^(NSArray* parentPath)
       { id decryptedPayload = [[parentPath firstObject] decryptedPayload];
         

@@ -324,7 +324,7 @@
   
   if( nextCommit )
   { nextCommit.message = commitMessage;
-    self.vault.commit  = nextCommit;
+    [self.vault setHead:nextCommit];
     
     if( ![_MOC save:&error] )
       addToErrorList(@"error while saving data", error, AddErrorNothing);
